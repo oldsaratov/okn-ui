@@ -1,0 +1,4 @@
+export const TYPES = {
+  SET_IS_LOADING: 'SET_IS_LOADING',
+  SET_OBJECTS: 'SET_OBJECTS'
+}
