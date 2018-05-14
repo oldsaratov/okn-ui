@@ -2,6 +2,14 @@
   <div class="list-page">
     <div v-if="isLoading">Loading...</div>
     <ObjectsTable v-else :objects="objects"/>
+
+    <el-pagination class="pagination"
+                   layout="prev, pager, next"
+                   :current-page="page"
+                   :page-size="20"
+                   :total="total"
+                   @current-change="handleCurrentChange">
+    </el-pagination>
   </div>
 </template>
 
@@ -18,14 +26,20 @@ export default {
   computed: {
     ...mapGetters([
       'isLoading',
-      'objects'
+      'objects',
+      'page',
+      'total'
     ])
   },
 
   methods: {
     ...mapActions([
       'getObjectsPerPage'
-    ])
+    ]),
+
+    handleCurrentChange (page) {
+      this.getObjectsPerPage(page)
+    }
   },
 
   created () {
@@ -33,3 +47,9 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+  .pagination {
+    text-align: center;
+  }
+</style>

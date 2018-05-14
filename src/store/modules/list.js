@@ -4,22 +4,25 @@ import { TYPES } from '../mutation-types'
 const state = {
   isLoading: false,
   objects: [],
-  page: null
+  page: null,
+  total: null
 }
 
 const getters = {
   isLoading: state => state.isLoading,
   objects: state => state.objects,
-  page: state => state.page
+  page: state => state.page,
+  total: state => state.total
 }
 
 const mutations = {
   [TYPES.SET_IS_LOADING] (state, status) {
     state.isLoading = status
   },
-  [TYPES.SET_OBJECTS] (state, { data, page }) {
+  [TYPES.SET_OBJECTS] (state, { data, page, total }) {
     state.objects = data
     state.page = page
+    state.total = total
   }
 }
 
