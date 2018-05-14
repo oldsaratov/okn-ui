@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import ObjectsTable from '@/components/ObjectsTable.vue'
 
 export default {
@@ -21,8 +21,15 @@ export default {
       'objects'
     ])
   },
+
+  methods: {
+    ...mapActions([
+      'getObjectsPerPage'
+    ])
+  },
+
   created () {
-    this.$store.dispatch('getObjects')
+    this.getObjectsPerPage()
   }
 }
 </script>
