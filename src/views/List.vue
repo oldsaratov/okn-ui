@@ -1,23 +1,27 @@
 <template>
   <div class="list-page">
-    <el-select
-      v-model="selectedTypes"
-      class="okn-types-filter"
-      multiple
-      placeholder="Тип"
-      @visible-change="onFilterTypesToggled"
-      @remove-tag="onFilterTypeRemoved">
-      <el-option
-        v-for="type in types"
-        :key="type.value"
-        :label="type.label"
-        :value="type.value"/>
-    </el-select>
+    <el-row :gutter="20" class="okn-filter-panel">
+      <el-col :span="8">
+        <el-input placeholder="Поиск" v-model="searchInput"></el-input>
+      </el-col>
+      <el-col :span="8">
+        <el-select
+          class="okn-filter-types"
+          v-model="selectedTypes"
+          multiple
+          placeholder="Тип"
+          @visible-change="onFilterTypesToggled"
+          @remove-tag="onFilterTypeRemoved">
+          <el-option
+            v-for="type in types"
+            :key="type.value"
+            :label="type.label"
+            :value="type.value"/>
+        </el-select>
+      </el-col>
+    </el-row>
 
-    <div v-if="isLoading">Loading...</div>
-    <ObjectsTable
-      v-else
-      :objects="objects"/>
+    <ObjectsTable :objects="objects"/>
 
     <el-pagination
       :current-page="page"
@@ -41,6 +45,7 @@ export default {
 
   data () {
     return {
+      searchInput: '',
       selectedTypes: [],
       previouslySelectedTypes: [],
       types: OBJECT_OPTIONS
@@ -49,7 +54,6 @@ export default {
 
   computed: {
     ...mapGetters([
-      'isLoading',
       'objects',
       'page',
       'total'
@@ -89,11 +93,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .okn-types-filter {
-    width: 400px;
-  }
+.okn-filter-panel {
+  margin-bottom: 10px;
+}
 
-  .okn-pagination {
-    text-align: center;
-  }
+.okn-filter-types {
+  width: 100%;
+}
+
+.okn-pagination {
+  margin-top: 10px;
+  text-align: center;
+}
 </style>
