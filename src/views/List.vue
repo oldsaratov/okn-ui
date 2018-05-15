@@ -2,7 +2,7 @@
   <div class="list-page">
     <el-row :gutter="20" class="okn-filter-panel">
       <el-col :span="8">
-        <el-input placeholder="Поиск" v-model="searchInput"></el-input>
+        <el-input placeholder="Поиск" prefix-icon="el-icon-search" v-model="searchInput"></el-input>
       </el-col>
       <el-col :span="8">
         <el-select
