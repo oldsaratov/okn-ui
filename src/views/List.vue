@@ -1,13 +1,18 @@
 <template>
   <div class="list-page">
-    <el-row :gutter="20" class="okn-filter-panel">
+    <el-row
+      :gutter="20"
+      class="okn-filter-panel">
       <el-col :span="8">
-        <el-input placeholder="Поиск" prefix-icon="el-icon-search" v-model="searchInput"></el-input>
+        <el-input
+          v-model="searchInput"
+          placeholder="Поиск"
+          prefix-icon="el-icon-search"/>
       </el-col>
       <el-col :span="8">
         <el-select
-          class="okn-filter-types"
           v-model="selectedTypes"
+          class="okn-filter-types"
           multiple
           placeholder="Тип"
           @visible-change="onFilterTypesToggled"

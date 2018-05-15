@@ -1,16 +1,17 @@
 <template>
   <el-table
-    class="okn-objects-table"
     v-loading="isLoading"
     :data="objects"
+    class="okn-objects-table"
     height="500">
-    <el-table-column prop="name" label="Название"></el-table-column>
     <el-table-column
-        prop="type"
-        label="Тип"
-        width="200"
-        :formatter="(row, column, cellValue) => typeFormatter(objectTypes, cellValue)">
-    </el-table-column>
+      prop="name"
+      label="Название"/>
+    <el-table-column
+      :formatter="(row, column, cellValue) => typeFormatter(objectTypes, cellValue)"
+      prop="type"
+      label="Тип"
+      width="200"/>
   </el-table>
 </template>
 
@@ -28,7 +29,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       objectTypes: OBJECT_OPTIONS
     }
@@ -46,10 +47,9 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+<style lang="scss">
+.el-table .cell {
+  white-space: nowrap;
 }
 
 a {
