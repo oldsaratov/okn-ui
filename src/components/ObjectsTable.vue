@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
-    <div v-for="object in objects" :key="object.id">
+    <div
+      v-for="object in objects"
+      :key="object.id">
       {{ object.name }}
     </div>
   </div>

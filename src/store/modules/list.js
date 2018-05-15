@@ -27,9 +27,9 @@ const mutations = {
 }
 
 const actions = {
-  async getObjectsPerPage ({ commit, state }, page) {
+  async getObjectsByParams ({ commit, state }, options) {
     commit(TYPES.SET_IS_LOADING, true)
-    commit(TYPES.SET_OBJECTS, await api.getObjectsPerPage(page))
+    commit(TYPES.SET_OBJECTS, await api.getObjectsByParams(options))
     commit(TYPES.SET_IS_LOADING, false)
   }
 }
