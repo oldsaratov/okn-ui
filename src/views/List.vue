@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 import ObjectsTable from '../components/ObjectsTable.vue'
 import { OBJECT_OPTIONS } from '../constants'
@@ -58,8 +58,11 @@ export default {
   },
 
   computed: {
-    ...mapState(['page', 'total']),
-    ...mapGetters(['objects'])
+    ...mapGetters([
+      'page',
+      'total',
+      'objects'
+    ])
   },
 
   created () {

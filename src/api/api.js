@@ -24,7 +24,7 @@ export function getObjectsByParams (params) {
 }
 
 export function getObjectById (id) {
-  return axios.get(BASE_URL + 'object', { params: { id } })
+  return axios.get(BASE_URL + 'objects/' + id)
     .then((res) => {
       if (res.status >= 200 && res.status < 300) {
         return res.data

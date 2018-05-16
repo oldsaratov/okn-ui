@@ -8,7 +8,7 @@
       prop="name"
       label="Название">
       <template slot-scope="scope">
-        <router-link :to="{ name: 'object', params: { id: scope.row.objectId }}">{{scope.row.name}}</router-link>
+        <router-link :to="{ name: 'object', params: { id: scope.row.objectId }}">{{ scope.row.name }}</router-link>
       </template>
     </el-table-column>
     <el-table-column

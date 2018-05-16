@@ -8,7 +8,9 @@ const state = {
 }
 
 const getters = {
-  objects: state => state.objects
+  objects: state => state.objects,
+  page: state => state.page,
+  total: state => state.total
 }
 
 const mutations = {

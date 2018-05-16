@@ -1,9 +1,8 @@
 <template>
   <div>
-    Объект {{ $route.params.id }}
-    {{object.name}}
+    <h1>{{ object.name }}</h1>
+    <div>{{ object.description }}</div>
   </div>
-
 </template>
 
 <script>
@@ -12,8 +11,13 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
   name: 'Object',
 
-  created () {
-    this.getObjectById(this.objectId)
+  computed: {
+    ...mapState(['object']),
+    ...mapGetters(['isLoading']),
+
+    objectId () {
+      return this.$route.params.id
+    }
   },
 
   watch: {
@@ -22,13 +26,8 @@ export default {
     }
   },
 
-  computed: {
-    ...mapState(['object']),
-    ...mapGetters(['isLoading']),
-
-    objectId () {
-      return this.$route.params.id;
-    }
+  created () {
+    this.getObjectById(this.objectId)
   },
 
   methods: {

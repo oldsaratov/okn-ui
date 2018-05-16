@@ -13,15 +13,18 @@ const getters = {
 }
 
 const mutations = {
-  [TYPES.SET_OBJECT] (state, { object }) {
-    state = object
+  [TYPES.SET_OBJECT] (state, object) {
+    state.objectId = object.objectId
+    state.name = object.name
+    state.description = object.description
+    state.type = object.type
   }
 }
 
 const actions = {
   async getObjectById ({ commit, state }, id) {
     commit(TYPES.SET_IS_LOADING, true)
-    commit(TYPES.SET_OBJECTS, await api.getObjectById(id))
+    commit(TYPES.SET_OBJECT, await api.getObjectById(id))
     commit(TYPES.SET_IS_LOADING, false)
   }
 }
