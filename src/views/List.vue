@@ -91,7 +91,7 @@ export default {
     },
 
     _selectedTypesHasBeenChanged () {
-      return this.selectedTypes.sort().toString() !== this.previouslySelectedTypes.sort().toString()
+      return this.selectedTypes.slice().sort().toString() !== this.previouslySelectedTypes.sort().toString()
     }
   }
 }
