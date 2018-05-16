@@ -6,7 +6,11 @@
     height="500">
     <el-table-column
       prop="name"
-      label="Название"/>
+      label="Название">
+      <template slot-scope="scope">
+        <router-link :to="{ name: 'object', params: { id: scope.row.objectId }}">{{scope.row.name}}</router-link>
+      </template>
+    </el-table-column>
     <el-table-column
       :formatter="(row, column, cellValue) => typeFormatter(objectTypes, cellValue)"
       prop="type"
@@ -16,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import { OBJECT_OPTIONS } from '../constants'
 
@@ -36,7 +40,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['isLoading'])
+    ...mapState(['isLoading'])
   },
 
   methods: {

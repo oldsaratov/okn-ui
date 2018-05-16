@@ -22,3 +22,15 @@ export function getObjectsByParams (params) {
       return Promise.reject(error)
     })
 }
+
+export function getObjectById (id) {
+  return axios.get(BASE_URL + 'object', { params: { id } })
+    .then((res) => {
+      if (res.status >= 200 && res.status < 300) {
+        return res.data
+      }
+    })
+    .catch((error) => {
+      return Promise.reject(error)
+    })
+}

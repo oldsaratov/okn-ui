@@ -2,23 +2,16 @@ import * as api from '../../api'
 import { TYPES } from '../mutation-types'
 
 const state = {
-  isLoading: false,
   objects: [],
   page: null,
   total: null
 }
 
 const getters = {
-  isLoading: state => state.isLoading,
-  objects: state => state.objects,
-  page: state => state.page,
-  total: state => state.total
+  objects: state => state.objects
 }
 
 const mutations = {
-  [TYPES.SET_IS_LOADING] (state, status) {
-    state.isLoading = status
-  },
   [TYPES.SET_OBJECTS] (state, { data, page, total }) {
     state.objects = data
     state.page = page
