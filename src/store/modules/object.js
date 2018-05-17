@@ -2,9 +2,10 @@ import * as api from '../../api'
 import { TYPES } from '../mutation-types'
 
 const state = {
-  objectId: null,
-  name: null,
+  coords: { latitude: null, longitude: null },
   description: null,
+  name: null,
+  objectId: null,
   type: null
 }
 
@@ -14,9 +15,10 @@ const getters = {
 
 const mutations = {
   [TYPES.SET_OBJECT] (state, object) {
-    state.objectId = object.objectId
-    state.name = object.name
+    state.coords = { latitude: object.latitude, longitude: object.longitude }
     state.description = object.description
+    state.name = object.name
+    state.objectId = object.objectId
     state.type = object.type
   }
 }

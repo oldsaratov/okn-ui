@@ -2,7 +2,7 @@
   <div class="object-page">
     <h1>{{ object.name }}</h1>
     <div>{{ object.description }}</div>
-    <ObjectMap :data="object"/>
+    <ObjectMap :object="object"/>
   </div>
 </template>
 
