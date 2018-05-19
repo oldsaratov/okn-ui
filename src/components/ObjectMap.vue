@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import L from 'leaflet'
 import {
   LMap,
   LTileLayer,
@@ -43,16 +44,6 @@ import {
   LControlScale,
   LControlLayers
 } from 'vue2-leaflet'
-
-import L from 'leaflet'
-
-delete L.Icon.Default.prototype._getIconUrl
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-})
 
 const tileProviders = [
   {
@@ -125,8 +116,6 @@ export default {
 </script>
 
 <style>
-@import '~leaflet/dist/leaflet.css';
-
 .vue2leaflet-map {
   height: 75% !important;
   margin-top: 15px;
