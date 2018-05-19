@@ -6,3 +6,5 @@ export const OBJECT_OPTIONS = [
   { label: 'Муниципальный', value: 3 },
   { label: 'Выявленный', value: 4 }
 ]
+
+export const SARATOV_CENTER_COORDS = [51.537996, 46.0225103]

@@ -6,15 +6,6 @@
     :center="center"
     :min-zoom="minZoom"
     :max-zoom="maxZoom">
-    <l-control-layers :position="layersPosition"/>
-    <l-tile-layer
-      v-for="tileProvider in tileProviders"
-      :key="tileProvider.name"
-      :name="tileProvider.name"
-      :visible="tileProvider.visible"
-      :url="tileProvider.url"
-      :attribution="tileProvider.attribution"
-      layer-type="base"/>
     <l-control-zoom :position="zoomPosition"/>
     <l-marker
       v-for="marker in markers"
@@ -22,78 +13,58 @@
       :visible="marker.visible"
       :draggable="marker.draggable"
       :lat-lng="marker.position"
-      :icon="marker.icon">
-      <l-popup :content="marker.tooltip"/>
-      <l-tooltip :content="marker.tooltip"/>
-    </l-marker>
+      :icon="marker.icon"/>
   </l-map>
 </template>
 
 <script>
 import L from 'leaflet'
-import {
-  LMap,
-  LTileLayer,
-  LMarker,
-  LPolyline,
-  LLayerGroup,
-  LTooltip,
-  LPopup,
-  LControlZoom,
-  LControlAttribution,
-  LControlScale,
-  LControlLayers
-} from 'vue2-leaflet'
+import { LMap, LMarker, LControlZoom } from 'vue2-leaflet'
+import 'leaflet.gridlayer.googlemutant'
 
-const tileProviders = [
-  {
-    name: 'OpenStreetMap',
-    visible: true,
-    attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-  }
-]
+import { SARATOV_CENTER_COORDS } from '../constants'
 
 export default {
   name: 'ObjectMap',
 
   components: {
     LMap,
-    LTileLayer,
     LMarker,
-    LPolyline,
-    LLayerGroup,
-    LTooltip,
-    LPopup,
-    LControlZoom,
-    LControlAttribution,
-    LControlScale,
-    LControlLayers
+    LControlZoom
   },
 
-  props: ['object'],
+  props: {
+    object: {
+      type: Object,
+      default () { return {} }
+    }
+  },
 
   data () {
     return {
-      center: [51.537996, 46.0225103],
-      opacity: 0.6,
+      center: SARATOV_CENTER_COORDS,
       mapOptions: { zoomControl: false, attributionControl: false },
       zoom: 13,
       minZoom: 1,
       maxZoom: 20,
       zoomPosition: 'topleft',
-      attributionPosition: 'bottomright',
       layersPosition: 'topright',
-      attributionPrefix: 'Vue2Leaflet',
-      imperial: false,
-      Positions: ['topleft', 'topright', 'bottomleft', 'bottomright'],
-      tileProviders: tileProviders,
       markers: []
+    }
+  },
+
+  computed: {
+    leafletMap () {
+      return this.$refs.map.mapObject
     }
   },
 
   watch: {
     'object.coords': 'updateMarker'
+  },
+
+  mounted () {
+    this.addLayers()
   },
 
   methods: {
@@ -109,7 +80,19 @@ export default {
       }]
 
       // Center the map based on object coords
-      this.$refs.map.mapObject.setView(new L.LatLng(latitude, longitude))
+      this.leafletMap.setView(new L.LatLng(latitude, longitude))
+    },
+
+    addLayers () {
+      let roadMutant = L.gridLayer.googleMutant({ type: 'roadmap' }).addTo(this.leafletMap)
+      let hybridMutant = L.gridLayer.googleMutant({ type: 'hybrid' })
+
+      L.control.layers({
+        Roadmap: roadMutant,
+        Hybrid: hybridMutant
+      }, {}, {
+        collapsed: true
+      }).addTo(this.leafletMap)
     }
   }
 }

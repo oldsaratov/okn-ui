@@ -30,6 +30,12 @@ new Vue({
       iconUrl: require('leaflet/dist/images/marker-icon.png'),
       shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     })
+
+    let apiKey = 'AIzaSyDO259ExBlMIGS4pU18gI2kaDFN4ypqO8E'
+    let script = document.createElement('script')
+
+    script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + apiKey)
+    document.head.appendChild(script)
   },
   render: h => h(App)
 }).$mount('#app')
