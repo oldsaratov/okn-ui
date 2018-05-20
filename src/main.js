@@ -31,11 +31,18 @@ new Vue({
       shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     })
 
+    // Add Google Maps API script
     let apiKey = 'AIzaSyDO259ExBlMIGS4pU18gI2kaDFN4ypqO8E'
-    let script = document.createElement('script')
+    let googleScript = document.createElement('script')
 
-    script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + apiKey)
-    document.head.appendChild(script)
+    googleScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + apiKey)
+    document.head.appendChild(googleScript)
+
+    // Add Yandex Maps API script
+    let yandexScript = document.createElement('script')
+
+    yandexScript.setAttribute('src', 'http://api-maps.yandex.ru/2.0/?load=package.map&lang=ru-RU')
+    document.head.appendChild(yandexScript)
   },
   render: h => h(App)
 }).$mount('#app')

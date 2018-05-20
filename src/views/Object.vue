@@ -1,19 +1,19 @@
 <template>
-  <div class="object-page">
+  <div class="okn-object-page">
     <h1>{{ object.name }}</h1>
     <div>{{ object.description }}</div>
-    <ObjectMap :object="object"/>
+    <ObjectsMap :object="object"/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 
-import ObjectMap from '../components/ObjectMap.vue'
+import ObjectsMap from '../components/ObjectsMap.vue'
 
 export default {
   name: 'Object',
-  components: { ObjectMap },
+  components: { ObjectsMap },
 
   computed: {
     ...mapState(['object']),
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.object-page {
+.okn-object-page {
   height: 80vh;
 }
 </style>

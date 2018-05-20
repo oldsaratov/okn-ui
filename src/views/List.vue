@@ -1,5 +1,5 @@
 <template>
-  <div class="list-page">
+  <div class="okn-list-page">
     <el-row
       :gutter="20"
       class="okn-filter-panel">
