@@ -13,12 +13,12 @@ import 'leaflet-panel-layers'
 import { SARATOV_CENTER_COORDS } from '../constants'
 
 export default {
-  name: 'ObjectMap',
+  name: 'ObjectsMap',
 
   props: {
-    object: {
-      type: Object,
-      default: () => {}
+    objects: {
+      type: Array,
+      default: () => []
     },
 
     draggable: {
@@ -34,7 +34,7 @@ export default {
   },
 
   watch: {
-    'object.coords': 'updateMarker'
+    'objects': 'updateMarkers'
   },
 
   mounted () {
@@ -85,13 +85,19 @@ export default {
       ], []).addTo(this.leafletMap)
     },
 
-    updateMarker (coords) {
-      let markerLatLng = new L.LatLng(coords.latitude, coords.longitude)
+    updateMarkers () {
+      this.objects.forEach(object => {
+        L.marker(this.getLatLng(object.coords), { draggable: this.draggable }).addTo(this.leafletMap)
+      })
 
-      L.marker(markerLatLng, { draggable: this.draggable }).addTo(this.leafletMap)
+      // Center the map based on object coords if only one object has been passed
+      if (this.objects.length === 1) {
+        this.leafletMap.setView(this.getLatLng(this.objects[0].coords))
+      }
+    },
 
-      // Center the map based on object coords
-      this.leafletMap.setView(markerLatLng)
+    getLatLng (coords) {
+      return new L.LatLng(coords.latitude, coords.longitude)
     }
   }
 }

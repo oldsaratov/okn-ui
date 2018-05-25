@@ -2,7 +2,7 @@
   <div class="okn-object-page">
     <h1>{{ object.name }}</h1>
     <div>{{ object.description }}</div>
-    <ObjectsMap :object="object"/>
+    <ObjectsMap :objects="[object]"/>
   </div>
 </template>
 
@@ -24,19 +24,18 @@ export default {
     }
   },
 
-  watch: {
-    '$route' () {
-      this.getObjectById(this.objectId)
-    }
-  },
-
   created () {
     this.getObjectById(this.objectId)
   },
 
+  beforeDestroy () {
+    this.clearObject()
+  },
+
   methods: {
     ...mapActions([
-      'getObjectById'
+      'getObjectById',
+      'clearObject'
     ])
   }
 }

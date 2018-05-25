@@ -13,9 +13,9 @@ export default {
   name: 'Home',
 
   computed: {
-    ...mapGetters([
-      'objects'
-    ])
+    ...mapGetters({
+      objects: 'mapObjects'
+    })
   },
 
   created () {

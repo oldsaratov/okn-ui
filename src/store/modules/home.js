@@ -6,7 +6,7 @@ const state = {
 }
 
 const getters = {
-  objects: state => state.objects
+  mapObjects: state => state.objects
 }
 
 const mutations = {
