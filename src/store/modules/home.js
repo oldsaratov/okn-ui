@@ -1,0 +1,31 @@
+import * as api from '../../api'
+import { TYPES } from '../mutation-types'
+
+const state = {
+  objects: []
+}
+
+const getters = {
+  objects: state => state.objects
+}
+
+const mutations = {
+  [TYPES.SET_OBJECTS] (state, { data }) {
+    state.objects = data
+  }
+}
+
+const actions = {
+  async getAllObjects ({ commit }) {
+    commit(TYPES.SET_IS_LOADING, true)
+    commit(TYPES.SET_OBJECTS, await api.getAllObjects())
+    commit(TYPES.SET_IS_LOADING, false)
+  }
+}
+
+export default {
+  state,
+  getters,
+  mutations,
+  actions
+}

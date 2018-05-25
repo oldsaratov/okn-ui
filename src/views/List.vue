@@ -45,7 +45,7 @@ import ObjectsTable from '../components/ObjectsTable.vue'
 import { OBJECT_OPTIONS } from '../constants'
 
 export default {
-  name: 'Home',
+  name: 'List',
   components: { ObjectsTable },
 
   data () {
