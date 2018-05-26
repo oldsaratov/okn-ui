@@ -13,7 +13,7 @@ const getters = {}
 
 const mutations = {
   [TYPES.SET_OBJECT] (state, object) {
-    state.coords = { latitude: object.latitude, longitude: object.longitude }
+    state.coords = object.coords
     state.description = object.description
     state.name = object.name
     state.objectId = object.objectId

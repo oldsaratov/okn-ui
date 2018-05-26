@@ -1,16 +1,19 @@
 <template>
-  <div class="about">
+  <div class="okn-home-page">
     <h1>Map is coming soon...</h1>
 
-    {{ objects }}
+    <ObjectsMap :objects="objects"/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 
+import ObjectsMap from '../components/ObjectsMap.vue'
+
 export default {
   name: 'Home',
+  components: { ObjectsMap },
 
   computed: {
     ...mapGetters({
@@ -29,3 +32,9 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+.okn-home-page {
+  height: 80vh;
+}
+</style>

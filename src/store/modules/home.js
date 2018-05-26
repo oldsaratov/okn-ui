@@ -10,8 +10,8 @@ const getters = {
 }
 
 const mutations = {
-  [TYPES.SET_OBJECTS] (state, { data }) {
-    state.objects = data
+  [TYPES.SET_OBJECTS] (state, objects) {
+    state.objects = objects
   }
 }
 
