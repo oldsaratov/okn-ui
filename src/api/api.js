@@ -4,7 +4,7 @@ import { PAGE_SIZE } from '../constants'
 const BASE_URL = 'https://okn.azurewebsites.net/api/'
 
 export function getAllObjects () {
-  return axios.get(BASE_URL + 'objects', { params: { perPage: 200 } })
+  return axios.get(BASE_URL + 'objects', { params: { perPage: 2000 } })
     .then(({ data, status }) => {
       if (status >= 200 && status < 300) {
         return data.data.map(object => mapObjectDto(object))

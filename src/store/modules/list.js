@@ -14,7 +14,7 @@ const getters = {
 }
 
 const mutations = {
-  [TYPES.SET_OBJECTS] (state, { data, page, total }) {
+  [TYPES.SET_LIST_OBJECTS] (state, { data, page, total }) {
     state.objects = data
     state.page = page
     state.total = total
@@ -24,7 +24,7 @@ const mutations = {
 const actions = {
   async getObjectsByParams ({ commit, state }, options) {
     commit(TYPES.SET_IS_LOADING, true)
-    commit(TYPES.SET_OBJECTS, await api.getObjectsByParams(options))
+    commit(TYPES.SET_LIST_OBJECTS, await api.getObjectsByParams(options))
     commit(TYPES.SET_IS_LOADING, false)
   }
 }

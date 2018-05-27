@@ -7,6 +7,7 @@
 <script>
 import L from 'leaflet'
 import 'leaflet.gridlayer.googlemutant'
+import 'leaflet.markercluster'
 import 'leaflet-plugins/layer/tile/Yandex'
 import 'leaflet-panel-layers'
 
@@ -22,6 +23,11 @@ export default {
     },
 
     draggable: {
+      type: Boolean,
+      default: false
+    },
+
+    isClustered: {
       type: Boolean,
       default: false
     }
@@ -40,6 +46,7 @@ export default {
   mounted () {
     this.initMap()
     this.addLayers()
+    this.updateMarkers()
   },
 
   methods: {
@@ -85,10 +92,27 @@ export default {
       ], []).addTo(this.leafletMap)
     },
 
-    updateMarkers () {
-      this.objects.forEach(object => {
-        L.marker(this.getLatLng(object.coords), { draggable: this.draggable }).addTo(this.leafletMap)
-      })
+    updateMarkers (val, oldVal) {
+      console.log(val, oldVal)
+
+      if (this.objects.length === 0) {
+        return
+      }
+
+      if (this.isClustered) {
+        let markers = L.markerClusterGroup({ showCoverageOnHover: false })
+
+        this.objects.forEach(object => {
+          let marker = L.marker(this.getLatLng(object.coords))
+          markers.addLayer(marker)
+        })
+
+        this.leafletMap.addLayer(markers)
+      } else {
+        this.objects.forEach(object => {
+          L.marker(this.getLatLng(object.coords), { draggable: this.draggable }).addTo(this.leafletMap)
+        })
+      }
 
       // Center the map based on object coords if only one object has been passed
       if (this.objects.length === 1) {
@@ -104,11 +128,6 @@ export default {
 </script>
 
 <style lang="scss">
-.okn-leaflet-map {
-  height: 75% !important;
-  margin-top: 15px;
-}
-
 .leaflet-panel-layers {
   .leaflet-panel-layers-group {
     margin-bottom: 5px;

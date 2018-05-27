@@ -4,6 +4,8 @@ import locale from 'element-ui/lib/locale/lang/ru-RU'
 import L from 'leaflet'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'leaflet/dist/leaflet.css'
+import 'leaflet.markercluster/dist/MarkerCluster.css'
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 
 import App from './App.vue'
 import router from './router'

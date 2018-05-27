@@ -44,5 +44,14 @@ export default {
 <style scoped lang="scss">
 .okn-object-page {
   height: 80vh;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .okn-leaflet-map {
+    min-height: 350px;
+    margin-top: 15px;
+  }
 }
 </style>
