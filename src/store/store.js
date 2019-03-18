@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import home from './modules/home'
 import list from './modules/list'
 import object from './modules/object'
 import { TYPES } from './mutation-types'
@@ -19,6 +20,6 @@ export default new Vuex.Store({
   },
   actions: {},
   modules: {
-    list, object
+    home, list, object
   }
 })

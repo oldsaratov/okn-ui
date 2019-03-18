@@ -9,17 +9,23 @@ const state = {
   type: null
 }
 
-const getters = {
-  object: state => state.object
-}
+const getters = {}
 
 const mutations = {
   [TYPES.SET_OBJECT] (state, object) {
-    state.coords = { latitude: object.latitude, longitude: object.longitude }
+    state.coords = object.coords
     state.description = object.description
     state.name = object.name
     state.objectId = object.objectId
     state.type = object.type
+  },
+
+  [TYPES.CLEAR_OBJECT] (state) {
+    state.coords = { latitude: null, longitude: null }
+    state.description = null
+    state.name = null
+    state.objectId = null
+    state.type = null
   }
 }
 
@@ -28,6 +34,10 @@ const actions = {
     commit(TYPES.SET_IS_LOADING, true)
     commit(TYPES.SET_OBJECT, await api.getObjectById(id))
     commit(TYPES.SET_IS_LOADING, false)
+  },
+
+  clearObject ({ commit }) {
+    commit(TYPES.CLEAR_OBJECT)
   }
 }
 

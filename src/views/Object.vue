@@ -2,7 +2,7 @@
   <div class="okn-object-page">
     <h1>{{ object.name }}</h1>
     <div>{{ object.description }}</div>
-    <ObjectsMap :object="object"/>
+    <ObjectsMap :objects="[object]"/>
   </div>
 </template>
 
@@ -24,19 +24,18 @@ export default {
     }
   },
 
-  watch: {
-    '$route' () {
-      this.getObjectById(this.objectId)
-    }
-  },
-
   created () {
     this.getObjectById(this.objectId)
   },
 
+  beforeDestroy () {
+    this.clearObject()
+  },
+
   methods: {
     ...mapActions([
-      'getObjectById'
+      'getObjectById',
+      'clearObject'
     ])
   }
 }
@@ -45,5 +44,14 @@ export default {
 <style scoped lang="scss">
 .okn-object-page {
   height: 80vh;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .okn-leaflet-map {
+    min-height: 350px;
+    margin-top: 15px;
+  }
 }
 </style>

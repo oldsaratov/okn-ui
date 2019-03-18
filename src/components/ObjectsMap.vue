@@ -7,21 +7,27 @@
 <script>
 import L from 'leaflet'
 import 'leaflet.gridlayer.googlemutant'
+import 'leaflet.markercluster'
 import 'leaflet-plugins/layer/tile/Yandex'
 import 'leaflet-panel-layers'
 
 import { SARATOV_CENTER_COORDS } from '../constants'
 
 export default {
-  name: 'ObjectMap',
+  name: 'ObjectsMap',
 
   props: {
-    object: {
-      type: Object,
-      default: () => {}
+    objects: {
+      type: Array,
+      default: () => []
     },
 
     draggable: {
+      type: Boolean,
+      default: false
+    },
+
+    isClustered: {
       type: Boolean,
       default: false
     }
@@ -34,12 +40,13 @@ export default {
   },
 
   watch: {
-    'object.coords': 'updateMarker'
+    'objects': 'updateMarkers'
   },
 
   mounted () {
     this.initMap()
     this.addLayers()
+    this.updateMarkers()
   },
 
   methods: {
@@ -85,24 +92,42 @@ export default {
       ], []).addTo(this.leafletMap)
     },
 
-    updateMarker (coords) {
-      let markerLatLng = new L.LatLng(coords.latitude, coords.longitude)
+    updateMarkers (val, oldVal) {
+      console.log(val, oldVal)
 
-      L.marker(markerLatLng, { draggable: this.draggable }).addTo(this.leafletMap)
+      if (this.objects.length === 0) {
+        return
+      }
 
-      // Center the map based on object coords
-      this.leafletMap.setView(markerLatLng)
+      if (this.isClustered) {
+        let markers = L.markerClusterGroup({ showCoverageOnHover: false })
+
+        this.objects.forEach(object => {
+          let marker = L.marker(this.getLatLng(object.coords))
+          markers.addLayer(marker)
+        })
+
+        this.leafletMap.addLayer(markers)
+      } else {
+        this.objects.forEach(object => {
+          L.marker(this.getLatLng(object.coords), { draggable: this.draggable }).addTo(this.leafletMap)
+        })
+      }
+
+      // Center the map based on object coords if only one object has been passed
+      if (this.objects.length === 1) {
+        this.leafletMap.setView(this.getLatLng(this.objects[0].coords))
+      }
+    },
+
+    getLatLng (coords) {
+      return new L.LatLng(coords.latitude, coords.longitude)
     }
   }
 }
 </script>
 
 <style lang="scss">
-.okn-leaflet-map {
-  height: 75% !important;
-  margin-top: 15px;
-}
-
 .leaflet-panel-layers {
   .leaflet-panel-layers-group {
     margin-bottom: 5px;
