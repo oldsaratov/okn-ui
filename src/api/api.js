@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { PAGE_SIZE } from '../constants'
 
-const BASE_URL = 'https://okn.azurewebsites.net/api/'
+const BASE_URL = 'http://dev.okn.oldsaratov.ru/api/'
 
 export function getAllObjects () {
   return axios.get(BASE_URL + 'objects', { params: { perPage: 2000 } })
