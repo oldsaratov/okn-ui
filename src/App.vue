@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Карта</router-link>|
+      <router-link to="/">Карта</router-link>
+      <span> | </span>
       <router-link to="/list">Список</router-link>
     </div>
     <router-view/>

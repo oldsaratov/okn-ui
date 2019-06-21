@@ -65,22 +65,22 @@ export default {
     },
 
     addLayers () {
-      let googleRoadmapLayer = L.gridLayer.googleMutant({ type: 'roadmap' }).addTo(this.leafletMap)
-      let googleSatelliteLayer = L.gridLayer.googleMutant({ type: 'satellite' })
-      let googleHybridLayer = L.gridLayer.googleMutant({ type: 'hybrid' })
+      // let googleRoadmapLayer = L.gridLayer.googleMutant({ type: 'roadmap' }).addTo(this.leafletMap)
+      // let googleSatelliteLayer = L.gridLayer.googleMutant({ type: 'satellite' })
+      // let googleHybridLayer = L.gridLayer.googleMutant({ type: 'hybrid' })
       let yandexSchemaLayer = new L.Yandex()
       let yandexSatelliteLayer = new L.Yandex('satellite')
       let yandexHybridLayer = new L.Yandex('hybrid')
 
       L.control.panelLayers([
-        {
-          group: 'Google',
-          layers: [
-            { name: 'Схема', layer: googleRoadmapLayer },
-            { name: 'Спутник', layer: googleSatelliteLayer },
-            { name: 'Гибрид', layer: googleHybridLayer }
-          ]
-        },
+        // {
+        //   group: 'Google',
+        //   layers: [
+        //     { name: 'Схема', layer: googleRoadmapLayer },
+        //     { name: 'Спутник', layer: googleSatelliteLayer },
+        //     { name: 'Гибрид', layer: googleHybridLayer }
+        //   ]
+        // },
         {
           group: 'Яндекс',
           layers: [
@@ -93,8 +93,6 @@ export default {
     },
 
     updateMarkers (val, oldVal) {
-      console.log(val, oldVal)
-
       if (this.objects.length === 0) {
         return
       }

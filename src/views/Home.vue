@@ -16,7 +16,7 @@ export default {
   components: { ObjectsMap },
 
   computed: {
-    ...mapState(['isLoading']),
+    ...mapState(['loading']),
     ...mapGetters({
       objects: 'mapObjects'
     }),

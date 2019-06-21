@@ -1,18 +1,16 @@
 import axios from 'axios'
 import { PAGE_SIZE } from '../constants'
 
-const BASE_URL = 'https://dev.okn.oldsaratov.ru/api/'
+const BASE_URL = 'https://dev.okn.oldsaratov.ru/api'
 
 export function getAllObjects () {
-  return axios.get(BASE_URL + 'objects', { params: { perPage: 2000 } })
+  return axios.get(`${BASE_URL}/objects`, { params: { perPage: 2000 } })
     .then(({ data, status }) => {
       if (status >= 200 && status < 300) {
         return data.data.map(object => mapObjectDto(object))
       }
     })
-    .catch((error) => {
-      return Promise.reject(error)
-    })
+    .catch((error) => Promise.reject(error))
 }
 
 export function getObjectsByParams (params) {
@@ -24,7 +22,7 @@ export function getObjectsByParams (params) {
     queryParams = Object.assign(queryParams, { types })
   }
 
-  return axios.get(BASE_URL + 'objects', { params: queryParams })
+  return axios.get(`${BASE_URL}/objects`, { params: queryParams })
     .then(({ data, status }) => {
       if (status >= 200 && status < 300) {
         return {
@@ -34,21 +32,27 @@ export function getObjectsByParams (params) {
         }
       }
     })
-    .catch((error) => {
-      return Promise.reject(error)
-    })
+    .catch((error) => Promise.reject(error))
 }
 
 export function getObjectById (id) {
-  return axios.get(BASE_URL + 'objects/' + id)
+  return axios.get(`${BASE_URL}/objects/${id}`)
     .then(({ data, status }) => {
       if (status >= 200 && status < 300) {
         return mapObjectDto(data)
       }
     })
-    .catch((error) => {
-      return Promise.reject(error)
+    .catch((error) => Promise.reject(error))
+}
+
+export function getObjectEventsById (id) {
+  return axios.get(`${BASE_URL}/objects/${id}/events`)
+    .then(({ data, status }) => {
+      if (status >= 200 && status < 300) {
+        return mapObjectEventsDto(data.data)
+      }
     })
+    .catch((error) => Promise.reject(error))
 }
 
 function mapObjectDto (dto) {
@@ -59,4 +63,8 @@ function mapObjectDto (dto) {
     objectId: dto.objectId,
     type: dto.type
   }
+}
+
+function mapObjectEventsDto (dto) {
+  return dto
 }

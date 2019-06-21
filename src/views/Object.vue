@@ -1,5 +1,7 @@
 <template>
-  <div class="okn-object-page">
+  <div
+    v-loading.fullscreen.lock="loading"
+    class="okn-object-page">
     <h1>{{ object.name }}</h1>
     <div>{{ object.description }}</div>
     <ObjectsMap :objects="[object]"/>
@@ -7,7 +9,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 import ObjectsMap from '../components/ObjectsMap.vue'
 
@@ -17,7 +19,7 @@ export default {
 
   computed: {
     ...mapState(['object']),
-    ...mapGetters(['isLoading']),
+    ...mapState(['loading']),
 
     objectId () {
       return this.$route.params.id
@@ -26,6 +28,7 @@ export default {
 
   created () {
     this.getObjectById(this.objectId)
+    this.getObjectEventsById(this.objectId)
   },
 
   beforeDestroy () {
@@ -33,10 +36,7 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'getObjectById',
-      'clearObject'
-    ])
+    ...mapActions(['getObjectById', 'getObjectEventsById', 'clearObject'])
   }
 }
 </script>

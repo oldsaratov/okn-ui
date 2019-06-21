@@ -1,6 +1,6 @@
 <template>
   <el-table
-    v-loading="isLoading"
+    v-loading="loading"
     :data="objects"
     class="okn-objects-table"
     height="500">
@@ -40,7 +40,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['isLoading'])
+    ...mapState(['loading'])
   },
 
   methods: {
