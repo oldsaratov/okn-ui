@@ -11,16 +11,6 @@ export function getObjectById (id) {
     .catch((error) => Promise.reject(error))
 }
 
-export function getObjectEventsById (id) {
-  return axios.get(`${BASE_URL}/objects/${id}/events`)
-    .then(({ data, status }) => {
-      if (status >= 200 && status < 300) {
-        return mapObjectEventsDto(data.data)
-      }
-    })
-    .catch((error) => Promise.reject(error))
-}
-
 function mapObjectDto (dto) {
   return {
     coords: { latitude: dto.latitude, longitude: dto.longitude },
@@ -29,8 +19,4 @@ function mapObjectDto (dto) {
     objectId: dto.objectId,
     type: dto.type
   }
-}
-
-function mapObjectEventsDto (dto) {
-  return dto
 }

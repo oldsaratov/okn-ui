@@ -54,19 +54,7 @@
       <el-col
         :span="12"
         class="okn-object-events">
-        <h2 class="okn-object-events__title">События</h2>
-        <el-timeline
-          v-if="hasEvents"
-          class="okn-object-events__timeline">
-          <el-timeline-item
-            v-for="(event, index) in object.events"
-            :key="index"
-            :timestamp="event.occuredAt"
-          >{{ event.name }}</el-timeline-item>
-        </el-timeline>
-        <div
-          v-else-if="!hasEvents"
-          class="okn-object__no-data">С этим объектом пока ещё ничего не случилось.</div>
+        <ObjectEvents :object-id="objectId"/>
       </el-col>
 
       <!-- Map -->
@@ -80,11 +68,12 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 
+import ObjectEvents from '../components/ObjectEvents.vue'
 import ObjectsMap from '../components/ObjectsMap.vue'
 
 export default {
   name: 'Object',
-  components: { ObjectsMap },
+  components: { ObjectEvents, ObjectsMap },
 
   computed: {
     ...mapState(['object']),
@@ -92,16 +81,11 @@ export default {
 
     objectId () {
       return this.$route.params.id
-    },
-
-    hasEvents () {
-      return Array.isArray(this.object.events) && this.object.events.length > 0
     }
   },
 
   created () {
     this.getObjectById(this.objectId)
-    this.getObjectEventsById(this.objectId)
   },
 
   beforeDestroy () {
@@ -109,7 +93,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['getObjectById', 'getObjectEventsById', 'clearObject'])
+    ...mapActions(['getObjectById', 'clearObject'])
   }
 }
 </script>
@@ -158,18 +142,6 @@ export default {
 
   .okn-leaflet-map {
     min-height: 350px;
-  }
-
-  .okn-object-events {
-    padding-right: 30px;
-
-    &__title {
-      margin-top: 0;
-    }
-
-    &__timeline {
-      padding-inline-start: 0;
-    }
   }
 }
 </style>

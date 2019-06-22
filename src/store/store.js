@@ -4,6 +4,8 @@ import Vuex from 'vuex'
 import home from './modules/home'
 import list from './modules/list'
 import object from './modules/object'
+import events from './modules/events'
+
 import { TYPES } from './mutation-types'
 
 Vue.use(Vuex)
@@ -20,6 +22,6 @@ export default new Vuex.Store({
   },
   actions: {},
   modules: {
-    home, list, object
+    home, list, object, events
   }
 })

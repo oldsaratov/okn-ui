@@ -6,8 +6,7 @@ const state = {
   description: null,
   name: null,
   objectId: null,
-  type: null,
-  events: []
+  type: null
 }
 
 const getters = {}
@@ -21,17 +20,12 @@ const mutations = {
     state.type = object.type
   },
 
-  [TYPES.SET_OBJECT_EVENTS] (state, events) {
-    state.events = events
-  },
-
   [TYPES.CLEAR_OBJECT] (state) {
     state.coords = { latitude: null, longitude: null }
     state.description = null
     state.name = null
     state.objectId = null
     state.type = null
-    state.events = []
   }
 }
 
@@ -40,10 +34,6 @@ const actions = {
     commit(TYPES.SET_IS_LOADING, true)
     commit(TYPES.SET_OBJECT, await api.getObjectById(id))
     commit(TYPES.SET_IS_LOADING, false)
-  },
-
-  async getObjectEventsById ({ commit, state }, id) {
-    commit(TYPES.SET_OBJECT_EVENTS, await api.getObjectEventsById(id))
   },
 
   clearObject ({ commit }) {
