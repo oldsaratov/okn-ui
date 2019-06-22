@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Карта</router-link>
-      <span> | </span>
+      <el-divider direction="vertical"/>
       <router-link to="/list">Список</router-link>
     </div>
     <router-view/>
