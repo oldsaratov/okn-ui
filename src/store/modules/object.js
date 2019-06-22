@@ -6,7 +6,8 @@ const state = {
   description: null,
   name: null,
   objectId: null,
-  type: null
+  type: null,
+  events: []
 }
 
 const getters = {}
@@ -18,6 +19,10 @@ const mutations = {
     state.name = object.name
     state.objectId = object.objectId
     state.type = object.type
+  },
+
+  [TYPES.SET_OBJECT_EVENTS] (state, events) {
+    state.events = events
   },
 
   [TYPES.CLEAR_OBJECT] (state) {
@@ -34,6 +39,10 @@ const actions = {
     commit(TYPES.SET_IS_LOADING, true)
     commit(TYPES.SET_OBJECT, await api.getObjectById(id))
     commit(TYPES.SET_IS_LOADING, false)
+  },
+
+  async getObjectEventsById ({ commit, state }, id) {
+    commit(TYPES.SET_OBJECT_EVENTS, await api.getObjectEventsById(id))
   },
 
   clearObject ({ commit }) {
