@@ -31,6 +31,7 @@ const mutations = {
     state.name = null
     state.objectId = null
     state.type = null
+    state.events = []
   }
 }
 
