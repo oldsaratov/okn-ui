@@ -1,4 +1,4 @@
-import * as api from '../../api'
+import * as api from '../../api/objects.api'
 import { TYPES } from '../mutation-types'
 
 const state = {
@@ -21,6 +21,7 @@ const actions = {
 
     if (state.objects.length === 0) {
       commit(TYPES.SET_IS_LOADING, true)
+
       api.getAllObjects()
         .then(objects => {
           commit(TYPES.SET_OBJECTS, objects)

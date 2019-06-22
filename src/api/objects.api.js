@@ -1,7 +1,5 @@
 import axios from 'axios'
-import { PAGE_SIZE } from '../constants'
-
-const BASE_URL = 'https://dev.okn.oldsaratov.ru/api'
+import { BASE_URL, PAGE_SIZE } from '../constants'
 
 export function getAllObjects () {
   return axios.get(`${BASE_URL}/objects`, { params: { perPage: 2000 } })
@@ -35,26 +33,6 @@ export function getObjectsByParams (params) {
     .catch((error) => Promise.reject(error))
 }
 
-export function getObjectById (id) {
-  return axios.get(`${BASE_URL}/objects/${id}`)
-    .then(({ data, status }) => {
-      if (status >= 200 && status < 300) {
-        return mapObjectDto(data)
-      }
-    })
-    .catch((error) => Promise.reject(error))
-}
-
-export function getObjectEventsById (id) {
-  return axios.get(`${BASE_URL}/objects/${id}/events`)
-    .then(({ data, status }) => {
-      if (status >= 200 && status < 300) {
-        return mapObjectEventsDto(data.data)
-      }
-    })
-    .catch((error) => Promise.reject(error))
-}
-
 function mapObjectDto (dto) {
   return {
     coords: { latitude: dto.latitude, longitude: dto.longitude },
@@ -63,8 +41,4 @@ function mapObjectDto (dto) {
     objectId: dto.objectId,
     type: dto.type
   }
-}
-
-function mapObjectEventsDto (dto) {
-  return dto
 }

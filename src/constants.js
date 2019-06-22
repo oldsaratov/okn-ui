@@ -1,3 +1,5 @@
+export const BASE_URL = 'https://dev.okn.oldsaratov.ru/api'
+
 export const PAGE_SIZE = 20
 
 export const OBJECT_OPTIONS = [

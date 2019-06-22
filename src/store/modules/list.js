@@ -1,4 +1,4 @@
-import * as api from '../../api'
+import * as api from '../../api/objects.api'
 import { TYPES } from '../mutation-types'
 
 const state = {

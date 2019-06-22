@@ -10,7 +10,9 @@
         :span="12"
         class="okn-object__description">
         <div v-if="object.description">{{ object.description }}</div>
-        <div v-else-if="!object.description" class="okn-object__no-data">У этого объека пока нет описания.</div>
+        <div
+          v-else-if="!object.description"
+          class="okn-object__no-data">У этого объека пока нет описания.</div>
       </el-col>
 
       <!-- Photos -->
@@ -48,19 +50,23 @@
     </el-row>
 
     <el-row class="okn-object__row">
-      <!-- Timeline -->
+      <!-- Events -->
       <el-col
         :span="12"
         class="okn-object-events">
         <h2 class="okn-object-events__title">События</h2>
-        <el-timeline v-if="hasEvents" class="okn-object-events__timeline">
+        <el-timeline
+          v-if="hasEvents"
+          class="okn-object-events__timeline">
           <el-timeline-item
             v-for="(event, index) in object.events"
             :key="index"
             :timestamp="event.occuredAt"
           >{{ event.name }}</el-timeline-item>
         </el-timeline>
-        <div v-else-if="!hasEvents" class="okn-object__no-data">С этим объектом пока ещё ничего не случилось.</div>
+        <div
+          v-else-if="!hasEvents"
+          class="okn-object__no-data">С этим объектом пока ещё ничего не случилось.</div>
       </el-col>
 
       <!-- Map -->
@@ -120,6 +126,10 @@ export default {
     margin-bottom: 30px;
   }
 
+  &__description {
+    padding-right: 30px;
+  }
+
   &__photo {
     background: #f5f7fa;
     color: #909399;
@@ -151,6 +161,8 @@ export default {
   }
 
   .okn-object-events {
+    padding-right: 30px;
+
     &__title {
       margin-top: 0;
     }
