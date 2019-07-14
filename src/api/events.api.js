@@ -12,5 +12,11 @@ export function getObjectEventsById (id) {
 }
 
 function mapObjectEventsDto (dto) {
-  return dto
+  return dto.map(obj => ({
+    name: obj.name || '',
+    description: obj.description || '',
+    occuredAt: new Date(obj.occuredAt),
+    links: obj.links || [],
+    images: obj.images || []
+  }))
 }

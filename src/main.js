@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import VueMoment from 'vue-moment'
+import moment from 'moment'
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/ru-RU'
 import L from 'leaflet'
@@ -14,6 +16,7 @@ import store from './store/store'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI, { locale })
+Vue.use(VueMoment, { moment })
 
 new Vue({
   router,

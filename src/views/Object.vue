@@ -54,7 +54,9 @@
       <el-col
         :span="12"
         class="okn-object-events">
-        <ObjectEvents :object-id="objectId" :editable="true"/>
+        <ObjectEvents
+          :object-id="objectId"
+          :editable="true"/>
       </el-col>
 
       <!-- Map -->
