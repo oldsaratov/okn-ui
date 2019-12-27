@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Icon, Input, Select } from 'antd';
 
+import { fetchObjectsByParams } from '../actions';
 import { OBJECT_OPTIONS } from '../constants';
 import './List.css';
 
@@ -8,12 +10,16 @@ const { Option } = Select;
 
 class List extends React.Component {
 
+    componentDidMount() {
+        this.props.fetchObjectsByParams();
+    }
+
     onSearchTermChange = ({ target: { value } }) => {
         console.log('onSearchTermChange: ', value); // TODO: Call service
     };
 
-    onTypeChange = value => {
-        console.log('onTypeChange: ', value); // TODO: Call service
+    onTypesChange = types => {
+        this.props.fetchObjectsByParams({ page: 1, types });
     };
 
     render() {
@@ -31,7 +37,7 @@ class List extends React.Component {
                     mode="multiple"
                     placeholder="Тип"
                     showArrow={true}
-                    onChange={this.onTypeChange}
+                    onChange={this.onTypesChange}
                     className="okn-type-select"
                 >
                     {this.renderSelectOptions()}
@@ -45,4 +51,10 @@ class List extends React.Component {
     }
 }
 
-export default List;
+const mapStateToProps = state => {
+    const { objects, page, total } = state.list;
+
+    return { objects, page, total };
+};
+
+export default connect(mapStateToProps, { fetchObjectsByParams })(List);
