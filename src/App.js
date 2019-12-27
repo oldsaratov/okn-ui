@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import List from './pages/List';
 import Header from './components/Header';
 
+import './App.css';
+
 const App = () => {
   return (
     <div className="app">
