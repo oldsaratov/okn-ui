@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Col, Icon, Input, Row, Select, Table } from 'antd';
 
@@ -13,6 +14,7 @@ const columns = [
         title: 'Название',
         dataIndex: 'name',
         key: 'name',
+        render: (name, obj) => <Link to={`/objects/${obj.id}`}>{name}</Link>,
         ellipsis: true
     },
     {
@@ -41,7 +43,6 @@ class List extends React.Component {
     };
 
     onPaginationChange = pagination => {
-        console.log('onPaginationChange: ', pagination);
         this.props.fetchObjectsByParams({ page: pagination.current, types: this.state.selectedTypes });
     };
 
