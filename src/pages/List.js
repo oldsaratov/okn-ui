@@ -59,7 +59,7 @@ class List extends React.Component {
                         <Input
                             placeholder="Поиск"
                             prefix={<Icon type="search"/>}
-                            onPressEnter={this.onSearchTermChange}
+                            onChange={this.onSearchTermChange}
                             allowClear
                             className="okn-search-box"
                         />

@@ -1,13 +1,13 @@
 import ACTION_TYPES from  '../actions/types';
 
-const initialObjectsState = {
+const initialState = {
     all: [],
     perPage: [],
     page: 1,
     total: null
 };
 
-export default (state = initialObjectsState, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case ACTION_TYPES.FETCH_OBJECTS_BY_PARAMS:
             return {
