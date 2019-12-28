@@ -1,14 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Icon } from 'antd';
+
+import { fetchAllObjects } from '../actions';
+import './Home.css';
 
 class Home extends React.Component {
 
+    componentDidMount() {
+        this.props.fetchAllObjects();
+    }
+
     render() {
         return (
-            <div>
-                <h2>Home</h2>
+            <div className="okn-empty-state">
+                <Icon type="hourglass" className="okn-empty-state__icon" />
+                <h2>{this.props.objects.length} объектов когда-нибудь будут показаны здесь на карте</h2>
             </div>
         );
     }
 }
 
-export default Home;
+const mapStateToProps = state => {
+    return { objects: state.objects.all };
+};
+
+export default connect(mapStateToProps, { fetchAllObjects })(Home);

@@ -92,10 +92,10 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const { objects, page, total } = state.list;
+    const { perPage, page, total } = state.objects;
 
     return {
-        objects,
+        objects: perPage,
         pagination: { current: page, total, pageSize: PAGE_SIZE }
     };
 };
