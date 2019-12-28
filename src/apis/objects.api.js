@@ -12,9 +12,10 @@ export function getAllObjects() {
 }
 
 export function getObjectsByParams(params) {
-    let page = params && params.page ? params.page : 1;
-    let types = params && params.types && params.types.length ? params.types.toString() : null;
-    let queryParams = { page, perPage: PAGE_SIZE };
+    const page = params && params.page ? params.page : 1;
+    const types = params && params.types && params.types.length ? params.types.toString() : null;
+    const term = params && params.term ? params.term : null;
+    let queryParams = { page, perPage: PAGE_SIZE, name: term };
 
     if (types) {
         queryParams = Object.assign(queryParams, { types });

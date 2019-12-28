@@ -27,23 +27,28 @@ const columns = [
 ];
 
 class List extends React.Component {
-    state = { selectedTypes: [] };
+    state = { searchTerm: '', selectedTypes: [] };
 
     componentDidMount() {
         this.props.fetchObjectsByParams();
     }
 
     onSearchTermChange = ({ target: { value } }) => {
-        console.log('onSearchTermChange: ', value); // TODO: Call service
+        this.setState({ searchTerm: value } );
+        this.props.fetchObjectsByParams({ term: value, types: this.state.selectedTypes, page: 1 });
     };
 
     onTypesChange = types => {
         this.setState({ selectedTypes: types } );
-        this.props.fetchObjectsByParams({ page: 1, types });
+        this.props.fetchObjectsByParams({ term: this.state.searchTerm, types, page: 1 });
     };
 
     onPaginationChange = pagination => {
-        this.props.fetchObjectsByParams({ page: pagination.current, types: this.state.selectedTypes });
+        this.props.fetchObjectsByParams({
+            term: this.state.searchTerm,
+            types: this.state.selectedTypes,
+            page: pagination.current
+        });
     };
 
     render() {
