@@ -84,7 +84,7 @@ class List extends React.Component {
                     rowKey={object => object.id}
                     pagination={this.props.pagination}
                     size="middle"
-                    scroll={{ y: 'calc(100vh - 200px)' }}
+                    scroll={{ y: 'calc(100vh - 210px)' }}
                     className="okn-objects-table"
                     onChange={this.onPaginationChange}
                 />
