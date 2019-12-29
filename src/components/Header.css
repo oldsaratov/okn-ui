@@ -1,0 +1,14 @@
+.okn-nav {
+    padding: 15px;
+    text-align: center;
+}
+
+.okn-nav__link {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.okn-nav__link--active {
+    color: #42b983;
+}

@@ -1,0 +1,5 @@
+@import '~antd/dist/antd.css';
+
+.app {
+    margin: 0 20px;
+}
