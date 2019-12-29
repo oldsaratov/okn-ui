@@ -1,5 +1,3 @@
-import { OLDSARATOV_AUTH } from '../apis/oldsaratov.api';
-
 const sessionKey = 'okn_session';
 const stateKey = 'okn_state';
 
@@ -8,7 +6,7 @@ export const authService = {
         const state = window.btoa(window.location.pathname);
         const redirectTo = `${window.location.origin}/auth`;
         const authParams = `scope=openid+profile+email&state=${state}&redirect_uri=${redirectTo}`;
-        const authUrl = `${OLDSARATOV_AUTH}?response_type=token&client_id=okn&${authParams}`;
+        const authUrl = `https://oldsaratov.ru/oauth2/authorize?response_type=token&client_id=okn&${authParams}`;
 
         storage.setItem(stateKey, state);
 
