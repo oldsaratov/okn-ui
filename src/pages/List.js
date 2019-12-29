@@ -55,7 +55,7 @@ class List extends React.Component {
         return (
             <div>
                 <Row gutter={16} className="okn-filters-panel">
-                    <Col className="gutter-row" xs={24} sm={12} lg={6}>
+                    <Col xs={24} sm={12} lg={6}>
                         <Input
                             placeholder="Поиск"
                             prefix={<Icon type="search"/>}
@@ -65,7 +65,7 @@ class List extends React.Component {
                         />
                     </Col>
 
-                    <Col className="gutter-row" xs={24} sm={12} lg={12}>
+                    <Col xs={24} sm={12} lg={12}>
                         <Select
                             mode="multiple"
                             placeholder="Тип"
@@ -84,7 +84,7 @@ class List extends React.Component {
                     rowKey={object => object.id}
                     pagination={this.props.pagination}
                     size="middle"
-                    scroll={{ y: 'calc(100vh - 210px)' }}
+                    scroll={{ y: "calc(100vh - 210px)" }}
                     className="okn-objects-table"
                     onChange={this.onPaginationChange}
                 />

@@ -2,6 +2,10 @@
     float: right;
 }
 
+.okn-user-details .ant-btn {
+    padding: 0;
+}
+
 .okn-username {
     cursor: pointer;
     margin-left: 7px;

@@ -1,19 +1,25 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Divider } from 'antd';
+import { Col, Divider, Row } from 'antd';
 
 import UserDetails from './UserDetails';
 import './Header.css';
+import logo from '../assets/logo_small.png';
 
 const Header = () => {
     return (
-        <div className="okn-nav">
-            <NavLink to="/" exact className="okn-nav__link" activeClassName="okn-nav__link--active">Карта</NavLink>
-            <Divider type="vertical" />
-            <NavLink to="/objects" exact className="okn-nav__link" activeClassName="okn-nav__link--active">Список</NavLink>
+        <Row className="okn-nav">
+            <Col span={12}>
+                <img src={logo} alt="Logo" className="okn-nav__logo" />
+                <NavLink to="/" exact className="okn-nav__link" activeClassName="okn-nav__link--active">Карта</NavLink>
+                <Divider type="vertical" />
+                <NavLink to="/objects" exact className="okn-nav__link" activeClassName="okn-nav__link--active">Список</NavLink>
+            </Col>
 
-            <UserDetails />
-        </div>
+            <Col span={12}>
+                <UserDetails />
+            </Col>
+        </Row>
     );
 };
 
