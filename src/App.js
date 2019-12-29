@@ -1,6 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 
+import history from './history';
+import Auth from './pages/Auth';
 import Home from './pages/Home';
 import List from './pages/List';
 import ObjectShow from './pages/ObjectShow';
@@ -11,14 +13,17 @@ import './App.css';
 const App = () => {
     return (
         <div className="app">
-            <BrowserRouter>
+            <Router history={history}>
                 <div>
                     <Header/>
-                    <Route path="/" exact component={Home}/>
-                    <Route path="/objects" exact component={List}/>
-                    <Route path="/objects/:id" exact component={ObjectShow}/>
+                    <Switch>
+                        <Route path="/auth" exact component={Auth}/>
+                        <Route path="/" exact component={Home}/>
+                        <Route path="/objects" exact component={List}/>
+                        <Route path="/objects/:id" exact component={ObjectShow}/>
+                    </Switch>
                 </div>
-            </BrowserRouter>
+            </Router>
         </div>
     );
 };

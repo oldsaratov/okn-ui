@@ -2,14 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Avatar, Button, Popover } from 'antd';
 
-import { login, logout } from '../actions';
+import { logout } from '../actions';
+import { authService } from '../services/auth.service';
 import './UserDetails.css';
 
 class UserDetails extends React.Component {
     state = { visible: false };
 
     onLoginClick = () => {
-        this.props.login();
+        if (!this.props.isLoggedIn) {
+            authService.login();
+        }
     };
 
     onLogoutClick = () => {
@@ -52,7 +55,7 @@ class UserDetails extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { isLoggedIn: state.user.isLoggedIn };
+    return { isLoggedIn: authService.isLoggedIn() };
 };
 
-export default connect(mapStateToProps, { login, logout })(UserDetails);
+export default connect(mapStateToProps, { logout })(UserDetails);

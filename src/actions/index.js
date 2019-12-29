@@ -1,11 +1,16 @@
 import { getAllObjects, getObjectsByParams } from  '../apis/objects.api';
+import { authService } from  '../services/auth.service';
 import ACTION_TYPES from  './types';
 
-export const login = () => {
-    return { type: ACTION_TYPES.USER_LOGIN, payload: {} };
+export const login = session => {
+    authService.saveSession(session);
+
+    return { type: ACTION_TYPES.USER_LOGIN, payload: { session } };
 };
 
 export const logout = () => {
+    authService.invalidateSession();
+
     return { type: ACTION_TYPES.USER_LOGOUT };
 };
 

@@ -1,11 +1,14 @@
 .okn-empty-state {
-    background: #f5f7fa;
     color: #909399;
     height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.okn-empty-state--grey {
+    background: #f5f7fa;
 }
 
 .okn-empty-state__icon {

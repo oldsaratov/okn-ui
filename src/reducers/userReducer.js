@@ -1,7 +1,9 @@
 import ACTION_TYPES from '../actions/types';
 
 const unauthenticatedState = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    session: null,
+    profile: null
 };
 const initialState = { ...unauthenticatedState };
 
@@ -10,7 +12,8 @@ export default (state = initialState, action) => {
         case ACTION_TYPES.USER_LOGIN:
             return {
                 ...state,
-                isLoggedIn: true
+                isLoggedIn: true,
+                session: action.payload.session
             };
         case ACTION_TYPES.USER_LOGOUT:
             return { ...unauthenticatedState };
