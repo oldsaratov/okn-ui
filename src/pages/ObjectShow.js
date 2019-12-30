@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Icon, Spin } from 'antd';
 
 import { fetchObject, resetObject } from '../actions';
+import ObjectEvents from '../components/ObjectEvents';
 
 class ObjectShow extends React.Component {
 
@@ -25,8 +26,12 @@ class ObjectShow extends React.Component {
 
         return (
             <div>
-                <h2>{this.props.name}</h2>
-                <div>{this.props.description}</div>
+                <div>
+                    <h1>{this.props.name}</h1>
+                    <p>{this.props.description}</p>
+                </div>
+
+                <ObjectEvents objectId={this.props.id} />
             </div>
         );
     };
