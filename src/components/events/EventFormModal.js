@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Modal } from 'antd';
+import { DatePicker, Form, Input, Modal } from 'antd';
 
 const { TextArea } = Input;
 
@@ -17,6 +17,7 @@ const EventFormModal = Form.create({
         return (event && {
             name: Form.createFormField({ ...event.name, value: event.name }),
             description: Form.createFormField({ ...event.description, value: event.description }),
+            occuredAt: Form.createFormField({ ...event.occuredAt, value: event.occuredAt }),
         }) || {};
     },
     onValuesChange(props, values) {
@@ -44,6 +45,9 @@ const EventFormModal = Form.create({
                     </Form.Item>
                     <Form.Item {...formItemLayout} label="Описание">
                         {getFieldDecorator('description')(<TextArea autoSize={{ minRows: 2, maxRows: 6 }}/>)}
+                    </Form.Item>
+                    <Form.Item {...formItemLayout} label="Дата">
+                        {getFieldDecorator('occuredAt', { rules: [{ type: 'object',  ...requiredFieldRule }] })(<DatePicker />)}
                     </Form.Item>
                 </Form>
             </Modal>
