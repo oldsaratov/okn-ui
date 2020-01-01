@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Icon, Spin } from 'antd';
 
 import { fetchObject, resetObject } from '../actions';
-import ObjectEvents from '../components/ObjectEvents';
+import ObjectEvents from '../components/events/Events';
+import { authService } from '../services/auth.service';
 
 class ObjectShow extends React.Component {
 
@@ -31,7 +32,7 @@ class ObjectShow extends React.Component {
                     <p>{this.props.description}</p>
                 </div>
 
-                <ObjectEvents objectId={this.props.id} />
+                <ObjectEvents objectId={this.props.id} isLoggedIn={this.props.isLoggedIn} />
             </div>
         );
     };
@@ -56,6 +57,7 @@ class ObjectShow extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         id: ownProps.match.params.id,
+        isLoggedIn: authService.isLoggedIn(),
         ...state.object
     };
 };
