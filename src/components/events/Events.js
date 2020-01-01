@@ -2,47 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Icon, Spin, Timeline } from 'antd';
 
-import {
-    createObjectEvent,
-    deleteObjectEvent,
-    fetchObjectEvents,
-    resetObjectEvents,
-    updateObjectEvent
-} from '../../actions';
+import { createObjectEvent, fetchObjectEvents } from '../../actions';
+import { getActionStatus } from '../../selectors';
 import EventCard from './EventCard';
-import EventModal from './EventModal';
+import EventFormModal from './EventFormModal';
 
 class Events extends React.Component {
-    state = { modalVisible: false, modalType: null, selectedEvent: null };
+    state = { visible: false };
 
     componentDidMount() {
         this.props.fetchObjectEvents(this.props.objectId);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.confirmLoading && !this.props.confirmLoading) {
-            this.closeModal();
+        if (prevProps.createStatus.loading && !this.props.createStatus.loading) {
+            this.toggleModal(false);
         }
     }
 
-    componentWillUnmount() {
-        this.props.resetObjectEvents();
-    }
-
-    onAddEvent = () => {
-        this.setState({ modalVisible: true, modalType: 'NEW', selectedEvent: null });
-    };
-
-    onEditEvent = event => {
-        this.setState({ modalVisible: true, modalType: 'EDIT', selectedEvent: event });
-    };
-
-    onDeleteEvent = event => {
-        this.props.deleteObjectEvent(this.props.objectId, event.id)
-    };
-
-    closeModal = () => {
-        this.setState({ modalVisible: false });
+    toggleModal = visible => {
+        this.setState({ visible });
     };
 
     onFormSave = () => {
@@ -53,21 +32,17 @@ class Events extends React.Component {
                 return;
             }
 
-            if (this.state.modalType === 'NEW') {
-                this.props.createObjectEvent(this.props.objectId, event);
-            } else {
-                this.props.updateObjectEvent(this.props.objectId, { ...this.state.selectedEvent, ...event });
-            }
+            this.props.createObjectEvent(this.props.objectId, event);
         });
     };
 
-    saveFormRef = formRef => {
+    newFormRef = formRef => {
         this.formRef = formRef;
     };
 
     render() {
         return (
-            <div>
+            <div className="okn-object-events">
                 {this.renderTitle()}
                 {this.renderContent()}
                 {this.renderModal()}
@@ -89,7 +64,7 @@ class Events extends React.Component {
 
     renderTitle() {
         const button = this.props.isLoggedIn
-            ? <Button type="link" icon="plus" onClick={this.onAddEvent}>Добавить</Button>
+            ? <Button type="link" icon="plus" onClick={() => this.toggleModal(true)}>Добавить</Button>
             : null;
 
         return <h2>События {button}</h2>;
@@ -97,13 +72,11 @@ class Events extends React.Component {
 
     renderTimeline() {
         const timelineItems = this.props.events.map(event =>
-            <Timeline.Item key={event.id} dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }} />}>
+            <Timeline.Item key={event.id} dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }}/>}>
                 <EventCard
+                    objectId={this.props.objectId}
                     event={event}
                     isLoggedIn={this.props.isLoggedIn}
-                    confirmLoading={this.props.confirmLoading}
-                    onEdit={() => this.onEditEvent(event)}
-                    onDelete={() => this.onDeleteEvent(event)}
                 />
             </Timeline.Item>
         );
@@ -113,13 +86,13 @@ class Events extends React.Component {
 
     renderModal() {
         const modal = (
-            <EventModal
-                wrappedComponentRef={this.saveFormRef}
-                visible={this.state.modalVisible}
-                confirmLoading={this.props.confirmLoading}
-                event={this.state.selectedEvent}
-                type={this.state.modalType}
-                onCancel={() => this.closeModal()}
+            <EventFormModal
+                wrappedComponentRef={this.newFormRef}
+                visible={this.state.visible}
+                title="Новое событие"
+                okText="Создать"
+                confirmLoading={this.props.createStatus.loading}
+                onCancel={() => this.toggleModal(false)}
                 onSave={this.onFormSave}
             />
         );
@@ -129,13 +102,10 @@ class Events extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { ...state.events };
+    return {
+        ...state.events,
+        createStatus: getActionStatus(state, 'create', 'event')
+    };
 };
 
-export default connect(mapStateToProps, {
-    createObjectEvent,
-    fetchObjectEvents,
-    deleteObjectEvent,
-    resetObjectEvents,
-    updateObjectEvent
-})(Events);
+export default connect(mapStateToProps, { createObjectEvent, fetchObjectEvents })(Events);

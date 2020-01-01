@@ -71,6 +71,7 @@ class List extends React.Component {
                             placeholder="Тип"
                             showArrow={true}
                             onChange={this.onTypesChange}
+                            allowClear
                             className="okn-type-select"
                         >
                             {this.renderSelectOptions()}
@@ -83,6 +84,7 @@ class List extends React.Component {
                     columns={columns}
                     rowKey={object => object.id}
                     pagination={this.props.pagination}
+                    loading={this.props.loading}
                     size="middle"
                     scroll={{ y: "calc(100vh - 210px)" }}
                     className="okn-objects-table"
@@ -98,11 +100,12 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const { perPage, page, total } = state.objects;
+    const { perPage, page, total, loading } = state.objects;
 
     return {
         objects: perPage,
-        pagination: { current: page, total, pageSize: PAGE_SIZE }
+        pagination: { current: page, total, pageSize: PAGE_SIZE },
+        loading
     };
 };
 
