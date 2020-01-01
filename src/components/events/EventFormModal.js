@@ -10,7 +10,7 @@ const formItemLayout = {
 const requiredFieldRule = { required: true, message: 'Обязательное поле' };
 
 const EventFormModal = Form.create({
-    name: 'form_in_modal',
+    name: 'event_form_in_modal',
     mapPropsToFields(props) {
         const { event } = props;
 
@@ -18,6 +18,9 @@ const EventFormModal = Form.create({
             name: Form.createFormField({ ...event.name, value: event.name }),
             description: Form.createFormField({ ...event.description, value: event.description }),
         }) || {};
+    },
+    onValuesChange(props, values) {
+        props.onChange(values);
     }
 })(class extends React.Component {
     render() {

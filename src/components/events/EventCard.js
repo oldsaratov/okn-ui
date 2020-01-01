@@ -9,14 +9,19 @@ import EventFormModal from './EventFormModal';
 const { Paragraph } = Typography;
 
 class EventCard extends React.Component {
-    state = { visible: false };
+    state = { visible: false, formEvent: {} };
 
     onEditEvent = () => {
+        this.setState({ formEvent: this.props.event });
         this.toggleModal(true);
     };
 
     onDeleteEvent = () => {
         this.props.deleteObjectEvent(this.props.objectId, this.props.event.id)
+    };
+
+    onFormChange = changedEventFields => {
+        this.setState(({ formEvent }) => ({ formEvent: { ...formEvent, ...changedEventFields } }));
     };
 
     onFormSave = () => {
@@ -82,7 +87,8 @@ class EventCard extends React.Component {
                 title="Редактирование событие"
                 okText="Сохранить"
                 confirmLoading={this.props.updateStatus.loading}
-                event={this.props.event}
+                event={this.state.formEvent}
+                onChange={this.onFormChange}
                 onCancel={() => this.toggleModal(false)}
                 onSave={this.onFormSave}
             />
@@ -92,10 +98,10 @@ class EventCard extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, props) => {
     return {
-        updateStatus: getActionStatus(state, 'update', ownProps.event.id),
-        deleteStatus: getActionStatus(state, 'delete', ownProps.event.id)
+        updateStatus: getActionStatus(state, 'update', props.event.id),
+        deleteStatus: getActionStatus(state, 'delete', props.event.id)
     };
 };
 

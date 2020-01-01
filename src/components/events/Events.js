@@ -8,7 +8,7 @@ import EventCard from './EventCard';
 import EventFormModal from './EventFormModal';
 
 class Events extends React.Component {
-    state = { visible: false };
+    state = { visible: false, formEvent: {} };
 
     componentDidMount() {
         this.props.fetchObjectEvents(this.props.objectId);
@@ -20,8 +20,13 @@ class Events extends React.Component {
         }
     }
 
-    toggleModal = visible => {
-        this.setState({ visible });
+    onAddEvent = () => {
+        this.setState({ formEvent: {} });
+        this.toggleModal(true);
+    };
+
+    onFormChange = changedEventFields => {
+        this.setState(({ formEvent }) => ({ formEvent: { ...formEvent, ...changedEventFields } }));
     };
 
     onFormSave = () => {
@@ -38,6 +43,10 @@ class Events extends React.Component {
 
     newFormRef = formRef => {
         this.formRef = formRef;
+    };
+
+    toggleModal = visible => {
+        this.setState({ visible });
     };
 
     render() {
@@ -64,7 +73,7 @@ class Events extends React.Component {
 
     renderTitle() {
         const button = this.props.isLoggedIn
-            ? <Button type="link" icon="plus" onClick={() => this.toggleModal(true)}>Добавить</Button>
+            ? <Button type="link" icon="plus" onClick={this.onAddEvent}>Добавить</Button>
             : null;
 
         return <h2>События {button}</h2>;
@@ -92,6 +101,8 @@ class Events extends React.Component {
                 title="Новое событие"
                 okText="Создать"
                 confirmLoading={this.props.createStatus.loading}
+                event={this.state.formEvent}
+                onChange={this.onFormChange}
                 onCancel={() => this.toggleModal(false)}
                 onSave={this.onFormSave}
             />
