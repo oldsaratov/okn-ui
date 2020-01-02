@@ -126,11 +126,17 @@ class Events extends React.Component {
     }
 
     renderTimelineEvent(event, index) {
+        const dot = (
+            <div className="okn-dot-event">
+                <Icon type="clock-circle" className="okn-dot-event__icon" />
+            </div>
+        );
+
         return (
             <Timeline.Item
                 className={event.position}
                 key={index}
-                dot={<Icon type="clock-circle" theme="twoTone" style={{ fontSize: '26px' }}/>}
+                dot={dot}
                 position={event.position}
             >
                 <EventCard

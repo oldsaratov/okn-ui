@@ -1,10 +1,43 @@
+.okn-object-events {
+    padding: 0 40px;
+    background-color: #f4f5fa;
+}
+
 .okn-object-events .okn-object-events__title {
-    margin-bottom: 22px;
+    padding: 22px 0;
     text-align: center;
+    font-size: 28px;
+}
+
+.okn-object-events__fake-block {
+    height: 55px;
+}
+
+.okn-object-events__container .ant-timeline-item-tail {
+    border-left: 2px solid #dadada;
+}
+
+.okn-object-events__container .ant-timeline-item-head {
+    background-color: transparent;
+    top: 11px;
+}
+
+.okn-object-events__container.ant-timeline.ant-timeline-alternate .ant-timeline-item-left .ant-timeline-item-content,
+.okn-object-events__container.ant-timeline.ant-timeline-right .ant-timeline-item-left .ant-timeline-item-content {
+    left: calc(50% + 18px);
+    width: calc(50% - 34px);
+    text-align: left;
+}
+
+.okn-object-events__container.ant-timeline.ant-timeline-alternate .ant-timeline-item-right .ant-timeline-item-content,
+.okn-object-events__container.ant-timeline.ant-timeline-right .ant-timeline-item-right .ant-timeline-item-content {
+    width: calc(50% - 34px);
+    margin: 0;
+    text-align: right;
 }
 
 .okn-dot-year {
-    background-color: #42b983;
+    background-color: #6967ce;
     border-radius: 1.5rem;
     color: #fff;
     font-size: 1rem;
@@ -18,20 +51,17 @@
     margin-right: 6px;
 }
 
-.okn-object-events__fake-block {
-    height: 55px;
+.okn-dot-event {
+    background-color: #42b983 !important;
+    border-radius: 50%;
+    box-shadow: 0 1px 7px 1px rgba(66, 185, 131, .5);
+    height: 36px;
+    padding: 8px;
+    width: 36px;
+    text-align: center;
 }
 
-.okn-object-events__container.ant-timeline.ant-timeline-alternate .ant-timeline-item-left .ant-timeline-item-content,
-.okn-object-events__container.ant-timeline.ant-timeline-right .ant-timeline-item-left .ant-timeline-item-content {
-    left: calc(50% + 6px);
-    width: calc(50% - 22px);
-    text-align: left;
-}
-
-.okn-object-events__container.ant-timeline.ant-timeline-alternate .ant-timeline-item-right .ant-timeline-item-content,
-.okn-object-events__container.ant-timeline.ant-timeline-right .ant-timeline-item-right .ant-timeline-item-content {
-    width: calc(50% - 22px);
-    margin: 0;
-    text-align: right;
+.okn-dot-event__icon {
+    color: white !important;
+    font-size: 20px;
 }

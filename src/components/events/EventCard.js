@@ -49,12 +49,15 @@ class EventCard extends React.Component {
     render() {
         const { event } = this.props;
         const actions = this.props.isLoggedIn ? this.renderActions() : null;
+        const last = event.last ? 'okn-event-card--last': '';
+        const position = event.position ? `okn-event-card--${event.position}` : '';
 
         return (
             <Card
-                className={'okn-event-card ' + (event.last ? 'okn-event-card--last': '')}
+                className={`okn-event-card ${position} ${last}`}
                 size="small"
                 title={event.name}
+                bordered={false}
                 extra={<React.Fragment>{this.renderDate()} {actions}</React.Fragment>}
             >
                 <Paragraph ellipsis={{ rows: 5, expandable: true }}>{event.description}</Paragraph>

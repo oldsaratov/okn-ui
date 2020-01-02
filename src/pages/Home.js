@@ -13,9 +13,11 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div className="okn-empty-state okn-empty-state--grey">
-                <Icon type="hourglass" className="okn-empty-state__icon" />
-                <h2>{this.props.objects.length} объектов когда-нибудь будут показаны здесь на карте</h2>
+            <div className="okn-home-page">
+                <div className="okn-empty-state okn-empty-state--grey">
+                    <Icon type="hourglass" className="okn-empty-state__icon" />
+                    <h2>{this.props.objects.length} объектов когда-нибудь будут показаны здесь на карте</h2>
+                </div>
             </div>
         );
     }

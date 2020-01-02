@@ -1,5 +1,52 @@
 .okn-event-card {
+    box-shadow: 0 1px 8px 1px rgba(62, 57, 107, .1);
     text-align: left;
+}
+
+.okn-event-card.okn-event-card--left .ant-card-head {
+    border-left: 10px solid #42b983;
+}
+
+.okn-event-card.okn-event-card--left .ant-card-head:after {
+    right: 100%;
+    top: 18px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-right-color: #42b983;
+    border-width: 10px;
+    margin-top: -10px;
+}
+
+.okn-event-card.okn-event-card--left .ant-card-body {
+    border-left: 10px solid #42b983;
+    border-bottom-left-radius: 2px;
+}
+
+.okn-event-card.okn-event-card--right .ant-card-head {
+    border-right: 10px solid #42b983;
+}
+
+.okn-event-card.okn-event-card--right .ant-card-head:after {
+    left: 100%;
+    top: 18px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-left-color: #42b983;
+    border-width: 10px;
+    margin-top: -10px;
+}
+
+.okn-event-card.okn-event-card--right .ant-card-body {
+    border-right: 10px solid #42b983;
+    border-bottom-right-radius: 2px;
 }
 
 .okn-event-card.okn-event-card--last {

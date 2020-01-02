@@ -53,7 +53,7 @@ class List extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="okn-list-page">
                 <Row gutter={16} className="okn-filters-panel">
                     <Col xs={24} sm={12} lg={6}>
                         <Input
