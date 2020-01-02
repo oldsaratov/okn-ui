@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Icon, Spin, Timeline } from 'antd';
+import groupBy from 'lodash/groupBy';
 
 import { createObjectEvent, fetchObjectEvents } from '../../actions';
 import { getActionStatus } from '../../selectors';
@@ -82,10 +83,56 @@ class Events extends React.Component {
     }
 
     renderTimeline() {
-        const timelineItems = this.props.events.map(event =>
+        const timeline = [];
+        const years = groupBy(
+            this.props.events.map((event, i) => ({ ...event, position: i % 2 === 0 ? 'left' : 'right' })),
+            event => event.occuredAt.format('YYYY')
+        );
+
+        for (const year in years) {
+            const itemsCount = years[year].length;
+
+            years[year].reverse().forEach((event, index) => {
+                timeline.unshift({ type: 'event', item: { ...event, last: itemsCount === index + 1 } });
+            });
+
+            timeline.unshift({ type: 'dot', item: year });
+        }
+
+        const timelineItems = timeline.map(({ type, item }, index) => {
+            if (type === 'dot') {
+                return this.renderTimelineYear(item, index);
+            }
+
+            return this.renderTimelineEvent(item, index);
+        });
+
+        return <Timeline className="okn-object-events__container" mode="alternate">{timelineItems}</Timeline>;
+    }
+
+    renderTimelineYear(year, index) {
+        const dot = (
+            <div className="okn-dot-year">
+                <Icon type="calendar" className="okn-dot-year__icon" />
+                <span className="okn-dot-year__year">{year}</span>
+            </div>
+        );
+
+        return (
+            <Timeline.Item key={index} dot={dot}>
+                <div className="okn-object-events__fake-block"></div>
+            </Timeline.Item>
+        );
+    }
+
+    renderTimelineEvent(event, index) {
+        return (
             <Timeline.Item
-                key={event.id}
-                dot={<Icon type="clock-circle-o" theme="twoTone" style={{ fontSize: '26px' }}/>}>
+                className={event.position}
+                key={index}
+                dot={<Icon type="clock-circle" theme="twoTone" style={{ fontSize: '26px' }}/>}
+                position={event.position}
+            >
                 <EventCard
                     objectId={this.props.objectId}
                     event={event}
@@ -93,8 +140,6 @@ class Events extends React.Component {
                 />
             </Timeline.Item>
         );
-
-        return <Timeline className="okn-object-events__container" mode="alternate">{timelineItems}</Timeline>;
     }
 
     renderModal() {

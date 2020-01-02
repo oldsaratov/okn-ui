@@ -52,7 +52,7 @@ class EventCard extends React.Component {
 
         return (
             <Card
-                className="okn-event-card"
+                className={'okn-event-card ' + (event.last ? 'okn-event-card--last': '')}
                 size="small"
                 title={event.name}
                 extra={<React.Fragment>{this.renderDate()} {actions}</React.Fragment>}

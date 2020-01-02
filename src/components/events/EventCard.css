@@ -2,6 +2,10 @@
     text-align: left;
 }
 
+.okn-event-card.okn-event-card--last {
+    margin-bottom: 25px;
+}
+
 .okn-event-card .okn-event-card__date {
     color: rgba(0, 0, 0, .25);
 }

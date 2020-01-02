@@ -3,6 +3,25 @@
     text-align: center;
 }
 
+.okn-dot-year {
+    background-color: #42b983;
+    border-radius: 1.5rem;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: .8px;
+    line-height: 1.25;
+    padding: .5rem 1.5rem;
+}
+
+.okn-dot-year .okn-dot-year__icon {
+    margin-right: 6px;
+}
+
+.okn-object-events__fake-block {
+    height: 55px;
+}
+
 .okn-object-events__container.ant-timeline.ant-timeline-alternate .ant-timeline-item-left .ant-timeline-item-content,
 .okn-object-events__container.ant-timeline.ant-timeline-right .ant-timeline-item-left .ant-timeline-item-content {
     left: calc(50% + 6px);
