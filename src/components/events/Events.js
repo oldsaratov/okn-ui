@@ -7,6 +7,8 @@ import { getActionStatus } from '../../selectors';
 import EventCard from './EventCard';
 import EventFormModal from './EventFormModal';
 
+import './Events.css';
+
 class Events extends React.Component {
     state = { visible: false, formEvent: {} };
 
@@ -76,12 +78,14 @@ class Events extends React.Component {
             ? <Button type="link" icon="plus" onClick={this.onAddEvent}>Добавить</Button>
             : null;
 
-        return <h2>События {button}</h2>;
+        return <h2 className="okn-object-events__title">События {button}</h2>;
     }
 
     renderTimeline() {
         const timelineItems = this.props.events.map(event =>
-            <Timeline.Item key={event.id} dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }}/>}>
+            <Timeline.Item
+                key={event.id}
+                dot={<Icon type="clock-circle-o" theme="twoTone" style={{ fontSize: '26px' }}/>}>
                 <EventCard
                     objectId={this.props.objectId}
                     event={event}
@@ -90,7 +94,7 @@ class Events extends React.Component {
             </Timeline.Item>
         );
 
-        return <Timeline>{timelineItems}</Timeline>;
+        return <Timeline className="okn-object-events__container" mode="alternate">{timelineItems}</Timeline>;
     }
 
     renderModal() {

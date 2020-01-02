@@ -6,6 +6,8 @@ import { deleteObjectEvent, updateObjectEvent } from '../../actions';
 import { getActionStatus } from '../../selectors';
 import EventFormModal from './EventFormModal';
 
+import './EventCard.css';
+
 const { Paragraph } = Typography;
 
 class EventCard extends React.Component {
@@ -46,13 +48,14 @@ class EventCard extends React.Component {
 
     render() {
         const { event } = this.props;
+        const actions = this.props.isLoggedIn ? this.renderActions() : null;
 
         return (
             <Card
+                className="okn-event-card"
                 size="small"
                 title={event.name}
-                extra={this.props.isLoggedIn ? this.renderActions() : null}
-                style={{ width: 400 }}
+                extra={<React.Fragment>{this.renderDate()} {actions}</React.Fragment>}
             >
                 <Paragraph ellipsis={{ rows: 5, expandable: true }}>{event.description}</Paragraph>
             </Card>
@@ -61,7 +64,7 @@ class EventCard extends React.Component {
 
     renderActions() {
         return (
-            <div className="okn-event-card__actions">
+            <span className="okn-event-card__actions">
                 <Button type="link" icon="edit" onClick={this.onEditEvent}/>
 
                 <Popconfirm
@@ -75,8 +78,12 @@ class EventCard extends React.Component {
                 </Popconfirm>
 
                 {this.renderEditModal()}
-            </div>
+            </span>
         );
+    }
+
+    renderDate() {
+        return <span className="okn-event-card__date">{this.props.event.occuredAt.format('DD/MM/YYYY')}</span>;
     }
 
     renderEditModal() {

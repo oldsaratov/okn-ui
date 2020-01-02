@@ -1,0 +1,7 @@
+.okn-event-card {
+    text-align: left;
+}
+
+.okn-event-card .okn-event-card__date {
+    color: rgba(0, 0, 0, .25);
+}

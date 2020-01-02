@@ -1,0 +1,18 @@
+.okn-object-events .okn-object-events__title {
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+.okn-object-events__container.ant-timeline.ant-timeline-alternate .ant-timeline-item-left .ant-timeline-item-content,
+.okn-object-events__container.ant-timeline.ant-timeline-right .ant-timeline-item-left .ant-timeline-item-content {
+    left: calc(50% + 6px);
+    width: calc(50% - 22px);
+    text-align: left;
+}
+
+.okn-object-events__container.ant-timeline.ant-timeline-alternate .ant-timeline-item-right .ant-timeline-item-content,
+.okn-object-events__container.ant-timeline.ant-timeline-right .ant-timeline-item-right .ant-timeline-item-content {
+    width: calc(50% - 22px);
+    margin: 0;
+    text-align: right;
+}
