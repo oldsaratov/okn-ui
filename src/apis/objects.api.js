@@ -46,10 +46,13 @@ export function getObjectById(id) {
 
 function mapObjectDto(dto) {
     return {
-        coords: { latitude: dto.latitude, longitude: dto.longitude },
-        description: dto.description,
-        name: dto.name,
         id: dto.objectId,
-        type: dto.type
+        name: dto.name,
+        description: dto.description,
+        coords: { latitude: dto.latitude, longitude: dto.longitude },
+        type: dto.type,
+        eventsCount: dto.eventsCount,
+        mainPhoto: dto.mainPhoto,
+        photos: dto.photos
     };
 }

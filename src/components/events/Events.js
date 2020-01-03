@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Icon, Spin, Timeline } from 'antd';
+import { Button, Icon, Spin, Timeline, Typography } from 'antd';
 import groupBy from 'lodash/groupBy';
 
 import { createObjectEvent, fetchObjectEvents } from '../../actions';
@@ -10,11 +10,15 @@ import EventFormModal from './EventFormModal';
 
 import './Events.css';
 
+const { Text } = Typography;
+
 class Events extends React.Component {
     state = { visible: false, formEvent: {} };
 
     componentDidMount() {
-        this.props.fetchObjectEvents(this.props.objectId);
+        if (this.props.eventsCount > 0) {
+            this.props.fetchObjectEvents(this.props.objectId);
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -64,11 +68,11 @@ class Events extends React.Component {
 
     renderContent() {
         if (this.props.loading) {
-            return <Spin size="large"/>;
+            return <Spin size="large" className="okn-object-events__loading"/>;
         } else if (this.props.error) {
-            return <div>Что-то пошло не так <Icon type="frown"/></div>;
+            return <Text className="okn-object-events__message">Что-то пошло не так <Icon type="frown"/></Text>;
         } else if (!this.props.loading && this.props.events.length === 0) {
-            return <div>С этим объектом пока ещё ничего не случилось.</div>;
+            return <Text className="okn-object-events__message">С этим объектом пока ещё ничего не случилось.</Text>;
         }
 
         return this.renderTimeline();

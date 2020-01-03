@@ -32,7 +32,11 @@ class ObjectShow extends React.Component {
                     <p>{this.props.description}</p>
                 </div>
 
-                <ObjectEvents objectId={this.props.id} isLoggedIn={this.props.isLoggedIn} />
+                <ObjectEvents
+                    objectId={this.props.id}
+                    eventsCount={this.props.eventsCount}
+                    isLoggedIn={this.props.isLoggedIn}
+                />
             </div>
         );
     };

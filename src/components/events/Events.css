@@ -1,6 +1,19 @@
 .okn-object-events {
-    padding: 0 40px;
     background-color: #f4f5fa;
+    min-height: 185px;
+    padding: 0 40px;
+}
+
+.okn-object-events__loading.ant-spin {
+    margin: 0 auto;
+    display: block;
+}
+
+.okn-object-events__message {
+    display: block;
+    font-size: 16px;
+    font-style: italic;
+    text-align: center;
 }
 
 .okn-object-events .okn-object-events__title {
@@ -18,7 +31,7 @@
 }
 
 .okn-object-events__container .ant-timeline-item-head {
-    background-color: transparent;
+    background-color: #f4f5fa;
     top: 11px;
 }
 
@@ -39,6 +52,7 @@
 .okn-dot-year {
     background-color: #6967ce;
     border-radius: 1.5rem;
+    box-shadow: 0 1px 7px 1px rgba(105, 103, 206, .5);
     color: #fff;
     font-size: 1rem;
     font-weight: 600;
