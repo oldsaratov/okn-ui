@@ -28,8 +28,15 @@ export function getObjectEvents(id) {
 }
 
 function mapObjectEventToDto(event) {
+    const photos = (event.photos || []).map(event => ({
+        fileId: event.fileId,
+        url: event.url,
+        description: event.description
+    }));
+
     return {
         ...event,
+        photos,
         occuredAt: event.occuredAt.toISOString()
     };
 }
@@ -40,7 +47,6 @@ function mapObjectEventsFromDto (dto) {
         name: obj.name || '',
         description: obj.description || '',
         occuredAt: moment(obj.occuredAt),
-        links: obj.links || [],
-        images: obj.images || []
+        photos: obj.photos || []
     }));
 }

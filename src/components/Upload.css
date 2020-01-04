@@ -1,0 +1,11 @@
+.ant-upload-list .ant-upload-list-item.ant-upload-list-item-new {
+    border-color: #1890ff;
+}
+
+.ant-upload-list .ant-upload-list-item.ant-upload-list-item-new .ant-upload-list-item-card-actions .anticon {
+    color: #1890ff;
+}
+
+.ant-upload-list-picture .ant-upload-list-item-name {
+    line-height: 46px !important;
+}

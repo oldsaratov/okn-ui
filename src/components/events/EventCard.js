@@ -94,7 +94,7 @@ class EventCard extends React.Component {
             <EventFormModal
                 wrappedComponentRef={this.editFormRef}
                 visible={this.state.visible}
-                title="Редактирование событие"
+                title="Редактирование события"
                 okText="Сохранить"
                 confirmLoading={this.props.updateStatus.loading}
                 event={this.state.formEvent}
