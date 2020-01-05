@@ -1,5 +1,6 @@
 .okn-object-events {
-    background-color: #f4f5fa;
+    background-color: rgb(246, 249, 252);
+    border-top: 1px solid rgba(0, 0, 0, .1);
     min-height: 185px;
     padding: 0 40px;
 }
@@ -27,7 +28,7 @@
 }
 
 .okn-object-events__container .ant-timeline-item-tail {
-    border-left: 2px solid #dadada;
+    border-left: 1.5px solid rgba(0, 0, 0, .1)
 }
 
 .okn-object-events__container .ant-timeline-item-head {
