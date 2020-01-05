@@ -4,7 +4,7 @@ import { Widget as UploadCare } from '@uploadcare/react-widget';
 
 import './UploadCareWrapper.css';
 
-const UploadCareWrapper = ({ multipleMax, onUpload }) => {
+const UploadCareWrapper = ({ type, multipleMax, onUpload }) => {
     const publicKey = 'cd9f808e21ca087dc455';
     const widgetApi = useRef();
 
@@ -27,6 +27,18 @@ const UploadCareWrapper = ({ multipleMax, onUpload }) => {
         });
     };
 
+    // TODO: Use it for preferredTypes when uploadcare team fix issue - https://github.com/uploadcare/uploadcare-widget/issues/547
+    // const preferredTypes = () => {
+    //     switch (type) {
+    //         case 'file':
+    //             return 'application/pdf application/vnd.openxmlformats-officedocument.* application/vnd.oasis.opendocument.*';
+    //         case 'image':
+    //             return 'image/*';
+    //         default:
+    //             return null;
+    //     }
+    // };
+
     return (
         <div>
             <Button icon="upload" disabled={!multipleMax} onClick={openUploadcareDialog}>Загрузить</Button>
@@ -35,10 +47,9 @@ const UploadCareWrapper = ({ multipleMax, onUpload }) => {
                 ref={widgetApi}
                 publicKey={publicKey}
                 preloader={null}
-                imagesOnly
+                imagesOnly={type === 'image'}
                 multiple
                 multipleMax={multipleMax}
-                crop
                 locale="ru"
                 tabs="file url vk facebook instagram gdrive gphotos dropbox"
             />
