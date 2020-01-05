@@ -3,6 +3,7 @@ import { Icon, Input } from 'antd';
 import uniqBy from 'lodash/uniqBy';
 
 import UploadCareWrapper from './UploadCareWrapper';
+import FileList from './FileList';
 
 import './Upload.css';
 
@@ -16,12 +17,6 @@ class Upload extends React.Component {
         this.onChange(this.props.fileList.filter((file) => id !== file.fileId));
     };
 
-    onFileDownload = url => {
-        if (url) {
-            window.open(url);
-        }
-    };
-
     onChange = files => {
         const { onChange } = this.props;
 
@@ -30,11 +25,10 @@ class Upload extends React.Component {
         }
     };
 
-    onDescriptionChange = (id, event) => {
-        const { value } = event.target;
+    onDescriptionChange = (id, description) => {
         const newFiles = this.props.fileList.map(file => {
             if (file.fileId === id) {
-                return { ...file, description: value};
+                return { ...file, description};
             }
 
             return file;
@@ -50,7 +44,14 @@ class Upload extends React.Component {
             <React.Fragment>
                 <UploadCareWrapper type={this.props.type} multipleMax={multipleMax} onUpload={this.onFileUpload}/>
                 {this.props.type === 'image' && this.renderImageList()}
-                {this.props.type === 'file' && this.renderFileList()}
+                {this.props.type === 'file' &&
+                    <FileList
+                        fileList={this.props.fileList}
+                        editable
+                        onDescriptionChange={(id, description) => this.onDescriptionChange(id, description)}
+                        onFileRemove={id => this.onFileRemove(id)}
+                    />
+                }
             </React.Fragment>
         );
     }
@@ -90,41 +91,6 @@ class Upload extends React.Component {
         });
 
         return <div className="ant-upload-list ant-upload-list-picture">{list}</div>;
-    }
-
-    renderFileList() {
-        const list = (this.props.fileList || []).map(file => {
-            const itemClass = 'ant-upload-list-item';
-            const statusClass = file.status ? `${itemClass}-${file.status}` : `${itemClass}-done`;
-            const placeholder = file.name ? `Добавьте описание для ${file.name}` : 'Добавьте описание';
-
-            return (
-                <div key={file.fileId}>
-                    <div className={`${itemClass} ${statusClass} ${itemClass}-list-type-text`}>
-                        <div className={`${itemClass}-info`}>
-                            <span>
-                                <Icon type="paper-clip"/>
-                                <span className={`${itemClass}-name ${itemClass}-name-icon-count-2`} title={file.name}>
-                                    <Input
-                                        size="small"
-                                        placeholder={placeholder}
-                                        maxLength={50}
-                                        value={file.description}
-                                        onChange={event => this.onDescriptionChange(file.fileId, event)}
-                                    />
-                                </span>
-                                <span className={`${itemClass}-card-actions`}>
-                                    <Icon type="download" title="Скачать файл" onClick={() => this.onFileDownload(file.url)}/>
-                                    <Icon type="delete" title="Удалить файл" onClick={() => this.onFileRemove(file.fileId)}/>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            );
-        });
-
-        return <div className="ant-upload-list ant-upload-list-text">{list}</div>;
     }
 }
 

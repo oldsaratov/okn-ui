@@ -1,0 +1,33 @@
+.ant-upload-list-text .ant-upload-list-item .ant-upload-list-item-info {
+    padding: 4px 0 4px 4px;
+}
+
+.ant-upload-list-text .ant-upload-list-item:hover .ant-upload-list-item-info {
+    background-color: transparent;
+}
+
+.ant-upload-list-text .ant-upload-list-item.ant-upload-list-item-new .ant-upload-list-item-info {
+    background-color: #e6f7ff;
+}
+
+.ant-upload-list-text .ant-upload-list-item .ant-upload-list-item-card-actions {
+    opacity: 1;
+    top: 5px;
+}
+
+.ant-upload-list-text .ant-upload-list-item-name.ant-upload-list-item-name-icon-count-2 {
+    padding-left: 18px;
+    padding-right: 42px !important;
+}
+
+.ant-upload-list-text .ant-upload-list-item {
+    height: 32px;
+}
+
+.ant-upload-list-text .ant-upload-list-item-info .anticon-paper-clip {
+    top: 8px;
+}
+
+.ant-upload-list-text-editable .ant-upload-list-item-info .anticon-paper-clip {
+    top: 9px;
+}

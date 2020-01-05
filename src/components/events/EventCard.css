@@ -56,3 +56,24 @@
 .okn-event-card .okn-event-card__date {
     color: rgba(0, 0, 0, .25);
 }
+
+.okn-event-card .okn-event-card__files .ant-collapse-item {
+    border-bottom: none;
+}
+
+.okn-event-card .okn-event-card__files .ant-collapse-item  .ant-collapse-header {
+    padding: 2px 20px;
+}
+
+.okn-event-card .okn-event-card__files .ant-collapse-item  .ant-collapse-header .ant-collapse-arrow {
+    left: 0;
+}
+
+.okn-event-card .okn-event-card__files .ant-collapse-content-box {
+    padding-bottom: 0;
+    padding-right: 0;
+}
+
+.okn-event-card .okn-event-card__files .ant-upload-list .ant-upload-list-item {
+    margin-top: 0;
+}

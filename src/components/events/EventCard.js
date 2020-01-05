@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Card, Icon, Popconfirm, Typography } from 'antd';
+import { Button, Card, Collapse, Icon, Popconfirm, Typography } from 'antd';
 
 import { deleteObjectEvent, updateObjectEvent } from '../../actions';
 import { getActionStatus } from '../../selectors';
 import EventFormModal from './EventFormModal';
+import FileList from '../FileList';
 
 import './EventCard.css';
 
+const { Panel } = Collapse;
 const { Paragraph } = Typography;
 
 class EventCard extends React.Component {
@@ -61,8 +63,21 @@ class EventCard extends React.Component {
                 extra={<React.Fragment>{this.renderDate()} {actions}</React.Fragment>}
             >
                 <Paragraph ellipsis={{ rows: 5, expandable: true }}>{event.description}</Paragraph>
+                {this.renderFiles(event.files)}
             </Card>
         );
+    };
+
+    renderFiles(files) {
+        if (Array.isArray(files) && files.length > 0) {
+            return (
+                <Collapse bordered={false} className="okn-event-card__files">
+                    <Panel header="Файлы" key="1">
+                        <FileList fileList={files}/>
+                    </Panel>
+                </Collapse>
+            );
+        }
     };
 
     renderActions() {
