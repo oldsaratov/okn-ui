@@ -94,10 +94,10 @@ class Events extends React.Component {
         );
 
         for (const year in years) {
-            const itemsCount = years[year].length;
+            const revertedYears = years[year].reverse();
 
-            years[year].reverse().forEach((event, index) => {
-                timeline.unshift({ type: 'event', item: { ...event, last: itemsCount === index + 1 } });
+            revertedYears.forEach((event, index) => {
+                timeline.unshift({ type: 'event', item: { ...event, last: index === 0 } });
             });
 
             timeline.unshift({ type: 'dot', item: year });
