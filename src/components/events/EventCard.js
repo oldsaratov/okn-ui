@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import Carousel, { Modal, ModalGateway } from 'react-images';
 import { Button, Card, Collapse, Icon, Popconfirm, Typography } from 'antd';
 
 import { deleteObjectEvent, updateObjectEvent } from '../../actions';
@@ -13,7 +14,12 @@ const { Panel } = Collapse;
 const { Paragraph } = Typography;
 
 class EventCard extends React.Component {
-    state = { visible: false, formEvent: {} };
+    state = {
+        modalVisible: false,
+        formEvent: {},
+        selectedPhotoIndex: 0,
+        lightboxVisible: false
+    };
 
     onEditEvent = () => {
         this.setState({ formEvent: this.props.event });
@@ -41,7 +47,14 @@ class EventCard extends React.Component {
     };
 
     toggleModal = visible => {
-        this.setState({ visible });
+        this.setState({ modalVisible: visible });
+    };
+
+    toggleLightbox = selectedPhotoIndex => {
+        this.setState(state => ({
+            lightboxVisible: !state.lightboxVisible,
+            selectedPhotoIndex
+        }));
     };
 
     editFormRef = formRef => {
@@ -63,10 +76,42 @@ class EventCard extends React.Component {
                 extra={<React.Fragment>{this.renderDate()} {actions}</React.Fragment>}
             >
                 <Paragraph ellipsis={{ rows: 5, expandable: true }}>{event.description}</Paragraph>
+                {this.renderPhotos(event.photos)}
                 {this.renderFiles(event.files)}
             </Card>
         );
     };
+
+    renderPhotos(photos) {
+        const images = (photos || []).map(photo => ({
+            id: photo.fileId,
+            caption: photo.description,
+            source: {
+                regular: photo.url,
+                thumbnail: `${photo.url}/-/scale_crop/180x180/smart/`
+            }
+        }));
+
+        return (
+            <Fragment>
+                <div className="okn-event-card__gallery">
+                    {images.map(({ id, source, description }, i) => (
+                        <div className="okn-event-card__gallery__item" key={id} onClick={() => this.toggleLightbox(i)}>
+                            <img alt={description} src={source.thumbnail}/>
+                        </div>
+                    ))}
+                </div>
+
+                <ModalGateway>
+                    {this.state.lightboxVisible && (
+                        <Modal onClose={this.toggleLightbox}>
+                            <Carousel currentIndex={this.state.selectedPhotoIndex} views={images}/>
+                        </Modal>
+                    )}
+                </ModalGateway>
+            </Fragment>
+        );
+    }
 
     renderFiles(files) {
         if (Array.isArray(files) && files.length > 0) {
@@ -108,7 +153,7 @@ class EventCard extends React.Component {
         const modal = (
             <EventFormModal
                 wrappedComponentRef={this.editFormRef}
-                visible={this.state.visible}
+                visible={this.state.modalVisible}
                 title="Редактирование события"
                 okText="Сохранить"
                 confirmLoading={this.props.updateStatus.loading}

@@ -48,6 +48,7 @@ const UploadcareWrapper = ({ type, multipleMax, onUpload }) => {
                 publicKey={publicKey}
                 preloader={null}
                 imagesOnly={type === 'image'}
+                crop
                 multiple
                 multipleMax={multipleMax}
                 locale="ru"

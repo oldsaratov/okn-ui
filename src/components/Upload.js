@@ -62,7 +62,7 @@ class Upload extends React.Component {
             const statusClass = file.status ? `${itemClass}-${file.status}` : `${itemClass}-done`;
             const thumbnail = (
                 <a className={`${itemClass}-thumbnail`} href={file.url} target="_blank" rel="noopener noreferrer">
-                    <img className={`${itemClass}-image`} src={`${file.url}-/preview/-/resize/48x48/`} alt={file.name}/>
+                    <img className={`${itemClass}-image`} src={`${file.url}/-/scale_crop/48x48/smart/`} alt={file.name}/>
                 </a>
             );
             const placeholder = file.name ? `Добавьте описание для ${file.name}` : 'Добавьте описание';

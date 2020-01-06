@@ -1,3 +1,5 @@
+$galleryGutter: 2px;
+
 .okn-event-card {
     $self: &;
     box-shadow: 0 1px 8px 1px rgba(62, 57, 107, .1);
@@ -62,6 +64,8 @@
     }
 
     #{ $self }__files {
+        margin-top: 1em;
+
         .ant-collapse-item {
             border-bottom: none;
 
@@ -80,6 +84,33 @@
                 .ant-upload-list .ant-upload-list-item {
                     margin-top: 0;
                 }
+            }
+        }
+    }
+
+    #{ $self }__gallery {
+        overflow: hidden;
+        margin-left: -$galleryGutter;
+        margin-right: -$galleryGutter;
+
+        &__item {
+            background-color: #eee;
+            box-sizing: border-box;
+            float: left;
+            margin: $galleryGutter;
+            overflow: hidden;
+            padding-bottom: 16%;
+            position: relative;
+            width: calc(20% - #{$galleryGutter} * 2);
+
+            &:hover {
+                opacity: .9;
+            }
+
+            img {
+                cursor: pointer;
+                position: absolute;
+                max-width: 100%;
             }
         }
     }
