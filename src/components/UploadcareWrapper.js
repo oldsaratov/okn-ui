@@ -2,9 +2,9 @@ import React, { useRef } from 'react';
 import { Button } from 'antd';
 import { Widget as UploadCare } from '@uploadcare/react-widget';
 
-import './UploadCareWrapper.css';
+import './UploadcareWrapper.css';
 
-const UploadCareWrapper = ({ type, multipleMax, onUpload }) => {
+const UploadcareWrapper = ({ type, multipleMax, onUpload }) => {
     const publicKey = 'cd9f808e21ca087dc455';
     const widgetApi = useRef();
 
@@ -57,4 +57,4 @@ const UploadCareWrapper = ({ type, multipleMax, onUpload }) => {
     );
 };
 
-export default UploadCareWrapper;
+export default UploadcareWrapper;

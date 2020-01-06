@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon, Input } from 'antd';
 import uniqBy from 'lodash/uniqBy';
 
-import UploadCareWrapper from './UploadCareWrapper';
+import UploadcareWrapper from './UploadcareWrapper';
 import FileList from './FileList';
 
 import './Upload.css';
@@ -42,11 +42,11 @@ class Upload extends React.Component {
 
         return (
             <React.Fragment>
-                <UploadCareWrapper type={this.props.type} multipleMax={multipleMax} onUpload={this.onFileUpload}/>
+                <UploadcareWrapper type={this.props.type} multipleMax={multipleMax} onUpload={this.onFileUpload}/>
                 {this.props.type === 'image' && this.renderImageList()}
                 {this.props.type === 'file' &&
                     <FileList
-                        fileList={this.props.fileList}
+                        fileList={this.props.fileList || []}
                         editable
                         onDescriptionChange={(id, description) => this.onDescriptionChange(id, description)}
                         onFileRemove={id => this.onFileRemove(id)}
