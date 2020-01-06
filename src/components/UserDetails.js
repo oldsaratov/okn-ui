@@ -4,7 +4,7 @@ import { Avatar, Button, Popover } from 'antd';
 
 import { fetchUserProfile, logout } from '../actions';
 import { authService } from '../services/auth.service';
-import './UserDetails.css';
+import './UserDetails.scss';
 
 class UserDetails extends React.Component {
     state = { visible: false };
@@ -45,14 +45,21 @@ class UserDetails extends React.Component {
                     onVisibleChange={visible => this.setState({ visible })}
                 >
                     {this.renderAvatar()}
-                    <span className="okn-username">{this.props.profile.name || 'Username'}</span>
+                    <span className="okn-user-details__name">{this.props.profile.name || 'Username'}</span>
                 </Popover>
             );
         }
 
         return (
             <div className="okn-user-details">
-                <Button type="link" icon="login" onClick={this.onLoginClick}>Войти</Button>
+                <Button
+                    type="link"
+                    icon="login"
+                    className="okn-user-details__login-btn"
+                    onClick={this.onLoginClick}
+                >
+                    Войти
+                </Button>
             </div>
         );
     };
@@ -65,7 +72,7 @@ class UserDetails extends React.Component {
 
     renderPopoverContent() {
         return (
-            <div className="okn-user-details-popover">
+            <div className="okn-user-details__popover">
                 <Button
                     type="link"
                     icon="user"

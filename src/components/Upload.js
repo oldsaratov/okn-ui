@@ -5,7 +5,7 @@ import uniqBy from 'lodash/uniqBy';
 import UploadcareWrapper from './UploadcareWrapper';
 import FileList from './FileList';
 
-import './Upload.css';
+import './Upload.scss';
 
 class Upload extends React.Component {
 

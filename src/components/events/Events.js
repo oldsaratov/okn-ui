@@ -8,7 +8,7 @@ import { getActionStatus } from '../../selectors';
 import EventCard from './EventCard';
 import EventFormModal from './EventFormModal';
 
-import './Events.css';
+import './Events.scss';
 
 const { Text } = Typography;
 
@@ -111,7 +111,7 @@ class Events extends React.Component {
             return this.renderTimelineEvent(item, index);
         });
 
-        return <Timeline className="okn-object-events__container" mode="alternate">{timelineItems}</Timeline>;
+        return <Timeline className="okn-object-events__timeline" mode="alternate">{timelineItems}</Timeline>;
     }
 
     renderTimelineYear(year, index) {
@@ -124,7 +124,7 @@ class Events extends React.Component {
 
         return (
             <Timeline.Item key={index} dot={dot}>
-                <div className="okn-object-events__fake-block"></div>
+                <div className="okn-object-events__timeline__fake-block"></div>
             </Timeline.Item>
         );
     }

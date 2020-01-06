@@ -7,7 +7,7 @@ import { getActionStatus } from '../../selectors';
 import EventFormModal from './EventFormModal';
 import FileList from '../FileList';
 
-import './EventCard.css';
+import './EventCard.scss';
 
 const { Panel } = Collapse;
 const { Paragraph } = Typography;

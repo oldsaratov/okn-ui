@@ -5,7 +5,7 @@ import { Col, Icon, Input, Row, Select, Table } from 'antd';
 
 import { fetchObjectsByParams } from '../actions';
 import { OBJECT_OPTIONS, PAGE_SIZE } from '../constants';
-import './List.css';
+import './List.scss';
 
 const { Option } = Select;
 

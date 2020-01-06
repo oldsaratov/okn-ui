@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Col, Divider, Row } from 'antd';
 
 import UserDetails from './UserDetails';
-import './Header.css';
+import './Header.scss';
 import logo from '../assets/logo_small.png';
 
 const Header = () => {

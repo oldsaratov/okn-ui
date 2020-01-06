@@ -1,10 +1,10 @@
 import React from 'react';
 import { Icon, Input } from 'antd';
 
-import './FileList.css';
+import './FileList.scss';
 
 const FileList = (props) => {
-    const editableClass = props.editable ? 'ant-upload-list-text-editable' : '';
+    const editableClass = props.editable ? 'ant-upload-list-text--editable' : '';
 
     const onFileDownload = url => {
         if (url) {

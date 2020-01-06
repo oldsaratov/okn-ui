@@ -8,7 +8,7 @@ import List from './pages/List';
 import ObjectShow from './pages/ObjectShow';
 import Header from './components/Header';
 
-import './App.css';
+import './App.scss';
 
 const App = () => {
     return (

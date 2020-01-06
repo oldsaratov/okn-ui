@@ -9,7 +9,7 @@ import ruRu from 'antd/es/locale/ru_RU';
 import App from './App';
 import reducers from './reducers';
 
-import './index.css';
+import './index.scss';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
