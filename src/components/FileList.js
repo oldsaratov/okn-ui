@@ -19,7 +19,7 @@ const FileList = (props) => {
     };
 
     const renderFileList = () => {
-        return props.fileList.map(file => {
+        return (props.fileList || []).map(file => {
             const itemClass = 'ant-upload-list-item';
             const statusClass = file.status ? `${itemClass}-${file.status}` : `${itemClass}-done`;
             const placeholder = file.name ? `Добавьте описание для ${file.name}` : 'Добавьте описание';

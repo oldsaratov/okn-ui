@@ -78,7 +78,7 @@ class Upload extends React.Component {
                                     placeholder={placeholder}
                                     maxLength={50}
                                     value={file.description}
-                                    onChange={event => this.onDescriptionChange(file.fileId, event)}
+                                    onChange={({ target }) => this.onDescriptionChange(file.fileId, target.value)}
                                 />
                             </span>
                             <span className={`${itemClass}-card-actions picture`}>
