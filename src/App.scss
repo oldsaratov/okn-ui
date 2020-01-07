@@ -1,1 +1,20 @@
 @import '~antd/dist/antd.css';
+
+.okn-empty-state {
+    color: #909399;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &--grey {
+        background: #f5f7fa;
+    }
+
+    &__icon {
+        font-size: 80px;
+        color: rgba(0, 0, 0, .7) !important;
+        margin-bottom: 15px;
+    }
+}
