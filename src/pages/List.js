@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Col, Icon, Input, Row, Select, Table } from 'antd';
 
 import { fetchObjectsByParams } from '../actions';
-import { OBJECT_OPTIONS, PAGE_SIZE } from '../constants';
+import { OBJECT_TYPES, PAGE_SIZE } from '../constants';
 import './List.scss';
 
 const { Option } = Select;
@@ -21,7 +21,7 @@ const columns = [
         title: 'Тип',
         dataIndex: 'type',
         key: 'type',
-        render: type => OBJECT_OPTIONS.find(obj => obj.value === type).label,
+        render: type => OBJECT_TYPES.find(obj => obj.value === type).label,
         width: '140px'
     }
 ];
@@ -95,7 +95,7 @@ class List extends React.Component {
     }
 
     renderSelectOptions() {
-        return OBJECT_OPTIONS.map(opt => <Option key={opt.value}>{opt.label}</Option>);
+        return OBJECT_TYPES.map(opt => <Option key={opt.value}>{opt.label}</Option>);
     }
 }
 

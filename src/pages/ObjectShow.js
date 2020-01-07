@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Icon, Spin } from 'antd';
+import { Icon, Spin, Tag } from 'antd';
 
 import { fetchObject, resetObject } from '../actions';
 import ObjectEvents from '../components/events/Events';
+import { getObjectType } from '../selectors';
 import { authService } from '../services/auth.service';
 
-class ObjectShow extends React.Component {
+import './ObjectShow.scss';
+
+class ObjectShow extends Component {
 
     componentDidMount() {
         this.props.fetchObject(this.props.id);
@@ -26,10 +29,11 @@ class ObjectShow extends React.Component {
         }
 
         return (
-            <div>
-                <div>
+            <Fragment>
+                <div className="okn-object">
                     <h1>{this.props.name}</h1>
                     <p>{this.props.description}</p>
+                    <p>Тип <Tag color={this.props.type.color}>{this.props.type.label}</Tag></p>
                 </div>
 
                 <ObjectEvents
@@ -37,7 +41,7 @@ class ObjectShow extends React.Component {
                     eventsCount={this.props.eventsCount}
                     isLoggedIn={this.props.isLoggedIn}
                 />
-            </div>
+            </Fragment>
         );
     };
 
@@ -62,7 +66,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         id: ownProps.match.params.id,
         isLoggedIn: authService.isLoggedIn(),
-        ...state.object
+        ...state.object,
+        type: getObjectType(state.object.type) || {}
     };
 };
 
