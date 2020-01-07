@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Col, DatePicker, Form, Input, Modal, Row } from 'antd';
 
 // Import RU locale from moment for Datepicker (months)
@@ -10,7 +10,7 @@ const { TextArea } = Input;
 
 const formItemLayout = {
     labelCol: { span: 6 },
-    wrapperCol: { span: 18 },
+    wrapperCol: { span: 18 }
 };
 const requiredFieldRule = { required: true, message: 'Обязательное поле' };
 
@@ -30,7 +30,7 @@ const EventFormModal = Form.create({
     onValuesChange(props, values) {
         props.onChange(values);
     }
-})(class extends React.Component {
+})(class extends Component {
     render() {
         const { visible, title, onCancel, onSave, okText, form, confirmLoading } = this.props;
         const { getFieldDecorator } = form;
