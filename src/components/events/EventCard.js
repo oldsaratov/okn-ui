@@ -30,8 +30,8 @@ class EventCard extends React.Component {
         this.props.deleteObjectEvent(this.props.objectId, this.props.event.id)
     };
 
-    onFormChange = changedEventFields => {
-        this.setState(({ formEvent }) => ({ formEvent: { ...formEvent, ...changedEventFields } }));
+    onFormChange = changedFields => {
+        this.setState(({ formEvent }) => ({ formEvent: { ...formEvent, ...changedFields } }));
     };
 
     onFormSave = () => {

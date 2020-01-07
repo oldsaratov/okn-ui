@@ -5,7 +5,7 @@ export function getAllObjects() {
     return okn.get('/objects', { params: { perPage: 2000 } })
         .then(({ data, status }) => {
             if (status >= 200 && status < 300) {
-                return data.data.map(object => mapObjectDto(object));
+                return data.data.map(object => mapObjectFromDto(object));
             }
         })
         .catch((error) => Promise.reject(error));
@@ -25,7 +25,7 @@ export function getObjectsByParams(params) {
         .then(({ data, status }) => {
             if (status >= 200 && status < 300) {
                 return {
-                    objects: data.data.map(object => mapObjectDto(object)),
+                    objects: data.data.map(object => mapObjectFromDto(object)),
                     page: data.page,
                     total: data.total
                 };
@@ -38,13 +38,35 @@ export function getObjectById(id) {
     return okn.get(`/objects/${id}`)
         .then(({ data, status }) => {
             if (status >= 200 && status < 300) {
-                return mapObjectDto(data);
+                return mapObjectFromDto(data);
             }
         })
         .catch((error) => Promise.reject(error));
 }
 
-function mapObjectDto(dto) {
+export function requestUpdateObject(object) {
+    return okn.post(`/objects/${object.id}`, mapObjectToDto(object))
+        .catch((error) => Promise.reject(error));
+}
+
+function mapObjectToDto(object) {
+    const photos = (object.photos || []).map(event => ({
+        fileId: event.fileId,
+        url: event.url,
+        description: event.description
+    }));
+
+    return {
+        name: object.name,
+        description: object.description,
+        latitude: object.coords.latitude,
+        longitude: object.coords.longitude,
+        type: object.type,
+        photos
+    };
+}
+
+function mapObjectFromDto(dto) {
     return {
         id: dto.objectId,
         name: dto.name,

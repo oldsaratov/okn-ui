@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Icon, Spin, Tag } from 'antd';
 
 import history from '../history';
-import { fetchObject, resetObject } from '../actions';
+import { fetchObject } from '../actions';
 import ObjectEvents from '../components/events/Events';
 import { getObjectType } from '../selectors';
 import { authService } from '../services/auth.service';
@@ -16,10 +16,6 @@ class ObjectShow extends Component {
         this.props.fetchObject(this.props.id);
     }
 
-    componentWillUnmount() {
-        this.props.resetObject();
-    }
-
     render() {
         if (this.props.loading) {
             return this.renderLoading();
@@ -29,27 +25,29 @@ class ObjectShow extends Component {
             return this.renderError();
         }
 
+        const { id, object, hasEvents, type, isLoggedIn } = this.props;
+
         return (
             <Fragment>
                 <div className="okn-object">
                     <h1 className="okn-object__title">
-                        {this.props.name}
-                        {this.props.isLoggedIn && (
+                        {object.name}
+                        {isLoggedIn && (
                             <Button
                                 type="link"
                                 icon="edit"
                                 className="okn-object__title__edit-button"
-                                onClick={() => history.push(`/objects/edit/${this.props.id}`)}
+                                onClick={() => history.push(`/objects/edit/${id}`)}
                             >
                                 Редактировать
                             </Button>
                         )}
                     </h1>
-                    <p>{this.props.description}</p>
-                    <p>Тип <Tag color={this.props.type.color}>{this.props.type.label}</Tag></p>
+                    <p>{object.description}</p>
+                    <p>Тип <Tag color={type.color}>{type.label}</Tag></p>
                 </div>
 
-                <ObjectEvents objectId={this.props.id} eventsCount={this.props.eventsCount}/>
+                <ObjectEvents objectId={id} hasEvents={hasEvents}/>
             </Fragment>
         );
     }
@@ -72,12 +70,17 @@ class ObjectShow extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    const { model, loading, error } = state.object;
+
     return {
         id: ownProps.match.params.id,
+        loading,
+        error,
         isLoggedIn: authService.isLoggedIn(),
-        ...state.object,
-        type: getObjectType(state.object.type) || {}
+        object: model,
+        hasEvents: model.eventsCount > 0,
+        type: getObjectType(model.type) || {}
     };
 };
 
-export default connect(mapStateToProps, { fetchObject, resetObject })(ObjectShow);
+export default connect(mapStateToProps, { fetchObject })(ObjectShow);

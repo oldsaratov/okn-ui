@@ -1,7 +1,14 @@
 .okn-object {
     margin: 0 20px;
+    padding-bottom: 20px;
 
     &__title__edit-button {
         vertical-align: middle;
+    }
+}
+
+.okn-object-form {
+    &__submit {
+        margin-left: 10px;
     }
 }

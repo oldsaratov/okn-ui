@@ -16,7 +16,7 @@ class Events extends React.Component {
     state = { visible: false, formEvent: {} };
 
     componentDidMount() {
-        if (this.props.eventsCount > 0) {
+        if (this.props.hasEvents) {
             this.props.fetchObjectEvents(this.props.objectId);
         }
     }
@@ -32,8 +32,8 @@ class Events extends React.Component {
         this.toggleModal(true);
     };
 
-    onFormChange = changedEventFields => {
-        this.setState(({ formEvent }) => ({ formEvent: { ...formEvent, ...changedEventFields } }));
+    onFormChange = changedFields => {
+        this.setState(({ formEvent }) => ({ formEvent: { ...formEvent, ...changedFields } }));
     };
 
     onFormSave = () => {

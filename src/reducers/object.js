@@ -2,7 +2,8 @@ import ACTION_TYPES from  '../actions/types';
 
 const initialState = {
     loading: false,
-    error: null
+    error: null,
+    model: {}
 };
 
 export default (state = initialState, action) => {
@@ -10,7 +11,7 @@ export default (state = initialState, action) => {
         case ACTION_TYPES.FETCH_OBJECT:
             return { ...state, loading: true };
         case ACTION_TYPES.FETCH_OBJECT_SUCCESS:
-            return { ...state, loading: false, error: null, ...action.payload };
+            return { ...state, loading: false, error: null, model: action.payload };
         case ACTION_TYPES.FETCH_OBJECT_FAILURE:
             return { ...state, loading: false, error: action.payload };
         case ACTION_TYPES.RESET_OBJECT:
