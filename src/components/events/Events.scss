@@ -13,6 +13,10 @@
         padding: 22px 0;
         text-align: center;
         font-size: 28px;
+
+        &__edit-button {
+            vertical-align: middle;
+        }
     }
 
     &__message {

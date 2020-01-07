@@ -5,6 +5,7 @@ import history from './history';
 import Auth from './pages/Auth';
 import Home from './pages/Home';
 import List from './pages/List';
+import ObjectEdit from './pages/ObjectEdit';
 import ObjectShow from './pages/ObjectShow';
 import Header from './components/Header';
 
@@ -21,6 +22,7 @@ const App = () => {
                         <Route path="/" exact component={Home}/>
                         <Route path="/objects" exact component={List}/>
                         <Route path="/objects/:id" exact component={ObjectShow}/>
+                        <Route path="/objects/edit/:id" exact component={ObjectEdit}/>
                     </Switch>
                 </div>
             </Router>

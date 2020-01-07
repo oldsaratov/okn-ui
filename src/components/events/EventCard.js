@@ -63,7 +63,7 @@ class EventCard extends React.Component {
 
     render() {
         const { event } = this.props;
-        const actions = this.props.isLoggedIn ? this.renderActions() : null;
+        const actions = this.props.editable ? this.renderActions() : null;
         const last = event.last ? 'okn-event-card--last': '';
         const position = event.position ? `okn-event-card--${event.position}` : '';
 
@@ -164,7 +164,7 @@ class EventCard extends React.Component {
             />
         );
 
-        return this.props.isLoggedIn && modal;
+        return this.props.editable && modal;
     }
 }
 

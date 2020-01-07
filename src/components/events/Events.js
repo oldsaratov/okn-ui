@@ -79,8 +79,8 @@ class Events extends React.Component {
     }
 
     renderTitle() {
-        const button = this.props.isLoggedIn
-            ? <Button type="link" icon="plus" onClick={this.onAddEvent}>Добавить</Button>
+        const button = this.props.editable
+            ? <Button type="link" icon="plus" className="okn-object-events__title__edit-button" onClick={this.onAddEvent}>Добавить</Button>
             : null;
 
         return <h2 className="okn-object-events__title">События {button}</h2>;
@@ -143,11 +143,7 @@ class Events extends React.Component {
                 dot={dot}
                 position={event.position}
             >
-                <EventCard
-                    objectId={this.props.objectId}
-                    event={event}
-                    isLoggedIn={this.props.isLoggedIn}
-                />
+                <EventCard objectId={this.props.objectId} event={event} editable={this.props.editable}/>
             </Timeline.Item>
         );
     }
@@ -167,7 +163,7 @@ class Events extends React.Component {
             />
         );
 
-        return this.props.isLoggedIn && modal;
+        return this.props.editable && modal;
     }
 }
 
