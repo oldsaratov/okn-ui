@@ -104,9 +104,9 @@ const mapStateToProps = (state, ownProps) => {
         loading: state.object.loading,
         eventsCount: state.object.eventsCount,
         formObject: {
-            name: state.object.name,
-            description: state.object.description,
-            type: state.object.type
+            name: state.object.name || '',
+            description: state.object.description || '',
+            type: state.object.type ? state.object.type.toString() : ''
         }
     };
 };
