@@ -41,7 +41,7 @@ const UploadcareWrapper = ({ type, multipleMax, onUpload }) => {
 
     return (
         <div>
-            <Button icon="upload" disabled={!multipleMax} onClick={openUploadcareDialog}>Загрузить</Button>
+            <Button icon="upload" className="okn-upload-btn" disabled={!multipleMax} onClick={openUploadcareDialog}>Загрузить</Button>
 
             <UploadCare
                 ref={widgetApi}

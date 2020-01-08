@@ -4,6 +4,7 @@ import { Button, Col, Form, Input, Row, Select, Spin } from 'antd';
 
 import { fetchObject, updateObject } from '../actions';
 import ObjectEvents from '../components/events/Events';
+import Upload from '../components/Upload';
 import { OBJECT_TYPES } from '../constants';
 import history from '../history';
 import { getActionStatus } from '../selectors';
@@ -21,7 +22,8 @@ const ObjectForm = Form.create({
         return (object && {
             name: Form.createFormField({ ...object.name, value: object.name }),
             description: Form.createFormField({ ...object.description, value: object.description }),
-            type: Form.createFormField({ ...object.type, value: object.type })
+            type: Form.createFormField({ ...object.type, value: object.type }),
+            photos: Form.createFormField({ ...object.photos, value: object.photos })
         }) || {};
     },
     onValuesChange(props, changedFields) {
@@ -55,8 +57,14 @@ const ObjectForm = Form.create({
                     {getFieldDecorator('name', { rules: [requiredFieldRule] })(<Input/>)}
                 </Form.Item>
 
-                <Row>
-                    <Col span={12}></Col>
+                <Row gutter={32}>
+                    <Col span={12}>
+                        <Form.Item label="Фото" className="okn-object-form__photos">
+                            {getFieldDecorator('photos', {
+                                valuePropName: 'fileList'
+                            })(<Upload type="image" />)}
+                        </Form.Item>
+                    </Col>
                     <Col span={12}>
                         <Form.Item label="Описание">
                             {getFieldDecorator('description')(<TextArea autoSize={{ minRows: 10, maxRows: 20 }}/>)}
