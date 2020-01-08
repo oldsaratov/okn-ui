@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Button, Icon, Spin, Tag } from 'antd';
+import { Button, Col, Icon, Row, Spin, Tag } from 'antd';
 
 import history from '../history';
 import { fetchObject } from '../actions';
@@ -43,12 +43,40 @@ class ObjectShow extends Component {
                             </Button>
                         )}
                     </h1>
-                    <p>{object.description}</p>
-                    <p>Тип <Tag color={type.color}>{type.label}</Tag></p>
+
+                    <Row gutter={24}>
+                        <Col span={12}>
+                            {this.renderMainPhoto()}
+                        </Col>
+
+                        <Col span={12}>
+                            <p><Tag color={type.color}>{type.label}</Tag></p>
+                            <p>{object.description}</p>
+                        </Col>
+                    </Row>
                 </div>
 
                 <ObjectEvents objectId={id} hasEvents={hasEvents}/>
             </Fragment>
+        );
+    }
+
+    renderMainPhoto() {
+        const { object } = this.props;
+
+        if (!object.mainPhoto) {
+            return (
+                <div className="okn-object__main-photo okn-object__main-photo--empty">
+                    <Icon type="picture" className="okn-object__main-photo__icon" />
+                </div>
+            );
+        }
+
+        return (
+            <div className="okn-object__main-photo">
+                <img src={object.mainPhoto.url} alt={object.mainPhoto.description}/>
+                <div className="okn-object__main-photo__desc">{object.mainPhoto.description}</div>
+            </div>
         );
     }
 
