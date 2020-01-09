@@ -44,16 +44,18 @@ class ObjectShow extends Component {
                         )}
                     </h1>
 
-                    <Row gutter={24}>
-                        <Col span={12}>
-                            {this.renderMainPhoto()}
-                        </Col>
+                    <div className="okn-object__content">
+                        <Row gutter={24}>
+                            <Col span={12}>
+                                {this.renderMainPhoto()}
+                            </Col>
 
-                        <Col span={12}>
-                            <p><Tag color={type.color}>{type.label}</Tag></p>
-                            <p>{object.description}</p>
-                        </Col>
-                    </Row>
+                            <Col span={12}>
+                                <p><Tag color={type.color}>{type.label}</Tag></p>
+                                <p>{object.description}</p>
+                            </Col>
+                        </Row>
+                    </div>
                 </div>
 
                 <ObjectEvents objectId={id} hasEvents={hasEvents}/>

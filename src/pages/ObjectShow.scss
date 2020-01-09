@@ -1,9 +1,38 @@
-.okn-object {
-    margin: 0 20px;
-    padding-bottom: 40px;
+$okn-blue: #41a3e1;
 
-    &__title__edit-button {
-        vertical-align: middle;
+.okn-object {
+
+    &__title {
+        padding: 20px 40px;
+        background-color: $okn-blue;
+        color: #fff;
+        font-weight: 600;
+        font-size: 38px;
+        position: relative;
+        margin: 0;
+
+        &:after {
+            top: 100%;
+            right: 20%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-top-color: $okn-blue;
+            border-width: 22px;
+            margin-top: 0;
+        }
+
+        &__edit-button {
+            vertical-align: middle;
+        }
+    }
+
+    &__content {
+        margin: 0 40px;
+        padding: 40px 0;
     }
 
     &__main-photo {
