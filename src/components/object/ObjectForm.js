@@ -51,10 +51,6 @@ const ObjectForm = Form.create({
 
         return (
             <Form colon={false} layout="vertical" onSubmit={this.handleSubmit} className="okn-object-form">
-                <Form.Item label="Название">
-                    {getFieldDecorator('name', { rules: [requiredFieldRule] })(<Input/>)}
-                </Form.Item>
-
                 <Row gutter={32}>
                     <Col span={12}>
                         <Form.Item label="Главная фотография">
@@ -69,6 +65,10 @@ const ObjectForm = Form.create({
                     </Col>
 
                     <Col span={12}>
+                        <Form.Item label="Название">
+                            {getFieldDecorator('name', { rules: [requiredFieldRule] })(<Input/>)}
+                        </Form.Item>
+
                         <Form.Item label="Описание">
                             {getFieldDecorator('description')(<TextArea autoSize={{ minRows: 10, maxRows: 20 }}/>)}
                         </Form.Item>
