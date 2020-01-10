@@ -34,38 +34,4 @@
         margin: 0 40px;
         padding: 40px 0;
     }
-
-    &__main-photo {
-        border-radius: 2px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
-        position: relative;
-        overflow: hidden;
-
-        &--empty {
-            background: $okn-light-grey;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        &__icon {
-            font-size: 80px;
-            color: rgba(0, 0, 0, .6) !important;
-            margin-bottom: 15px;
-        }
-
-        &__desc {
-            background-color: rgba(253, 252, 250, .84);
-            padding: 5px 10px;
-            position: absolute;
-            bottom: 20px;
-            width: calc(100% - 100px);
-        }
-
-        img {
-            width: 100%;
-        }
-    }
 }

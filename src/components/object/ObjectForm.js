@@ -4,6 +4,7 @@ import { Button, Col, Form, Input, Row, Select } from 'antd';
 import Upload from '../Upload';
 import { OBJECT_TYPES } from '../../constants';
 import './ObjectForm.scss';
+import ObjectMainPhoto from './ObjectMainPhoto';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -19,6 +20,7 @@ const ObjectForm = Form.create({
             name: Form.createFormField({ ...object.name, value: object.name }),
             description: Form.createFormField({ ...object.description, value: object.description }),
             type: Form.createFormField({ ...object.type, value: object.type }),
+            mainPhoto: Form.createFormField({ ...object.mainPhoto, value: object.mainPhoto }),
             photos: Form.createFormField({ ...object.photos, value: object.photos })
         }) || {};
     },
@@ -55,7 +57,11 @@ const ObjectForm = Form.create({
 
                 <Row gutter={32}>
                     <Col span={12}>
-                        <Form.Item label="Фото" className="okn-object-form__photos">
+                        <Form.Item label="Главная фотография">
+                            {getFieldDecorator('mainPhoto', { valuePropName: 'photo' })(<ObjectMainPhoto />)}
+                    </Form.Item>
+
+                        <Form.Item label="Дополнительные фотографии" className="okn-object-form__photos">
                             {getFieldDecorator('photos', {
                                 valuePropName: 'fileList'
                             })(<Upload type="image"/>)}

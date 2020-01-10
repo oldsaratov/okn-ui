@@ -62,6 +62,7 @@ function mapObjectToDto(object) {
         latitude: object.coords.latitude,
         longitude: object.coords.longitude,
         type: object.type,
+        mainPhoto: object.mainPhoto,
         photos
     };
 }

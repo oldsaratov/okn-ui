@@ -5,6 +5,7 @@ import { Button, Col, Icon, Row, Spin, Tag } from 'antd';
 import history from '../history';
 import { fetchObject } from '../actions';
 import ObjectEvents from '../components/events/Events';
+import ObjectMainPhoto from '../components/object/ObjectMainPhoto';
 import { getObjectType } from '../selectors';
 import { authService } from '../services/auth.service';
 
@@ -47,7 +48,7 @@ class ObjectShow extends Component {
                     <div className="okn-object__content">
                         <Row gutter={24}>
                             <Col span={12}>
-                                {this.renderMainPhoto()}
+                                <ObjectMainPhoto photo={object.mainPhoto} />
                             </Col>
 
                             <Col span={12}>
@@ -60,25 +61,6 @@ class ObjectShow extends Component {
 
                 <ObjectEvents objectId={id} hasEvents={hasEvents}/>
             </Fragment>
-        );
-    }
-
-    renderMainPhoto() {
-        const { object } = this.props;
-
-        if (!object.mainPhoto) {
-            return (
-                <div className="okn-object__main-photo okn-object__main-photo--empty">
-                    <Icon type="picture" className="okn-object__main-photo__icon" />
-                </div>
-            );
-        }
-
-        return (
-            <div className="okn-object__main-photo">
-                <img src={object.mainPhoto.url} alt={object.mainPhoto.description}/>
-                <div className="okn-object__main-photo__desc">{object.mainPhoto.description}</div>
-            </div>
         );
     }
 
