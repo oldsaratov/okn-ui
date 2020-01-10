@@ -62,7 +62,7 @@ const ObjectForm = Form.create({
                         <Form.Item label="Фото" className="okn-object-form__photos">
                             {getFieldDecorator('photos', {
                                 valuePropName: 'fileList'
-                            })(<Upload type="image" />)}
+                            })(<Upload type="image"/>)}
                         </Form.Item>
                     </Col>
                     <Col span={12}>
@@ -73,7 +73,8 @@ const ObjectForm = Form.create({
                         <Form.Item label="Тип">
                             {getFieldDecorator('type')(
                                 <Select placeholder="Тип">
-                                    {OBJECT_TYPES.map(opt => <Option key={opt.value} value={opt.value}>{opt.label}</Option>)}
+                                    {OBJECT_TYPES.map(opt => <Option key={opt.value}
+                                                                     value={opt.value}>{opt.label}</Option>)}
                                 </Select>
                             )}
                         </Form.Item>
@@ -134,13 +135,15 @@ class ObjectEdit extends Component {
         return (
             <Fragment>
                 <div className="okn-object">
-                    <ObjectForm
-                        object={this.state.formObject || formObject}
-                        loading={this.props.updateStatus.loading}
-                        onChange={this.onFormChange}
-                        onCancel={this.goToObjectShow}
-                        onSubmit={this.onFormSubmit}
-                    />
+                    <div className="okn-object__content">
+                        <ObjectForm
+                            object={this.state.formObject || formObject}
+                            loading={this.props.updateStatus.loading}
+                            onChange={this.onFormChange}
+                            onCancel={this.goToObjectShow}
+                            onSubmit={this.onFormSubmit}
+                        />
+                    </div>
                 </div>
 
                 <ObjectEvents objectId={id} hasEvents={hasEvents} editable={true}/>

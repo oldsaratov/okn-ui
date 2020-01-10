@@ -1,3 +1,5 @@
+@import '../../colors';
+
 .okn-object-events {
     background-color: rgb(246, 249, 252);
     border-top: 1px solid rgba(0, 0, 0, .1);
@@ -12,7 +14,9 @@
     &__title {
         padding: 22px 0;
         text-align: center;
-        font-size: 28px;
+        font-size: 34px;
+        font-weight: 600;
+        margin: 0;
 
         &__edit-button {
             vertical-align: middle;
@@ -50,16 +54,16 @@
         }
 
         .ant-timeline-item-head {
-            background-color: #f4f5fa;
+            background-color: $okn-light-grey;
             top: 11px;
         }
     }
 }
 
 .okn-dot-year {
-    background-color: #6967ce;
+    background-color: $okn-dark-blue;
     border-radius: 1.5rem;
-    box-shadow: 0 1px 7px 1px rgba(105, 103, 206, .5);
+    box-shadow: 0 1px 7px 1px rgba($okn-dark-blue, 0.4);
     color: #fff;
     font-size: 1rem;
     font-weight: 600;
@@ -73,9 +77,9 @@
 }
 
 .okn-dot-event {
-    background-color: #42b983 !important;
+    background-color: $okn-green !important;
     border-radius: 50%;
-    box-shadow: 0 1px 7px 1px rgba(66, 185, 131, .5);
+    box-shadow: 0 1px 7px 1px rgba($okn-green, 0.4);
     height: 36px;
     padding: 8px;
     width: 36px;

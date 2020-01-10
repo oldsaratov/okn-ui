@@ -1,4 +1,4 @@
-$okn-blue: #41a3e1;
+@import '../colors';
 
 .okn-object {
 
@@ -42,7 +42,7 @@ $okn-blue: #41a3e1;
         overflow: hidden;
 
         &--empty {
-            background: #f6f9fc;
+            background: $okn-light-grey;
             height: 400px;
             display: flex;
             flex-direction: column;
