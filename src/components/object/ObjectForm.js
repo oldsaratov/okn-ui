@@ -58,8 +58,8 @@ const ObjectForm = Form.create({
                 <Row gutter={32}>
                     <Col span={12}>
                         <Form.Item label="Главная фотография">
-                            {getFieldDecorator('mainPhoto', { valuePropName: 'photo' })(<ObjectMainPhoto />)}
-                    </Form.Item>
+                            {getFieldDecorator('mainPhoto', { valuePropName: 'photo' })(<ObjectMainPhoto editable />)}
+                        </Form.Item>
 
                         <Form.Item label="Дополнительные фотографии" className="okn-object-form__photos">
                             {getFieldDecorator('photos', {
@@ -67,6 +67,7 @@ const ObjectForm = Form.create({
                             })(<Upload type="image"/>)}
                         </Form.Item>
                     </Col>
+
                     <Col span={12}>
                         <Form.Item label="Описание">
                             {getFieldDecorator('description')(<TextArea autoSize={{ minRows: 10, maxRows: 20 }}/>)}

@@ -15,7 +15,7 @@ const FileList = (props) => {
     const onDescriptionChange = (id, event)  => {
         const { value } = event.target;
 
-        props.onDescriptionChange(id, value)
+        props.onDescriptionChange(id, value);
     };
 
     const renderFileList = () => {
