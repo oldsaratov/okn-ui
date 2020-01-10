@@ -69,20 +69,3 @@
         }
     }
 }
-
-.okn-object-form {
-
-    &__photos {
-        position: relative;
-
-        .okn-upload-btn {
-            position: absolute;
-            top: -34px;
-            left: 64px;
-        }
-    }
-
-    &__submit {
-        margin-left: 10px;
-    }
-}
