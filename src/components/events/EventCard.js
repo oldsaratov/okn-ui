@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import Carousel, { Modal, ModalGateway } from 'react-images';
 import { Button, Card, Collapse, Icon, Popconfirm, Typography } from 'antd';
 
 import { deleteObjectEvent, updateObjectEvent } from '../../actions';
 import { getActionStatus } from '../../selectors';
 import EventFormModal from './EventFormModal';
 import FileList from '../FileList';
+import Gallery from '../Gallery';
 
 import './EventCard.scss';
 
@@ -50,13 +50,6 @@ class EventCard extends React.Component {
         this.setState({ modalVisible: visible });
     };
 
-    toggleLightbox = selectedPhotoIndex => {
-        this.setState(state => ({
-            lightboxVisible: !state.lightboxVisible,
-            selectedPhotoIndex
-        }));
-    };
-
     editFormRef = formRef => {
         this.formRef = formRef;
     };
@@ -92,25 +85,7 @@ class EventCard extends React.Component {
             }
         }));
 
-        return (
-            <Fragment>
-                <div className="okn-event-card__gallery">
-                    {images.map(({ id, source, description }, i) => (
-                        <div className="okn-event-card__gallery__item" key={id} onClick={() => this.toggleLightbox(i)}>
-                            <img alt={description} src={source.thumbnail}/>
-                        </div>
-                    ))}
-                </div>
-
-                <ModalGateway>
-                    {this.state.lightboxVisible && (
-                        <Modal onClose={this.toggleLightbox}>
-                            <Carousel currentIndex={this.state.selectedPhotoIndex} views={images}/>
-                        </Modal>
-                    )}
-                </ModalGateway>
-            </Fragment>
-        );
+        return <Gallery images={images}/>;
     }
 
     renderFiles(files) {

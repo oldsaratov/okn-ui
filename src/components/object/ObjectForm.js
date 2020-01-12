@@ -60,7 +60,7 @@ const ObjectForm = Form.create({
                         <Form.Item label="Дополнительные фотографии" className="okn-object-form__photos">
                             {getFieldDecorator('photos', {
                                 valuePropName: 'fileList'
-                            })(<Upload type="image"/>)}
+                            })(<Upload type="image" maxLimit={10}/>)}
                         </Form.Item>
                     </Col>
 

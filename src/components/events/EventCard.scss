@@ -89,31 +89,4 @@ $gallery-gutter: 2px;
             }
         }
     }
-
-    #{ $self }__gallery {
-        overflow: hidden;
-        margin-left: -$gallery-gutter;
-        margin-right: -$gallery-gutter;
-
-        &__item {
-            background-color: #eee;
-            box-sizing: border-box;
-            float: left;
-            margin: $gallery-gutter;
-            overflow: hidden;
-            padding-bottom: 16%;
-            position: relative;
-            width: calc(20% - #{$gallery-gutter} * 2);
-
-            &:hover {
-                opacity: .9;
-            }
-
-            img {
-                cursor: pointer;
-                position: absolute;
-                max-width: 100%;
-            }
-        }
-    }
 }

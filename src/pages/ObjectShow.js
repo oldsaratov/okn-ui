@@ -6,6 +6,7 @@ import history from '../history';
 import { fetchObject } from '../actions';
 import ObjectEvents from '../components/events/Events';
 import ObjectMainPhoto from '../components/object/ObjectMainPhoto';
+import Gallery from '../components/Gallery';
 import { getObjectType } from '../selectors';
 import { authService } from '../services/auth.service';
 
@@ -27,6 +28,14 @@ class ObjectShow extends Component {
         }
 
         const { id, object, hasEvents, type, isLoggedIn } = this.props;
+        const images = (object.photos || []).map(photo => ({
+            id: photo.fileId,
+            caption: photo.description,
+            source: {
+                regular: photo.url,
+                thumbnail: `${photo.url}/-/scale_crop/200x200/smart/`
+            }
+        }));
 
         return (
             <Fragment>
@@ -49,6 +58,7 @@ class ObjectShow extends Component {
                         <Row gutter={24}>
                             <Col span={12}>
                                 <ObjectMainPhoto photo={object.mainPhoto} />
+                                <Gallery images={images}/>
                             </Col>
 
                             <Col span={12}>
