@@ -8,11 +8,20 @@
 
     &--empty {
         background: $okn-light-grey;
-        height: 400px;
+        height: 410px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    &--editable {
+        .okn-upload-btn {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            margin-left: -60px;
+        }
     }
 
     &__icon {

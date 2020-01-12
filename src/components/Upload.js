@@ -42,7 +42,12 @@ class Upload extends React.Component {
 
         return (
             <React.Fragment>
-                <UploadcareWrapper type={this.props.type} multipleMax={multipleMax} onUpload={this.onFileUpload}/>
+                <UploadcareWrapper
+                    type={this.props.type}
+                    multiple
+                    multipleMax={multipleMax}
+                    onUpload={this.onFileUpload}
+                />
                 {this.props.type === 'image' && this.renderImageList()}
                 {this.props.type === 'file' &&
                     <FileList

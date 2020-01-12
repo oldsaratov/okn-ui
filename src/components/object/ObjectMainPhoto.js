@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Icon, Input } from 'antd';
 
+import UploadcareWrapper from '../UploadcareWrapper';
 import './ObjectMainPhoto.scss';
 
 class ObjectMainPhoto extends Component {
@@ -11,6 +12,10 @@ class ObjectMainPhoto extends Component {
         if (onChange) {
             onChange(photo);
         }
+    };
+
+    onFileUpload = file => {
+        this.onChange({ ...this.props.photo, fileId: file.fileId, url: file.url });
     };
 
     onDescriptionChange = (event)  => {
@@ -34,9 +39,7 @@ class ObjectMainPhoto extends Component {
         return (
             <div className={`okn-object__main-photo ${emptyClass} ${editableClass}`}>
                 {!photo && (
-                    <Fragment>
-                        <Icon type="picture" className="okn-object__main-photo__icon" />
-                    </Fragment>
+                    <Icon type="picture" className="okn-object__main-photo__icon" />
                 )}
 
                 {photo && (
@@ -44,6 +47,14 @@ class ObjectMainPhoto extends Component {
                         <img src={photo.url} alt={photo.description}/>
                         <div className="okn-object__main-photo__desc">{description}</div>
                     </Fragment>
+                )}
+
+                {editable && (
+                    <UploadcareWrapper
+                        className="okn-object__main-photo__upload-btn"
+                        type="image"
+                        onUpload={this.onFileUpload}
+                    />
                 )}
             </div>
         );

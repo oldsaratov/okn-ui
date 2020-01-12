@@ -4,27 +4,34 @@ import { Widget as UploadCare } from '@uploadcare/react-widget';
 
 import './UploadcareWrapper.scss';
 
-const UploadcareWrapper = ({ type, multipleMax, onUpload }) => {
+const UploadcareWrapper = ({ type, multiple, multipleMax, onUpload }) => {
     const publicKey = 'cd9f808e21ca087dc455';
     const widgetApi = useRef();
+    const disabledBtn = multiple ? !multipleMax : false;
 
     const openUploadcareDialog = () => {
-        widgetApi.current.openDialog().done(fileGroup => {
-            Promise.all(fileGroup.files()).then(files => {
-                const newFiles = files.map(file => ({
-                    fileId: file.uuid,
-                    name: file.name,
-                    url: file.cdnUrl,
-                    description: '',
-                    status: 'new'
-                }));
+        widgetApi.current.openDialog().done(response => {
+            const deferred = multiple ? Promise.all(response.files()) : response;
 
-                onUpload(newFiles);
+            deferred.then(data => {
+                const result = Array.isArray(data) ? data.map(file => mapFile(file)) : mapFile(data);
+
+                onUpload(result);
 
                 // Reset uploadcare widget to don't see previously uploaded files when user opens it again
                 widgetApi.current.reloadInfo();
             });
         });
+    };
+
+    const mapFile = (fileDto) => {
+        return {
+            fileId: fileDto.uuid,
+            name: fileDto.name,
+            url: fileDto.cdnUrl,
+            description: '',
+            status: 'new'
+        };
     };
 
     // TODO: Use it for preferredTypes when uploadcare team fix issue - https://github.com/uploadcare/uploadcare-widget/issues/547
@@ -41,7 +48,7 @@ const UploadcareWrapper = ({ type, multipleMax, onUpload }) => {
 
     return (
         <div>
-            <Button icon="upload" className="okn-upload-btn" disabled={!multipleMax} onClick={openUploadcareDialog}>Загрузить</Button>
+            <Button icon="upload" className="okn-upload-btn" disabled={disabledBtn} onClick={openUploadcareDialog}>Загрузить</Button>
 
             <UploadCare
                 ref={widgetApi}
@@ -49,7 +56,7 @@ const UploadcareWrapper = ({ type, multipleMax, onUpload }) => {
                 preloader={null}
                 imagesOnly={type === 'image'}
                 crop
-                multiple
+                multiple={multiple}
                 multipleMax={multipleMax}
                 locale="ru"
                 tabs="file url vk facebook instagram gdrive gphotos dropbox"
