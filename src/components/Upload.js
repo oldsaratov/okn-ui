@@ -81,7 +81,7 @@ class Upload extends React.Component {
                                 <Input
                                     size="small"
                                     placeholder={placeholder}
-                                    maxLength={50}
+                                    maxLength={100}
                                     value={file.description}
                                     onChange={({ target }) => this.onDescriptionChange(file.fileId, target.value)}
                                 />

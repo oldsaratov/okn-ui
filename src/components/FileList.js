@@ -27,7 +27,7 @@ const FileList = (props) => {
                 ? <Input
                     size="small"
                     placeholder={placeholder}
-                    maxLength={50}
+                    maxLength={100}
                     value={file.description}
                     onChange={event => onDescriptionChange(file.fileId, event)}/>
                 : <React.Fragment>{file.description}</React.Fragment>;
