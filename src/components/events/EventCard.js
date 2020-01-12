@@ -14,12 +14,7 @@ const { Panel } = Collapse;
 const { Paragraph } = Typography;
 
 class EventCard extends React.Component {
-    state = {
-        modalVisible: false,
-        formEvent: {},
-        selectedPhotoIndex: 0,
-        lightboxVisible: false
-    };
+    state = { modalVisible: false, formEvent: {} };
 
     onEditEvent = () => {
         this.setState({ formEvent: this.props.event });
