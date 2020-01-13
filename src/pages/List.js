@@ -69,7 +69,7 @@ class List extends React.Component {
                         <Select
                             mode="multiple"
                             placeholder="Тип"
-                            showArrow={true}
+                            showArrow
                             onChange={this.onTypesChange}
                             allowClear
                             className="okn-type-select"

@@ -43,14 +43,14 @@ class ObjectShow extends Component {
                     <h1 className="okn-object__title">
                         {object.name}
                         {isLoggedIn && (
-                            <Button
-                                type="link"
-                                icon="edit"
-                                className="okn-object__title__edit-button"
-                                onClick={() => history.push(`/objects/edit/${id}`)}
-                            >
-                                Редактировать
-                            </Button>
+                            <div className="okn-object__title__edit-button">
+                                <Button
+                                    title="Редактировать"
+                                    type="link"
+                                    icon="edit"
+                                    onClick={() => history.push(`/objects/edit/${id}`)}
+                                />
+                            </div>
                         )}
                     </h1>
 
@@ -69,7 +69,7 @@ class ObjectShow extends Component {
                     </div>
                 </div>
 
-                <ObjectEvents objectId={id} hasEvents={hasEvents}/>
+                <ObjectEvents isLoggedIn={this.props.isLoggedIn} objectId={id} hasEvents={hasEvents}/>
             </Fragment>
         );
     }

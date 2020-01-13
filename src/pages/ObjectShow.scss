@@ -26,7 +26,18 @@
         }
 
         &__edit-button {
-            vertical-align: middle;
+            background-color: #fff;
+            border-radius: 4px 0 0 4px;
+            box-shadow: 0 0 3px 1px rgba(62, 57, 107, 0.1);
+            padding-right: 5px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -16px;
+
+            .ant-btn-link {
+                display: block;
+            }
         }
     }
 

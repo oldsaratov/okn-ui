@@ -56,7 +56,7 @@ class ObjectEdit extends Component {
                     </div>
                 </div>
 
-                <ObjectEvents objectId={id} hasEvents={hasEvents} editable={true}/>
+                <ObjectEvents isLoggedIn editable objectId={id} hasEvents={hasEvents}/>
             </Fragment>
         );
     }

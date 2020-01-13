@@ -5,7 +5,8 @@
     border-top: 1px solid rgba(0, 0, 0, .1);
     min-height: 185px;
     padding: 0 40px;
-    
+    position: relative;
+
     &__loading.ant-spin {
         margin: 0 auto;
         display: block;
@@ -19,7 +20,22 @@
         margin: 0;
 
         &__edit-button {
-            vertical-align: middle;
+            background-color: #fff;
+            border-radius: 4px 0 0 4px;
+            box-shadow: 0 0 3px 1px rgba(62, 57, 107, 0.1);
+            padding-right: 5px;
+            position: absolute;
+            right: 0;
+            top: 32px;
+
+            .ant-btn-link {
+                display: block;
+            }
+
+            .anticon {
+                font-size: 18px;
+                line-height: 0 !important;
+            }
         }
     }
 

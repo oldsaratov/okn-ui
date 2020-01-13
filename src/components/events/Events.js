@@ -79,11 +79,13 @@ class Events extends React.Component {
     }
 
     renderTitle() {
-        const button = this.props.editable
-            ? <Button type="link" icon="plus" className="okn-object-events__title__edit-button" onClick={this.onAddEvent}>Добавить</Button>
-            : null;
+        const button = (
+            <div className="okn-object-events__title__edit-button">
+                <Button title="Добавить" type="link" icon="plus" onClick={this.onAddEvent}/>
+            </div>
+        );
 
-        return <h2 className="okn-object-events__title">События {button}</h2>;
+        return <h2 className="okn-object-events__title">События {this.props.isLoggedIn && button}</h2>;
     }
 
     renderTimeline() {
@@ -117,7 +119,7 @@ class Events extends React.Component {
     renderTimelineYear(year, index) {
         const dot = (
             <div className="okn-dot-year">
-                <Icon type="calendar" className="okn-dot-year__icon" />
+                <Icon type="calendar" className="okn-dot-year__icon"/>
                 <span className="okn-dot-year__year">{year}</span>
             </div>
         );
@@ -132,7 +134,7 @@ class Events extends React.Component {
     renderTimelineEvent(event, index) {
         const dot = (
             <div className="okn-dot-event">
-                <Icon type="clock-circle" className="okn-dot-event__icon" />
+                <Icon type="clock-circle" className="okn-dot-event__icon"/>
             </div>
         );
 
