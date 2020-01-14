@@ -165,7 +165,7 @@ class Events extends React.Component {
             />
         );
 
-        return this.props.editable && modal;
+        return this.props.isLoggedIn && modal;
     }
 }
 
