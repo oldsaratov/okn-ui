@@ -8,6 +8,7 @@ import List from './pages/List';
 import ObjectEdit from './pages/ObjectEdit';
 import ObjectShow from './pages/ObjectShow';
 import Header from './components/Header';
+import PrivateRoute from './components/PrivateRoute';
 
 import './App.scss';
 
@@ -22,7 +23,7 @@ const App = () => {
                         <Route path="/" exact component={Home}/>
                         <Route path="/objects" exact component={List}/>
                         <Route path="/objects/:id" exact component={ObjectShow}/>
-                        <Route path="/objects/edit/:id" exact component={ObjectEdit}/>
+                        <PrivateRoute path="/objects/edit/:id" exact component={ObjectEdit}/>
                     </Switch>
                 </div>
             </Router>
