@@ -1,3 +1,13 @@
 .okn-home-page {
-    margin: 40px;
+    margin: 0 40px 40px;
+
+    .okn-filters-panel {
+        margin: 15px 0;
+
+        &__type {
+            .ant-radio-button-wrapper {
+                padding: 0 10px;
+            }
+        }
+    }
 }
