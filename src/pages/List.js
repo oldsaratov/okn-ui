@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Col, Icon, Input, Row, Select, Table } from 'antd';
+import { Table } from 'antd';
 
 import { fetchObjectsByParams } from '../actions';
 import { OBJECT_TYPES, PAGE_SIZE } from '../constants';
+import FiltersPanel from '../components/FiltersPanel';
 import './List.scss';
-
-const { Option } = Select;
 
 const columns = [
     {
@@ -27,57 +26,29 @@ const columns = [
 ];
 
 class List extends React.Component {
-    state = { searchTerm: '', selectedTypes: [] };
+    state = { filters: { searchTerm: '', objectTypes: [] } };
 
     componentDidMount() {
         this.props.fetchObjectsByParams();
     }
 
-    onSearchTermChange = ({ target: { value } }) => {
-        this.setState({ searchTerm: value } );
-        this.props.fetchObjectsByParams({ term: value, types: this.state.selectedTypes, page: 1 });
-    };
-
-    onTypesChange = types => {
-        this.setState({ selectedTypes: types } );
-        this.props.fetchObjectsByParams({ term: this.state.searchTerm, types, page: 1 });
-    };
-
     onPaginationChange = pagination => {
         this.props.fetchObjectsByParams({
-            term: this.state.searchTerm,
-            types: this.state.selectedTypes,
+            term: this.state.filters.searchTerm,
+            types: this.state.filters.objectTypes,
             page: pagination.current
         });
+    };
+
+    onFiltersChange = filters => {
+        this.setState({ filters: filters });
+        this.props.fetchObjectsByParams({ term: filters.searchTerm, types: filters.objectTypes, page: 1 });
     };
 
     render() {
         return (
             <div className="okn-list-page">
-                <Row gutter={16} className="okn-filters-panel">
-                    <Col xs={24} sm={12} lg={6}>
-                        <Input
-                            placeholder="Поиск"
-                            prefix={<Icon type="search"/>}
-                            onChange={this.onSearchTermChange}
-                            allowClear
-                            className="okn-search-box"
-                        />
-                    </Col>
-
-                    <Col xs={24} sm={12} lg={12}>
-                        <Select
-                            mode="multiple"
-                            placeholder="Тип"
-                            showArrow
-                            onChange={this.onTypesChange}
-                            allowClear
-                            className="okn-type-select"
-                        >
-                            {this.renderSelectOptions()}
-                        </Select>
-                    </Col>
-                </Row>
+                <FiltersPanel onChange={this.onFiltersChange}/>
 
                 <Table
                     dataSource={this.props.objects}
@@ -92,10 +63,6 @@ class List extends React.Component {
                 />
             </div>
         );
-    }
-
-    renderSelectOptions() {
-        return OBJECT_TYPES.map(opt => <Option key={opt.value}>{opt.label}</Option>);
     }
 }
 
