@@ -6,6 +6,7 @@ import history from '../history';
 import { fetchObject } from '../actions';
 import ObjectEvents from '../components/events/Events';
 import ObjectMainPhoto from '../components/object/ObjectMainPhoto';
+import ObjectMap from '../components/object/ObjectMap';
 import Gallery from '../components/Gallery';
 import { getObjectType } from '../selectors';
 import { authService } from '../services/auth.service';
@@ -66,6 +67,8 @@ class ObjectShow extends Component {
                                 <p>{object.description}</p>
                             </Col>
                         </Row>
+
+                        {object.coords && <ObjectMap coords={object.coords} color={type.color}/>}
                     </div>
                 </div>
 

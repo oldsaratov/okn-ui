@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+@import '~mapbox-gl/dist/mapbox-gl.css';
 @import './colors';
 
 .okn-empty-state {
@@ -17,5 +18,41 @@
         font-size: 80px;
         color: rgba(0, 0, 0, .7) !important;
         margin-bottom: 15px;
+    }
+}
+
+.okn-map {
+    .okn-map__nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px;
+    }
+
+    .okn-map__pin {
+        border: 3px solid #fff;
+        border-radius: 50%;
+        box-shadow: 0 1px 7px 1px #a9a9a9;
+
+        &--medium {
+            height: 30px;
+            width: 30px;
+        }
+
+        &--volcano {
+            background-color: #fa541c;
+        }
+
+        &--cyan {
+            background-color: #13c2c2;
+        }
+
+        &--green {
+            background-color: #52c41a;
+        }
+
+        &--purple {
+            background-color: #722ed1;
+        }
     }
 }
