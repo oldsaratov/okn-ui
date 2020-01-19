@@ -1,47 +1,61 @@
 import React, { useState } from 'react';
-import { Col, Icon, Input, Row, Select } from 'antd';
+import { Col, Input, Row, Select, Switch } from 'antd';
 
-import { OBJECT_TYPES } from '../constants';
+import { DEFAULT_FILTERS, OBJECT_TYPES } from '../constants';
 
+const { Search } = Input;
 const { Option } = Select;
 
-const FiltersPanel = (props) => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [objectTypes, setObjectTypes] = useState([]);
+const FiltersPanel = props => {
+    const [searchTerm, setSearchTerm] = useState(DEFAULT_FILTERS.searchTerm);
+    const [objectTypes, setObjectTypes] = useState(DEFAULT_FILTERS.objectTypes);
+    const [viewType, setViewType] = useState(DEFAULT_FILTERS.viewType);
 
-    const onSearchTermChange = ({ target: { value } }) => {
+    const onSearchTermChange = value => {
         setSearchTerm(value);
-        props.onChange({ searchTerm: value, objectTypes });
+        props.onChange({ searchTerm: value, objectTypes, viewType });
     };
 
-    const onTypesChange = types => {
+    const onObjectTypesChange = types => {
         setObjectTypes(types);
-        props.onChange({ searchTerm, objectTypes: types });
+        props.onChange({ searchTerm, objectTypes: types, viewType });
+    };
+
+    const onViewTypeChange = checked => {
+        const newViewType = checked ? 'map' : 'list';
+
+        setViewType(newViewType);
+        props.onChange({ searchTerm, objectTypes, viewType: newViewType });
     };
 
     return (
-        <Row gutter={16} className="okn-filters-panel">
-            <Col xs={24} sm={12} lg={6}>
-                <Input
+        <Row gutter={16} type="flex" justify="space-between" className="okn-filters-panel">
+            <Col xs={24} sm={12} md={8} lg={8}>
+                <Search
                     placeholder="Поиск"
-                    prefix={<Icon type="search"/>}
-                    onChange={onSearchTermChange}
+                    onSearch={onSearchTermChange}
+                    enterButton
                     allowClear
                     className="okn-search-box"
                 />
             </Col>
 
-            <Col xs={24} sm={12} lg={12}>
+            <Col xs={24} sm={12} md={12} lg={12}>
                 <Select
                     mode="multiple"
                     placeholder="Тип"
                     showArrow
-                    onChange={onTypesChange}
+                    onChange={onObjectTypesChange}
                     allowClear
-                    className="okn-type-select"
+                    className="okn-object-type-select"
                 >
                     {OBJECT_TYPES.map(opt => <Option key={opt.value}>{opt.label}</Option>)}
                 </Select>
+            </Col>
+
+            <Col className="okn-view-type-switch">
+                <span className="okn-view-type-switch__label">Карта</span>
+                <Switch defaultChecked onChange={onViewTypeChange}/>
             </Col>
         </Row>
     );

@@ -1,4 +1,5 @@
 export const PAGE_SIZE = 20;
+export const DEFAULT_FILTERS = { searchTerm: '', objectTypes: [], viewType: 'map' };
 
 export const OBJECT_TYPES = [
     { label: 'Федеральный', value: 1, color: 'volcano' },
