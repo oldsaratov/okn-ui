@@ -29,28 +29,32 @@ const FiltersPanel = props => {
     };
 
     return (
-        <Row gutter={16} type="flex" justify="space-between" className="okn-filters-panel">
-            <Col xs={24} sm={12} md={8} lg={8}>
-                <Search
-                    placeholder="Поиск"
-                    onSearch={onSearchTermChange}
-                    enterButton
-                    allowClear
-                    className="okn-search-box"
-                />
-            </Col>
+        <Row type="flex" justify="space-between" className="okn-filters-panel">
+            <Col xs={16} sm={18} md={20} lg={20}>
+                <Row gutter={16}>
+                    <Col xs={24} sm={24} md={12} lg={8} className="okn-filters-panel__col">
+                        <Search
+                            placeholder="Поиск"
+                            onSearch={onSearchTermChange}
+                            enterButton
+                            allowClear
+                            className="okn-search-box"
+                        />
+                    </Col>
 
-            <Col xs={24} sm={12} md={12} lg={12}>
-                <Select
-                    mode="multiple"
-                    placeholder="Тип"
-                    showArrow
-                    onChange={onObjectTypesChange}
-                    allowClear
-                    className="okn-object-type-select"
-                >
-                    {OBJECT_TYPES.map(opt => <Option key={opt.value}>{opt.label}</Option>)}
-                </Select>
+                    <Col xs={24} sm={24} md={12} lg={14} className="okn-filters-panel__col">
+                        <Select
+                            mode="multiple"
+                            placeholder="Тип"
+                            showArrow
+                            onChange={onObjectTypesChange}
+                            allowClear
+                            className="okn-object-type-select"
+                        >
+                            {OBJECT_TYPES.map(opt => <Option key={opt.value}>{opt.label}</Option>)}
+                        </Select>
+                    </Col>
+                </Row>
             </Col>
 
             <Col className="okn-view-type-switch">

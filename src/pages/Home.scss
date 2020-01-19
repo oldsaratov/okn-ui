@@ -4,6 +4,10 @@
     .okn-filters-panel {
         margin: 15px 0;
 
+        &__col {
+            margin-bottom: 15px;
+        }
+
         .okn-object-type-select {
             width: 100%;
         }
