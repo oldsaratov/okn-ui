@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import { Button } from 'antd';
-import { Widget as UploadCare } from '@uploadcare/react-widget';
+import { Widget as Uploadcare } from '@uploadcare/react-widget';
 
 import './UploadcareWrapper.scss';
 
+const uploadcarePublicKey = process.env.REACT_APP_UPLOADCARE_PUBLIC_KEY;
+
 const UploadcareWrapper = ({ type, multiple, multipleMax, onUpload }) => {
-    const publicKey = 'cd9f808e21ca087dc455';
     const widgetApi = useRef();
     const disabledBtn = multiple ? !multipleMax : false;
 
@@ -50,9 +51,9 @@ const UploadcareWrapper = ({ type, multiple, multipleMax, onUpload }) => {
         <div>
             <Button icon="upload" className="okn-upload-btn" disabled={disabledBtn} onClick={openUploadcareDialog}>Загрузить</Button>
 
-            <UploadCare
+            <Uploadcare
                 ref={widgetApi}
-                publicKey={publicKey}
+                publicKey={uploadcarePublicKey}
                 preloader={null}
                 imagesOnly={type === 'image'}
                 crop

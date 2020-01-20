@@ -4,7 +4,7 @@ import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
 import { SARATOV_CENTER_COORDS } from '../../constants';
 import MapPin from '../MapPin';
 
-const mapboxApiAccessToken = '';
+const mapboxApiAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 const ObjectMap = ({ coords, color }) => {
     const [viewport, setViewport] = useState({
