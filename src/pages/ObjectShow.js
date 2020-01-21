@@ -68,7 +68,7 @@ class ObjectShow extends Component {
                             </Col>
                         </Row>
 
-                        {object.coords && <ObjectMap coords={object.coords} color={type.color}/>}
+                        {object.coords && <ObjectMap coords={object.coords} type={type}/>}
                     </div>
                 </div>
 

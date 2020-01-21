@@ -3,8 +3,10 @@ import { Button, Col, Form, Input, Row, Select } from 'antd';
 
 import Upload from '../Upload';
 import { OBJECT_TYPES } from '../../constants';
+import { getObjectType } from '../../selectors';
 import './ObjectForm.scss';
 import ObjectMainPhoto from './ObjectMainPhoto';
+import ObjectMap from './ObjectMap';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -20,6 +22,7 @@ const ObjectForm = Form.create({
             name: Form.createFormField({ ...object.name, value: object.name }),
             description: Form.createFormField({ ...object.description, value: object.description }),
             type: Form.createFormField({ ...object.type, value: object.type }),
+            coords: Form.createFormField({ ...object.coords, value: object.coords }),
             mainPhoto: Form.createFormField({ ...object.mainPhoto, value: object.mainPhoto }),
             photos: Form.createFormField({ ...object.photos, value: object.photos })
         }) || {};
@@ -46,8 +49,9 @@ const ObjectForm = Form.create({
     };
 
     render() {
-        const { form, loading } = this.props;
+        const { form, loading, object } = this.props;
         const { getFieldDecorator, getFieldsError } = form;
+        const type = object.type && getObjectType(object.type);
 
         return (
             <Form colon={false} layout="vertical" onSubmit={this.handleSubmit} className="okn-object-form">
@@ -81,6 +85,12 @@ const ObjectForm = Form.create({
                             )}
                         </Form.Item>
                     </Col>
+                </Row>
+
+                <Row>
+                    <Form.Item>
+                        {getFieldDecorator('coords', { valuePropName: 'coords' })(<ObjectMap editable type={type} />)}
+                    </Form.Item>
                 </Row>
 
                 <Row type="flex" justify="end">
