@@ -1,4 +1,4 @@
-import { getAllObjects, getObjectById, getObjectsByParams, requestUpdateObject } from '../apis/objects.api';
+import { getObjectById, getObjectsByParams, requestUpdateObject } from '../apis/objects.api';
 import { resetObjectEvents } from './events';
 import ACTION_TYPES from './types';
 import { requestStatus, requestStatusFailure, requestStatusSuccess } from "./status";
@@ -7,7 +7,7 @@ export const fetchAllObjects = params => async dispatch => {
     dispatch({ type: ACTION_TYPES.FETCH_OBJECTS });
 
     try {
-        const response = await getAllObjects(params);
+        const response = await getObjectsByParams(params);
 
         dispatch({ type: ACTION_TYPES.FETCH_OBJECTS_ALL, payload: response });
     } catch (error) {

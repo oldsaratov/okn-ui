@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
         case ACTION_TYPES.FETCH_OBJECTS_ALL:
             return {
                 ...state,
-                all: action.payload,
+                all: action.payload.objects,
                 loading: false
             };
         default:

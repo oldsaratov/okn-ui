@@ -28,31 +28,26 @@ class ObjectList extends React.Component {
     state = { page: 1 };
 
     componentDidMount() {
-        this.props.fetchObjectsByParams({
-            term: this.props.filters.searchTerm,
-            types: this.props.filters.objectTypes,
-            page: 1
-        });
+        this.fetchObjects(this.state.page);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (!isEqual(prevProps.filters, this.props.filters)) {
-            this.props.fetchObjectsByParams({
-                term: this.props.filters.searchTerm,
-                types: this.props.filters.objectTypes,
-                page: this.state.page
-            });
+            this.fetchObjects(this.state.page);
         }
     }
 
-    onPaginationChange = pagination => {
-        this.setState({ page: pagination.current });
-
+    fetchObjects = page => {
         this.props.fetchObjectsByParams({
             term: this.props.filters.searchTerm,
             types: this.props.filters.objectTypes,
-            page: pagination.current
+            page
         });
+    };
+
+    onPaginationChange = pagination => {
+        this.setState({ page: pagination.current });
+        this.fetchObjects(pagination.current);
     };
 
     render() {

@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 
 import history from './history';
 import Auth from './pages/Auth';
-import Home from './pages/Home';
+import Home from './pages/home/Home';
 import ObjectEdit from './pages/ObjectEdit';
 import ObjectShow from './pages/ObjectShow';
 import Header from './components/Header';

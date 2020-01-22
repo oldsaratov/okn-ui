@@ -1,24 +1,19 @@
 import { PAGE_SIZE } from '../constants';
 import okn from './okn.api';
 
-export function getAllObjects() {
-    return okn.get('/objects', { params: { perPage: 2000 } })
-        .then(({ data, status }) => {
-            if (status >= 200 && status < 300) {
-                return data.data.map(object => mapObjectFromDto(object));
-            }
-        })
-        .catch((error) => Promise.reject(error));
-}
-
 export function getObjectsByParams(params) {
-    const page = params && params.page ? params.page : 1;
-    const types = params && params.types && params.types.length ? params.types.toString() : null;
-    const term = params && params.term ? params.term : null;
-    let queryParams = { page, perPage: PAGE_SIZE, name: term };
+    let queryParams = { perPage: 2000 };
 
-    if (types) {
-        queryParams = Object.assign(queryParams, { types });
+    if (params && params.term) {
+        queryParams = Object.assign(queryParams, { name: params.term });
+    }
+
+    if (params && params.page) {
+        queryParams = Object.assign(queryParams, { page: params.page, perPage: PAGE_SIZE });
+    }
+
+    if (params && params.types && params.types.length) {
+        queryParams = Object.assign(queryParams, { types: params.types.toString() });
     }
 
     return okn.get('/objects', { params: queryParams })
