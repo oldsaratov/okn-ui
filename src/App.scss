@@ -27,14 +27,35 @@
         top: 0;
         left: 0;
         padding: 10px;
+
+        .mapboxgl-ctrl-group {
+            margin-bottom: 10px;
+        }
+    }
+
+    .okn-map__loading {
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: .5;
+        height: 100%;
+        width: 100%;
     }
 
     .okn-map__pin {
-        border: 3px solid #fff;
         border-radius: 50%;
         box-shadow: 0 1px 7px 1px #a9a9a9;
 
+        &--small {
+            border: 2px solid #fff;
+            height: 15px;
+            width: 15px;
+        }
+
         &--medium {
+            border: 3px solid #fff;
             height: 30px;
             width: 30px;
         }

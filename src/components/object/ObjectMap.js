@@ -13,7 +13,9 @@ class ObjectMap extends Component {
             height: 400,
             latitude: (this.props.coords && this.props.coords.latitude) || SARATOV_CENTER_COORDS.latitude,
             longitude: (this.props.coords && this.props.coords.longitude) || SARATOV_CENTER_COORDS.longitude,
-            zoom: 12
+            zoom: 12,
+            bearing: 0,
+            pitch: 0
         }
     };
 
