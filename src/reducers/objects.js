@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case ACTION_TYPES.FETCH_OBJECTS:
             return { ...state, loading: true };
-        case ACTION_TYPES.FETCH_OBJECTS_BY_PARAMS:
+        case ACTION_TYPES.FETCH_OBJECTS_PER_PAGE:
             return {
                 ...state,
                 perPage: action.payload.objects,
@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
         case ACTION_TYPES.FETCH_OBJECTS_ALL:
             return {
                 ...state,
-                all: action.payload.objects,
+                all: action.payload,
                 loading: false
             };
         default:

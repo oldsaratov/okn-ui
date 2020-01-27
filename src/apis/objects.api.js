@@ -1,15 +1,31 @@
 import { PAGE_SIZE } from '../constants';
 import okn from './okn.api';
 
-export function getObjectsByParams(params) {
-    let queryParams = { perPage: 2000 };
+export function getObjectsGeoJson(params) {
+    let queryParams = { perPage: 2000, geoJSON: true };
 
     if (params && params.term) {
         queryParams = Object.assign(queryParams, { name: params.term });
     }
 
-    if (params && params.page) {
-        queryParams = Object.assign(queryParams, { page: params.page, perPage: PAGE_SIZE });
+    if (params && params.types && params.types.length) {
+        queryParams = Object.assign(queryParams, { types: params.types.toString() });
+    }
+
+    return okn.get('/objects', { params: queryParams })
+        .then(({ data, status }) => {
+            if (status >= 200 && status < 300) {
+                return data;
+            }
+        })
+        .catch((error) => Promise.reject(error));
+}
+
+export function getObjectsPerPage(params) {
+    let queryParams = { page: params.page, perPage: PAGE_SIZE };
+
+    if (params && params.term) {
+        queryParams = Object.assign(queryParams, { name: params.term });
     }
 
     if (params && params.types && params.types.length) {

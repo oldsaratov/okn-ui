@@ -1,13 +1,13 @@
-import { getObjectById, getObjectsByParams, requestUpdateObject } from '../apis/objects.api';
+import { getObjectById, getObjectsPerPage, getObjectsGeoJson, requestUpdateObject } from '../apis/objects.api';
 import { resetObjectEvents } from './events';
 import ACTION_TYPES from './types';
-import { requestStatus, requestStatusFailure, requestStatusSuccess } from "./status";
+import { requestStatus, requestStatusFailure, requestStatusSuccess } from './status';
 
 export const fetchAllObjects = params => async dispatch => {
     dispatch({ type: ACTION_TYPES.FETCH_OBJECTS });
 
     try {
-        const response = await getObjectsByParams(params);
+        const response = await getObjectsGeoJson(params);
 
         dispatch({ type: ACTION_TYPES.FETCH_OBJECTS_ALL, payload: response });
     } catch (error) {
@@ -15,13 +15,13 @@ export const fetchAllObjects = params => async dispatch => {
     }
 };
 
-export const fetchObjectsByParams = params => async dispatch => {
+export const fetchObjectsPerPage = params => async dispatch => {
     dispatch({ type: ACTION_TYPES.FETCH_OBJECTS });
 
     try {
-        const response = await getObjectsByParams(params);
+        const response = await getObjectsPerPage(params);
 
-        dispatch({ type: ACTION_TYPES.FETCH_OBJECTS_BY_PARAMS, payload: response });
+        dispatch({ type: ACTION_TYPES.FETCH_OBJECTS_PER_PAGE, payload: response });
     } catch (error) {
         console.log('TODO: Show message: ', error);
     }

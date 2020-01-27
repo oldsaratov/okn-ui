@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Table } from 'antd';
 import isEqual from 'lodash/isEqual';
 
-import { fetchObjectsByParams } from '../../actions';
+import { fetchObjectsPerPage } from '../../actions';
 import { OBJECT_TYPES, PAGE_SIZE } from '../../constants';
 
 const columns = [
@@ -38,7 +38,7 @@ class ObjectList extends React.Component {
     }
 
     fetchObjects = page => {
-        this.props.fetchObjectsByParams({
+        this.props.fetchObjectsPerPage({
             term: this.props.filters.searchTerm,
             types: this.props.filters.objectTypes,
             page
@@ -77,4 +77,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { fetchObjectsByParams })(ObjectList);
+export default connect(mapStateToProps, { fetchObjectsPerPage })(ObjectList);
