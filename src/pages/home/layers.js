@@ -4,8 +4,19 @@ export const clusterLayer = {
     source: 'objects',
     filter: ['has', 'point_count'],
     paint: {
-        'circle-color': ['step', ['get', 'point_count'], '#51bbd6', 100, '#f1f075', 750, '#f28cb1'],
-        'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40]
+        'circle-color': [
+            'step',
+            ['get', 'point_count'],
+            '#a4abcb',
+            30,
+            '#daea99',
+            100,
+            '#fee17e',
+            350,
+            '#ffc498'
+        ],
+        'circle-radius': ['step', ['get', 'point_count'], 20, 30, 25, 100, 30, 350, 40],
+        'circle-opacity': 0.7
     }
 };
 
@@ -27,9 +38,26 @@ export const unclusteredPointLayer = {
     source: 'objects',
     filter: ['!', ['has', 'point_count']],
     paint: {
-        'circle-color': '#11b4da',
-        'circle-radius': 4,
-        'circle-stroke-width': 1,
+        // Color circles by object type
+        'circle-color': [
+            'match',
+            ['get', 'type'],
+            1, // Федеральный
+            '#fa541c',
+            2, // Региональный
+            '#13c2c2',
+            3, // Муниципальный
+            '#52c41a',
+            4, // Выявленный
+            '#722ed1',
+            /* other */ '#ccc'
+        ],
+        // Make circles larger as the user zooms from z8 to z18
+        'circle-radius': {
+            'base': 1.75,
+            'stops': [[12, 6], [18, 12]]
+        },
+        'circle-stroke-width': 2,
         'circle-stroke-color': '#fff'
     }
 };

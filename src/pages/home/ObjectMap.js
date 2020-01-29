@@ -1,44 +1,23 @@
-import React, { PureComponent, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactMapGL, { Marker, FullscreenControl, NavigationControl, Layer, Source } from 'react-map-gl';
+import ReactMapGL, { FullscreenControl, Layer, NavigationControl, Source } from 'react-map-gl';
 import isEqual from 'lodash/isEqual';
 import { Spin } from 'antd';
 
 import { fetchAllObjects } from '../../actions';
 import { SARATOV_CENTER_COORDS } from '../../constants';
-import { getObjectType } from '../../selectors';
-import MapPin from '../../components/MapPin';
-import { clusterLayer, clusterCountLayer, unclusteredPointLayer } from './layers';
+import { clusterCountLayer, clusterLayer, unclusteredPointLayer } from './layers';
 
 const mapboxApiAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-
-class Markers extends PureComponent {
-    render() {
-        const { data } = this.props;
-
-        return data.map(
-            object => {
-                const type = getObjectType(object.type);
-
-                return (
-                    <Marker
-                        key={object.id}
-                        longitude={object.coords.longitude}
-                        latitude={object.coords.latitude} >
-                        <MapPin size="small" color={type.color}/>
-                    </Marker>
-                );
-            }
-        )
-    }
-}
 
 class ObjectMap extends Component {
     state = {
         viewport: {
             latitude: SARATOV_CENTER_COORDS.latitude,
             longitude: SARATOV_CENTER_COORDS.longitude,
-            zoom: 12,
+            zoom: 11,
+            maxZoom: 18,
+            minZoom: 8,
             bearing: 0,
             pitch: 0
         }
@@ -120,7 +99,7 @@ class ObjectMap extends Component {
                             type="geojson"
                             data={dataSource}
                             cluster={true}
-                            clusterMaxZoom={14}
+                            clusterMaxZoom={15}
                             clusterRadius={50}
                             ref={this.sourceRef}
                         >
