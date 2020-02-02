@@ -16,11 +16,20 @@
     }
 
     &--editable {
-        .okn-upload-btn {
+        .okn-object__main-photo__buttons {
             position: absolute;
             bottom: 120px;
             left: 50%;
             margin-left: -60px;
+
+            .okn-delete-btn {
+                margin-top: 15px;
+            }
+
+            .okn-upload-btn,
+            .okn-delete-btn {
+                width: 120px;
+            }
         }
     }
 
