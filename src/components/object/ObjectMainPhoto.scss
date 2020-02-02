@@ -33,6 +33,19 @@
         }
     }
 
+    &:not(.okn-object__main-photo--editable) {
+        .okn-object__main-photo__desc {
+            opacity: 0;
+            transition: opacity .5s ease-out;
+        }
+
+        &:hover {
+            .okn-object__main-photo__desc {
+                opacity: 1;
+            }
+        }
+    }
+
     &__icon {
         font-size: 80px;
         color: rgba(0, 0, 0, .6) !important;
