@@ -38,6 +38,7 @@ class ObjectMap extends Component {
             <div className="okn-map">
                 <ReactMapGL
                     {...this.state.viewport}
+                    scrollZoom={false}
                     mapboxApiAccessToken={mapboxApiAccessToken}
                     onViewportChange={viewport => this.setState({ viewport })}
                 >
