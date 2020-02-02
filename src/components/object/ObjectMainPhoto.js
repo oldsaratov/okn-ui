@@ -45,7 +45,9 @@ class ObjectMainPhoto extends Component {
                 {photo && (
                     <Fragment>
                         <img src={photo.url} alt={photo.description}/>
-                        <div className="okn-object__main-photo__desc">{description}</div>
+                        {photo.description && (
+                            <div className="okn-object__main-photo__desc">{description}</div>
+                        )}
                     </Fragment>
                 )}
 

@@ -44,6 +44,26 @@
         width: 100%;
     }
 
+    .okn-map__popup {
+        &.mapboxgl-popup {
+            max-width: 250px;
+
+            .mapboxgl-popup-content {
+                padding: 10px;
+            }
+        }
+
+        &__name {
+            font-size: 13px;
+        }
+
+        &__photo {
+            cursor: pointer;
+            max-width: 100%;
+            padding-top: 5px;
+        }
+    }
+
     .okn-map__pin {
         border-radius: 50%;
         box-shadow: 0 1px 7px 1px #a9a9a9;

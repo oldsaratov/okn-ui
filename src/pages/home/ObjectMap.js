@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactMapGL, { FullscreenControl, Layer, NavigationControl, Source } from 'react-map-gl';
+import { Link } from 'react-router-dom';
+import ReactMapGL, { FullscreenControl, Layer, NavigationControl, Popup, Source } from 'react-map-gl';
 import isEqual from 'lodash/isEqual';
 import { Spin } from 'antd';
 
 import { fetchAllObjects } from '../../actions';
 import { SARATOV_CENTER_COORDS } from '../../constants';
 import { clusterCountLayer, clusterLayer, unclusteredPointLayer } from './layers';
+import history from '../../history';
 
 const mapboxApiAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 class ObjectMap extends Component {
     state = {
+        popupInfo: null,
         viewport: {
             latitude: SARATOV_CENTER_COORDS.latitude,
             longitude: SARATOV_CENTER_COORDS.longitude,
@@ -35,22 +38,41 @@ class ObjectMap extends Component {
     }
 
     fetchObjects = () => {
+        this.closePopup();
+
         this.props.fetchAllObjects({
             term: this.props.filters.searchTerm,
             types: this.props.filters.objectTypes
         });
     };
 
-    onViewportChange = viewport => this.setState({ viewport });
+    onViewportChange = viewport => {
+        this.closePopup();
+        this.setState({ viewport });
+    };
 
     onMapClick = event => {
         const feature = event.features[0];
         const layerId = feature && feature.layer && feature.layer.id;
 
+        if (this.state.popupInfo) {
+            this.closePopup();
+        }
+
         if (layerId === clusterLayer.id) {
             this.zoomInCluster(feature);
         } else if (layerId === unclusteredPointLayer.id) {
-            console.log('obj click', feature);
+            const { geometry, properties } = feature;
+
+            this.setState({
+                popupInfo: {
+                    name: properties.name,
+                    objectId: properties.objectId,
+                    photoUrl: properties.photoUrl,
+                    longitude: geometry.coordinates[0],
+                    latitude: geometry.coordinates[1]
+                }
+            });
         }
     };
 
@@ -73,9 +95,15 @@ class ObjectMap extends Component {
         });
     };
 
+    closePopup = () => {
+        if (this.state.popupInfo) {
+            this.setState({ popupInfo: null });
+        }
+    };
+
     render() {
         const { dataSource, loading } = this.props;
-        const { viewport } = this.state;
+        const { popupInfo, viewport } = this.state;
 
         return (
             <div className="okn-map">
@@ -109,6 +137,8 @@ class ObjectMap extends Component {
                         </Source>
                     )}
 
+                    {this.renderPopup(popupInfo)}
+
                     <div className="okn-map__nav">
                         <FullscreenControl/>
 
@@ -121,6 +151,31 @@ class ObjectMap extends Component {
                     </div>
                 </ReactMapGL>
             </div>
+        );
+    }
+
+    renderPopup = popupInfo => {
+        const objectPageUrl = popupInfo && `/objects/${popupInfo.objectId}`;
+
+        return popupInfo && (
+            <Popup
+                className="okn-map__popup"
+                longitude={popupInfo.longitude}
+                latitude={popupInfo.latitude}
+                closeButton={false}
+            >
+                <Link className="okn-map__popup__name" to={objectPageUrl}>{popupInfo.name}</Link>
+
+                {popupInfo.photoUrl && (
+                    <img
+                        className="okn-map__popup__photo"
+                        src={`${popupInfo.photoUrl}/-/scale_crop/250x150/smart/`}
+                        alt={popupInfo.name}
+                        draggable={false}
+                        onClick={() => history.push(objectPageUrl)}
+                    />
+                )}
+            </Popup>
         );
     }
 }
