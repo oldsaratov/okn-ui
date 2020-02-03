@@ -9,7 +9,7 @@ $gallery-gutter: 2px;
 
     &--left {
         .ant-card-head {
-            border-left: 10px solid $okn-green;
+            border-left: 10px solid $okn-ocean-green;
 
             &:after {
                 right: 100%;
@@ -20,21 +20,21 @@ $gallery-gutter: 2px;
                 width: 0;
                 position: absolute;
                 pointer-events: none;
-                border-right-color: $okn-green;
+                border-right-color: $okn-ocean-green;
                 border-width: 10px;
                 margin-top: -10px;
             }
         }
 
         .ant-card-body {
-            border-left: 10px solid $okn-green;
+            border-left: 10px solid $okn-ocean-green;
             border-bottom-left-radius: 2px;
         }
     }
 
     &--right {
         .ant-card-head {
-            border-right: 10px solid $okn-green;
+            border-right: 10px solid $okn-ocean-green;
 
             &:after {
                 left: 100%;
@@ -45,14 +45,14 @@ $gallery-gutter: 2px;
                 width: 0;
                 position: absolute;
                 pointer-events: none;
-                border-left-color: $okn-green;
+                border-left-color: $okn-ocean-green;
                 border-width: 10px;
                 margin-top: -10px;
             }
         }
 
         .ant-card-body {
-            border-right: 10px solid $okn-green;
+            border-right: 10px solid $okn-ocean-green;
             border-bottom-right-radius: 2px;
         }
     }

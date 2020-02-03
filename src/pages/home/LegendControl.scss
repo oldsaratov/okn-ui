@@ -1,0 +1,62 @@
+@import '../../colors';
+
+.okn-legend {
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+    border: 0;
+    box-sizing: border-box;
+
+    &__question-icon {
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        display: block;
+        outline: none;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, .05);
+        }
+
+        .anticon {
+            font-size: 20px;
+            margin: 5px;
+        }
+    }
+
+    &__body {
+        padding: 5px;
+    }
+
+    &__item {
+        padding: 2px 7px;
+
+        &__point {
+            border-radius: 50%;
+            display: inline-block;
+            height: 10px;
+            width: 10px;
+            margin-right: 8px;
+
+            &--volcano {
+                background-color: $okn-volcano;
+            }
+
+            &--cyan {
+                background-color: $okn-cyan;
+            }
+
+            &--green {
+                background-color: $okn-green;
+            }
+
+            &--purple {
+                background-color: $okn-purple;
+            }
+        }
+
+        &__label {
+            color: rgba(0, 0, 0, .7);
+        }
+    }
+}

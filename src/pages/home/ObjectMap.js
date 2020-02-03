@@ -8,6 +8,7 @@ import { Spin } from 'antd';
 import { fetchAllObjects } from '../../actions';
 import { SARATOV_CENTER_COORDS } from '../../constants';
 import { clusterCountLayer, clusterLayer, unclusteredPointLayer } from './layers';
+import LegendControl from './LegendControl';
 import history from '../../history';
 
 const mapboxApiAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
@@ -148,6 +149,10 @@ class ObjectMap extends Component {
                             showCompass={false}
                             onViewportChange={viewport => this.onViewportChange(viewport)}
                         />
+                    </div>
+
+                    <div  className="okn-map__legend">
+                        <LegendControl/>
                     </div>
                 </ReactMapGL>
             </div>

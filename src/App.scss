@@ -33,6 +33,13 @@
         }
     }
 
+    .okn-map__legend {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+    }
+
     .okn-map__loading {
         background-color: #fff;
         display: flex;
@@ -81,19 +88,23 @@
         }
 
         &--volcano {
-            background-color: #fa541c;
+            background-color: $okn-volcano;
         }
 
         &--cyan {
-            background-color: #13c2c2;
+            background-color: $okn-cyan;
         }
 
         &--green {
-            background-color: #52c41a;
+            background-color: $okn-green;
         }
 
         &--purple {
-            background-color: #722ed1;
+            background-color: $okn-purple;
         }
+    }
+
+    .mapboxgl-ctrl-logo {
+        display: none;
     }
 }
