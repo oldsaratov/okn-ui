@@ -59,9 +59,9 @@ class EventCard extends React.Component {
             <Card
                 className={`okn-event-card ${position} ${last}`}
                 size="small"
-                title={event.name}
+                title={this.renderTitle(event.name)}
                 bordered={false}
-                extra={<React.Fragment>{this.renderDate()} {actions}</React.Fragment>}
+                extra={actions}
             >
                 <Paragraph ellipsis={{ rows: 5, expandable: true }}>{event.description}</Paragraph>
                 {this.renderPhotos(event.photos)}
@@ -69,6 +69,17 @@ class EventCard extends React.Component {
             </Card>
         );
     };
+
+    renderTitle() {
+        const { event } = this.props;
+
+        return (
+            <React.Fragment>
+                <div className="okn-event-card__title">{event.name}</div>
+                <span className="okn-event-card__date">{event.occuredAt.format('DD/MM/YYYY')}</span>
+            </React.Fragment>
+        );
+    }
 
     renderPhotos(photos) {
         const images = (photos || []).map(photo => ({
@@ -98,7 +109,7 @@ class EventCard extends React.Component {
     renderActions() {
         return (
             <span className="okn-event-card__actions">
-                <Button type="link" icon="edit" onClick={this.onEditEvent}/>
+                <Button type="link" icon="edit" title="Редактировать" onClick={this.onEditEvent}/>
 
                 <Popconfirm
                     title="Вы уверены что хотите удалить это событие?"
@@ -107,16 +118,12 @@ class EventCard extends React.Component {
                     icon={<Icon type="warning" style={{ color: 'red' }}/>}
                     onConfirm={this.onDeleteEvent}
                 >
-                    <Button type="link" icon="delete" loading={this.props.deleteStatus.loading}/>
+                    <Button type="link" icon="delete" title="Удалить" loading={this.props.deleteStatus.loading}/>
                 </Popconfirm>
 
                 {this.renderEditModal()}
             </span>
         );
-    }
-
-    renderDate() {
-        return <span className="okn-event-card__date">{this.props.event.occuredAt.format('DD/MM/YYYY')}</span>;
     }
 
     renderEditModal() {

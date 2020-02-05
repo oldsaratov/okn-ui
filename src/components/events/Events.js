@@ -145,7 +145,7 @@ class Events extends React.Component {
                 dot={dot}
                 position={event.position}
             >
-                <EventCard objectId={this.props.objectId} event={event} editable={this.props.editable}/>
+                <EventCard objectId={this.props.objectId} event={event} editable={this.props.isLoggedIn}/>
             </Timeline.Item>
         );
     }

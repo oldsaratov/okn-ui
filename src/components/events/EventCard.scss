@@ -61,8 +61,16 @@ $gallery-gutter: 2px;
         margin-bottom: 25px !important;
     }
 
+    #{ $self }__title {
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     #{ $self }__date {
         color: rgba(0, 0, 0, .25);
+        font-size: 13px;
     }
 
     #{ $self }__files {
