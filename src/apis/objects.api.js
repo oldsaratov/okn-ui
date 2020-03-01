@@ -86,7 +86,7 @@ function mapObjectFromDto(dto) {
         description: dto.description,
         coords: {
             latitude: dto.latitude && parseFloat(dto.latitude),
-            longitude: dto.latitude && parseFloat(dto.latitude)
+            longitude: dto.longitude && parseFloat(dto.longitude)
         },
         type: dto.type,
         eventsCount: dto.eventsCount,
