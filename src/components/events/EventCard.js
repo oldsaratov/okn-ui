@@ -87,7 +87,7 @@ class EventCard extends React.Component {
             caption: photo.description,
             source: {
                 regular: photo.url,
-                thumbnail: `${photo.url}/-/scale_crop/180x180/smart/`
+                thumbnail: `${photo.url}-/scale_crop/180x180/smart/`
             }
         }));
 

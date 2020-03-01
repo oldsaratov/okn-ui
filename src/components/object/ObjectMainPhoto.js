@@ -41,7 +41,7 @@ class ObjectMainPhoto extends Component {
 
                 {photo && (
                     <Fragment>
-                        <img src={photo.url} alt={photo.description}/>
+                        <img src={`${photo.url}-/resize/600x/`} alt={photo.description}/>
                         {this.renderDescription(photo)}
                     </Fragment>
                 )}

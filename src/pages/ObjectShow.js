@@ -34,7 +34,7 @@ class ObjectShow extends Component {
             caption: photo.description,
             source: {
                 regular: photo.url,
-                thumbnail: `${photo.url}/-/scale_crop/200x200/smart/`
+                thumbnail: `${photo.url}-/scale_crop/200x200/smart/`
             }
         }));
 

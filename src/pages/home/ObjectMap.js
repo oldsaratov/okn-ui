@@ -174,7 +174,7 @@ class ObjectMap extends Component {
                 {popupInfo.photoUrl && (
                     <img
                         className="okn-map__popup__photo"
-                        src={`${popupInfo.photoUrl}/-/scale_crop/250x150/smart/`}
+                        src={`${popupInfo.photoUrl}-/scale_crop/250x150/smart/`}
                         alt={popupInfo.name}
                         draggable={false}
                         onClick={() => history.push(objectPageUrl)}

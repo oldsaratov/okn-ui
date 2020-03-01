@@ -5,6 +5,7 @@
     box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
     position: relative;
     overflow: hidden;
+    min-height: 200px;
 
     &--empty {
         background: $okn-light-grey;
