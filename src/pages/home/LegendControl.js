@@ -4,11 +4,12 @@ import { OBJECT_TYPES } from '../../constants';
 import './LegendControl.scss';
 
 const LegendControl = () => {
+    const options = Object.values(OBJECT_TYPES);
 
     const renderItem = item => {
         return (
             <div className="okn-legend__item" key={item.value}>
-                <span className={`okn-legend__item__point okn-legend__item__point--${item.color}`}></span>
+                <span className={`okn-legend__item__point okn-bg-color--${item.colorName}`}></span>
                 <span className="okn-legend__item__label">{item.label}</span>
             </div>
         );
@@ -17,7 +18,7 @@ const LegendControl = () => {
     return (
         <div className="okn-legend">
             <div className="okn-legend__body">
-                {OBJECT_TYPES.map(opt => renderItem(opt))}
+                {options.map(opt => renderItem(opt))}
             </div>
         </div>
     );

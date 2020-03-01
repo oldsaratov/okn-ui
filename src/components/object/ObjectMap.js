@@ -33,6 +33,7 @@ class ObjectMap extends Component {
 
     render() {
         const { coords, editable, type } = this.props;
+        const hasCoords = coords && coords.latitude && coords.longitude;
 
         return (
             <div className="okn-map">
@@ -42,7 +43,7 @@ class ObjectMap extends Component {
                     mapboxApiAccessToken={mapboxApiAccessToken}
                     onViewportChange={viewport => this.setState({ viewport })}
                 >
-                    {coords && type && (
+                    {hasCoords && type && (
                         <Marker
                             latitude={coords.latitude}
                             longitude={coords.longitude}
@@ -51,7 +52,7 @@ class ObjectMap extends Component {
                             draggable={editable}
                             onDragEnd={this.onMarkerDragEnd}
                         >
-                            <MapPin color={type.color}/>
+                            <MapPin color={type.colorName}/>
                         </Marker>
                     )}
 

@@ -19,7 +19,7 @@ const columns = [
         title: 'Тип',
         dataIndex: 'type',
         key: 'type',
-        render: type => OBJECT_TYPES.find(obj => obj.value === type).label,
+        render: type => type && OBJECT_TYPES[type] && OBJECT_TYPES[type].label,
         width: '140px'
     }
 ];

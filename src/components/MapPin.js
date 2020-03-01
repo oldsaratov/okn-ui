@@ -5,7 +5,7 @@ class MapPin extends PureComponent {
         const color = this.props.color;
         const size = this.props.size || 'medium';
 
-        return <div className={`okn-map__pin okn-map__pin--${color} okn-map__pin--${size}`}></div>;
+        return <div className={`okn-map__pin okn-bg-color--${color} okn-map__pin--${size}`}></div>;
     }
 }
 

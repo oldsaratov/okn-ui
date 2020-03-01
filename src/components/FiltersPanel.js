@@ -10,6 +10,7 @@ const FiltersPanel = props => {
     const [searchTerm, setSearchTerm] = useState(DEFAULT_FILTERS.searchTerm);
     const [objectTypes, setObjectTypes] = useState(DEFAULT_FILTERS.objectTypes);
     const [viewType, setViewType] = useState(DEFAULT_FILTERS.viewType);
+    const options = Object.values(OBJECT_TYPES);
 
     const onSearchTermChange = value => {
         setSearchTerm(value);
@@ -51,7 +52,7 @@ const FiltersPanel = props => {
                             allowClear
                             className="okn-object-type-select"
                         >
-                            {OBJECT_TYPES.map(opt => <Option key={opt.value}>{opt.label}</Option>)}
+                            {options.map(opt => <Option key={opt.value}>{opt.label}</Option>)}
                         </Select>
                     </Col>
                 </Row>

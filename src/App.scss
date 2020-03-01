@@ -87,25 +87,36 @@
             height: 30px;
             width: 30px;
         }
-
-        &--volcano {
-            background-color: $okn-volcano;
-        }
-
-        &--cyan {
-            background-color: $okn-cyan;
-        }
-
-        &--green {
-            background-color: $okn-green;
-        }
-
-        &--purple {
-            background-color: $okn-purple;
-        }
     }
 
     .mapboxgl-ctrl-logo {
         display: none;
+    }
+}
+
+.okn-bg-color {
+
+    &--volcano {
+        background-color: $okn-volcano;
+    }
+
+    &--gold {
+        background-color: $okn-gold;
+    }
+
+    &--cyan {
+        background-color: $okn-cyan;
+    }
+
+    &--green {
+        background-color: $okn-green;
+    }
+
+    &--purple {
+        background-color: $okn-purple;
+    }
+
+    &--geekblue {
+        background-color: $okn-geekblue;
     }
 }

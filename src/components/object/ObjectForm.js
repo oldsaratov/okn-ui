@@ -52,6 +52,7 @@ const ObjectForm = Form.create({
         const { form, loading, object } = this.props;
         const { getFieldDecorator, getFieldsError } = form;
         const type = object.type && getObjectType(object.type);
+        const options = Object.values(OBJECT_TYPES);
 
         return (
             <Form colon={false} layout="vertical" onSubmit={this.handleSubmit} className="okn-object-form">
@@ -80,7 +81,7 @@ const ObjectForm = Form.create({
                         <Form.Item label="Тип">
                             {getFieldDecorator('type')(
                                 <Select placeholder="Тип">
-                                    {OBJECT_TYPES.map(opt => <Option key={opt.value} value={opt.value}>{opt.label}</Option>)}
+                                    {options.map(opt => <Option key={opt.value} value={opt.value}>{opt.label}</Option>)}
                                 </Select>
                             )}
                         </Form.Item>

@@ -1,3 +1,7 @@
+import flatten from 'lodash/flatten';
+
+import { OBJECT_TYPES } from '../../constants';
+
 export const clusterLayer = {
     id: 'clusters',
     type: 'circle',
@@ -42,15 +46,8 @@ export const unclusteredPointLayer = {
         'circle-color': [
             'match',
             ['get', 'type'],
-            1, // Федеральный
-            '#fa541c',
-            2, // Региональный
-            '#13c2c2',
-            3, // Муниципальный
-            '#52c41a',
-            4, // Выявленный
-            '#722ed1',
-            /* other */ '#ccc'
+            ...flatten(Object.values(OBJECT_TYPES).map(type => ([type.value, type.colorCode]))),
+            '#ccc' // Other
         ],
         // Make circles larger as the user zooms from z8 to z18
         'circle-radius': {

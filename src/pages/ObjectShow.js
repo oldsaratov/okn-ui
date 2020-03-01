@@ -63,7 +63,7 @@ class ObjectShow extends Component {
                             </Col>
 
                             <Col span={12}>
-                                <p><Tag color={type.color}>{type.label}</Tag></p>
+                                <p><Tag color={type.colorName}>{type.label}</Tag></p>
                                 <p>{object.description}</p>
                             </Col>
                         </Row>
