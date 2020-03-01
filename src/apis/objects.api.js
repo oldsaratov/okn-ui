@@ -66,12 +66,13 @@ function mapObjectToDto(object) {
         url: event.url,
         description: event.description
     }));
+    const { coords } = object;
 
     return {
         name: object.name,
         description: object.description,
-        latitude: object.coords.latitude,
-        longitude: object.coords.longitude,
+        latitude: coords && coords.latitude && coords.latitude.toString(),
+        longitude: coords && coords.longitude && coords.longitude.toString(),
         type: object.type,
         mainPhoto: object.mainPhoto,
         photos
@@ -83,7 +84,10 @@ function mapObjectFromDto(dto) {
         id: dto.objectId,
         name: dto.name,
         description: dto.description,
-        coords: { latitude: dto.latitude, longitude: dto.longitude },
+        coords: {
+            latitude: parseFloat(dto.latitude),
+            longitude: parseFloat(dto.longitude)
+        },
         type: dto.type,
         eventsCount: dto.eventsCount,
         mainPhoto: dto.mainPhoto,
