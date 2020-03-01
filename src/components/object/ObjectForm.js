@@ -4,9 +4,9 @@ import { Button, Col, Form, Input, Row, Select } from 'antd';
 import Upload from '../Upload';
 import { OBJECT_TYPES } from '../../constants';
 import { getObjectType } from '../../selectors';
-import './ObjectForm.scss';
 import ObjectMainPhoto from './ObjectMainPhoto';
 import ObjectMap from './ObjectMap';
+import './ObjectForm.scss';
 
 const { TextArea } = Input;
 const { Option } = Select;

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
+import { Button } from 'antd';
 
 import { SARATOV_CENTER_COORDS } from '../../constants';
 import MapPin from '../MapPin';
+import './ObjectMap.scss';
 
 const mapboxApiAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -30,6 +32,17 @@ class ObjectMap extends Component {
     onMarkerDragEnd = event => {
         this.onChange({ longitude: event.lngLat[0], latitude: event.lngLat[1] });
     };
+
+    onMarkedAdd = () => {
+        this.onChange({
+            longitude: SARATOV_CENTER_COORDS.longitude,
+            latitude: SARATOV_CENTER_COORDS.latitude
+        });
+    }
+
+    onMarkedDelete = () => {
+        this.onChange({ longitude: '', latitude: '' });
+    }
 
     render() {
         const { coords, editable, type } = this.props;
@@ -64,6 +77,18 @@ class ObjectMap extends Component {
                             onViewportChange={viewport => this.setState({ viewport })}
                         />
                     </div>
+
+                    {editable && (
+                        <div className="okn-map__actions">
+                            {!hasCoords && (
+                                <Button type="primary" onClick={() => this.onMarkedAdd()}>Отметить</Button>
+                            )}
+
+                            {hasCoords && (
+                                <Button type="danger" onClick={() => this.onMarkedDelete()}>Удалить</Button>
+                            )}
+                        </div>
+                    )}
                 </ReactMapGL>
             </div>
         );
