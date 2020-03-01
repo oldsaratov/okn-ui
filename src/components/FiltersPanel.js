@@ -1,32 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Col, Input, Row, Select, Switch } from 'antd';
+import { connect } from 'react-redux';
 
-import { DEFAULT_FILTERS, OBJECT_TYPES } from '../constants';
+import { OBJECT_TYPES, VIEW_TYPES } from '../constants';
+import { setSearchTermFilter, setObjectTypesFilter, setViewTypeFilter } from '../actions';
 
 const { Search } = Input;
 const { Option } = Select;
 
 const FiltersPanel = props => {
-    const [searchTerm, setSearchTerm] = useState(DEFAULT_FILTERS.searchTerm);
-    const [objectTypes, setObjectTypes] = useState(DEFAULT_FILTERS.objectTypes);
-    const [viewType, setViewType] = useState(DEFAULT_FILTERS.viewType);
     const options = Object.values(OBJECT_TYPES);
+    const mapChecked = props.viewType === VIEW_TYPES.MAP;
 
     const onSearchTermChange = value => {
-        setSearchTerm(value);
-        props.onChange({ searchTerm: value, objectTypes, viewType });
+        props.setSearchTermFilter(value);
     };
 
     const onObjectTypesChange = types => {
-        setObjectTypes(types);
-        props.onChange({ searchTerm, objectTypes: types, viewType });
+        props.setObjectTypesFilter(types);
     };
 
     const onViewTypeChange = checked => {
-        const newViewType = checked ? 'map' : 'list';
+        const newViewType = checked ? VIEW_TYPES.MAP : VIEW_TYPES.LIST;
 
-        setViewType(newViewType);
-        props.onChange({ searchTerm, objectTypes, viewType: newViewType });
+        props.setViewTypeFilter(newViewType);
     };
 
     return (
@@ -36,6 +33,7 @@ const FiltersPanel = props => {
                     <Col xs={24} sm={24} md={12} lg={8} className="okn-filters-panel__col">
                         <Search
                             placeholder="Поиск"
+                            defaultValue={props.searchTerm}
                             onSearch={onSearchTermChange}
                             enterButton
                             allowClear
@@ -47,6 +45,7 @@ const FiltersPanel = props => {
                         <Select
                             mode="multiple"
                             placeholder="Тип"
+                            defaultValue={props.objectTypes}
                             showArrow
                             onChange={onObjectTypesChange}
                             allowClear
@@ -60,10 +59,20 @@ const FiltersPanel = props => {
 
             <Col className="okn-view-type-switch">
                 <span className="okn-view-type-switch__label">Карта</span>
-                <Switch defaultChecked onChange={onViewTypeChange}/>
+                <Switch checked={mapChecked} onChange={onViewTypeChange}/>
             </Col>
         </Row>
     );
 };
 
-export default FiltersPanel;
+const mapStateToProps = (state) => {
+    const { objectTypes, searchTerm, viewType } = state.filters;
+
+    return { objectTypes, searchTerm, viewType };
+};
+
+export default connect(mapStateToProps, {
+    setSearchTermFilter,
+    setObjectTypesFilter,
+    setViewTypeFilter
+})(FiltersPanel);

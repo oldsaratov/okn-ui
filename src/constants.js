@@ -1,5 +1,4 @@
 export const PAGE_SIZE = 20;
-export const DEFAULT_FILTERS = { searchTerm: '', objectTypes: [], viewType: 'map' };
 export const SARATOV_CENTER_COORDS = { latitude: 51.537996, longitude: 46.0225103 };
 
 export const OBJECT_TYPES = {
@@ -10,4 +9,9 @@ export const OBJECT_TYPES = {
     5: { label: 'Выявленный', value: 5, colorName: 'purple', colorCode: '#722ed1' },
     10: { label: 'Исключенный', value: 10, colorName: 'gold', colorCode: '#faad14' },
     100: { label: 'Утраченный', value: 100, colorName: 'geekblue', colorCode: '#2f54eb' }
+};
+
+export const VIEW_TYPES = {
+    MAP: 'MAP',
+    LIST: 'LIST'
 };

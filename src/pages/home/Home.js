@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { DEFAULT_FILTERS } from '../../constants';
+import { VIEW_TYPES } from '../../constants';
 import ObjectList from './ObjectList';
 import ObjectMap from './ObjectMap';
 import FiltersPanel from '../../components/FiltersPanel';
 import './Home.scss';
 
-const Home = () => {
-    const [filters, setFilters] = useState(DEFAULT_FILTERS);
-    const showMap = filters.viewType === 'map';
+const Home = (props) => {
+    const { filters } = props;
+    const showMap = filters.viewType === VIEW_TYPES.MAP;
 
     return (
         <div className="okn-home-page">
-            <FiltersPanel onChange={setFilters}/>
+            <FiltersPanel/>
 
             {showMap && (
                 <ObjectMap filters={filters}/>
@@ -25,4 +26,6 @@ const Home = () => {
     );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({ filters: state.filters });
+
+export default connect(mapStateToProps)(Home);
