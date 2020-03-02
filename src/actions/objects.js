@@ -1,4 +1,10 @@
-import { getObjectById, getObjectsPerPage, getObjectsGeoJson, requestUpdateObject } from '../apis/objects.api';
+import {
+    getObjectById,
+    getObjectsGeoJson,
+    getObjectsPerPage,
+    requestCreateObject,
+    requestUpdateObject
+} from '../apis/objects.api';
 import { resetObjectEvents } from './events';
 import ACTION_TYPES from './types';
 import { requestStatus, requestStatusFailure, requestStatusSuccess } from './status';
@@ -37,6 +43,22 @@ export const fetchObject = id => async dispatch => {
         dispatch({ type: ACTION_TYPES.FETCH_OBJECT_SUCCESS, payload: response });
     } catch (error) {
         dispatch({ type: ACTION_TYPES.FETCH_OBJECT_FAILURE, payload: error });
+    }
+};
+
+export const createObject = object => async dispatch => {
+    const status = { type: 'create', id: 'newObject' };
+
+    dispatch(requestStatus(status));
+
+    try {
+        const response = await requestCreateObject(object);
+
+        dispatch({ type: ACTION_TYPES.FETCH_OBJECT_SUCCESS, payload: response });
+        dispatch(requestStatusSuccess({ response, ...status }));
+    } catch (error) {
+        dispatch({ type: ACTION_TYPES.FETCH_OBJECT_FAILURE, payload: error });
+        dispatch(requestStatusFailure({ error, ...status }));
     }
 };
 

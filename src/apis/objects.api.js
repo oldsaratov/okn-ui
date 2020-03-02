@@ -55,6 +55,16 @@ export function getObjectById(id) {
         .catch((error) => Promise.reject(error));
 }
 
+export function requestCreateObject(object) {
+    return okn.post(`/objects`, mapObjectToDto(object))
+        .then(({ data, status }) => {
+            if (status >= 200 && status < 300) {
+                return mapObjectFromDto(data);
+            }
+        })
+        .catch((error) => Promise.reject(error));
+}
+
 export function requestUpdateObject(object) {
     return okn.post(`/objects/${object.id}`, mapObjectToDto(object))
         .catch((error) => Promise.reject(error));

@@ -79,7 +79,7 @@ const ObjectForm = Form.create({
                         </Form.Item>
 
                         <Form.Item label="Тип">
-                            {getFieldDecorator('type')(
+                            {getFieldDecorator('type', { rules: [requiredFieldRule] })(
                                 <Select placeholder="Тип">
                                     {options.map(opt => <Option key={opt.value} value={opt.value}>{opt.label}</Option>)}
                                 </Select>

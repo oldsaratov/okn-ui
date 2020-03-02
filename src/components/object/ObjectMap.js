@@ -56,7 +56,7 @@ class ObjectMap extends Component {
                     mapboxApiAccessToken={mapboxApiAccessToken}
                     onViewportChange={viewport => this.setState({ viewport })}
                 >
-                    {hasCoords && type && (
+                    {hasCoords && (
                         <Marker
                             latitude={coords.latitude}
                             longitude={coords.longitude}
@@ -65,7 +65,7 @@ class ObjectMap extends Component {
                             draggable={editable}
                             onDragEnd={this.onMarkerDragEnd}
                         >
-                            <MapPin color={type.colorName}/>
+                            <MapPin color={type && type.colorName}/>
                         </Marker>
                     )}
 
