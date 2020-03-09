@@ -31,16 +31,12 @@
     &__item {
         padding: 2px 7px;
 
-        &__point {
-            border-radius: 50%;
-            display: inline-block;
-            height: 10px;
-            width: 10px;
-            margin-right: 8px;
-        }
-
         &__label {
             color: rgba(0, 0, 0, .7);
+        }
+
+        .okn-color-dot {
+            margin-right: 8px;
         }
     }
 }

@@ -70,7 +70,7 @@ export function requestUpdateObject(object) {
         .catch((error) => Promise.reject(error));
 }
 
-function mapObjectToDto(object) {
+export function mapObjectToDto(object) {
     const photos = (object.photos || []).map(event => ({
         fileId: event.fileId,
         url: event.url,
@@ -89,7 +89,7 @@ function mapObjectToDto(object) {
     };
 }
 
-function mapObjectFromDto(dto) {
+export function mapObjectFromDto(dto) {
     return {
         id: dto.objectId,
         name: dto.name,

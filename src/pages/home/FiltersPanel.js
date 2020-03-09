@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Input, Row, Select, Switch } from 'antd';
 import { connect } from 'react-redux';
 
-import { OBJECT_TYPES, VIEW_TYPES } from '../constants';
-import { setSearchTermFilter, setObjectTypesFilter, setViewTypeFilter } from '../actions';
+import { OBJECT_TYPES, VIEW_TYPES } from '../../constants';
+import { setSearchTermFilter, setObjectTypesFilter, setViewTypeFilter } from '../../actions';
 
 const { Search } = Input;
 const { Option } = Select;

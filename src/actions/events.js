@@ -1,5 +1,6 @@
 import {
     getObjectEvents,
+    getLastEvents,
     requestDeleteObjectEvent,
     requestPostObjectEvent,
     requestUpdateObjectEvent
@@ -18,6 +19,18 @@ export const fetchObjectEvents = id => async dispatch => {
         dispatch({ type: ACTION_TYPES.FETCH_OBJECT_EVENTS_SUCCESS, payload: response });
     } catch (error) {
         dispatch({ type: ACTION_TYPES.FETCH_OBJECT_EVENTS_FAILURE, payload: error });
+    }
+};
+
+export const fetchLastEvents = () => async dispatch => {
+    dispatch({ type: ACTION_TYPES.FETCH_LAST_OBJECT_EVENTS });
+
+    try {
+        const response = await getLastEvents();
+
+        dispatch({ type: ACTION_TYPES.FETCH_LAST_OBJECT_EVENTS_SUCCESS, payload: response });
+    } catch (error) {
+        dispatch({ type: ACTION_TYPES.FETCH_LAST_OBJECT_EVENTS_FAILURE, payload: error });
     }
 };
 

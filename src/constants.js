@@ -1,5 +1,6 @@
 export const PAGE_SIZE = 20;
 export const SARATOV_CENTER_COORDS = { latitude: 51.537996, longitude: 46.0225103 };
+export const DATE_FORMAT = 'DD/MM/YYYY';
 
 export const OBJECT_TYPES = {
     1: { label: 'Федеральный', value: 1, colorName: 'volcano', colorCode: '#fa541c' },

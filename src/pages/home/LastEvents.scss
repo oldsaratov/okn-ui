@@ -1,0 +1,27 @@
+$cover-photo-size: 120px;
+
+.okn-last-events {
+    margin-top: 40px;
+
+    &__title {
+        border-bottom: 1px solid #e8e8e8;
+        margin-bottom: 25px;
+    }
+
+    .okn-event {
+        margin-bottom: 20px;
+
+        &__object-name {
+            margin-left: 5px;
+        }
+
+        &__name {
+            font-weight: 600;
+        }
+
+        &__date {
+            color: rgba(0, 0, 0, 0.25);
+            font-size: 13px;
+        }
+    }
+}

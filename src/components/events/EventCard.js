@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Card, Collapse, Icon, Popconfirm, Typography } from 'antd';
 
 import { deleteObjectEvent, updateObjectEvent } from '../../actions';
+import { DATE_FORMAT } from '../../constants';
 import { getActionStatus } from '../../selectors';
 import EventFormModal from './EventFormModal';
 import FileList from '../FileList';
@@ -76,7 +77,7 @@ class EventCard extends React.Component {
         return (
             <React.Fragment>
                 <div className="okn-event-card__title">{event.name}</div>
-                <span className="okn-event-card__date">{event.occuredAt.format('DD/MM/YYYY')}</span>
+                <span className="okn-event-card__date">{event.occuredAt.format(DATE_FORMAT)}</span>
             </React.Fragment>
         );
     }

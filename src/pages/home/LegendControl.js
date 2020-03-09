@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { OBJECT_TYPES } from '../../constants';
+import ColorDot from '../../components/ColorDot';
 import './LegendControl.scss';
 
 const LegendControl = () => {
@@ -9,7 +10,7 @@ const LegendControl = () => {
     const renderItem = item => {
         return (
             <div className="okn-legend__item" key={item.value}>
-                <span className={`okn-legend__item__point okn-bg-color--${item.colorName}`}></span>
+                <ColorDot color={item.colorCode}/>
                 <span className="okn-legend__item__label">{item.label}</span>
             </div>
         );
