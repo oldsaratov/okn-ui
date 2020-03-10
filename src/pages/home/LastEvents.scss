@@ -1,11 +1,14 @@
+@import '../../colors';
+
 $cover-photo-size: 120px;
 
 .okn-last-events {
-    margin-top: 40px;
+    margin-top: 30px;
 
     &__title {
-        border-bottom: 1px solid #e8e8e8;
+        border-bottom: 5px solid $okn-dark-blue;
         margin-bottom: 25px;
+        font-weight: 600;
     }
 
     .okn-event {
