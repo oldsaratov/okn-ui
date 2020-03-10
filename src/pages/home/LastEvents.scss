@@ -26,5 +26,12 @@ $cover-photo-size: 120px;
             color: rgba(0, 0, 0, 0.25);
             font-size: 13px;
         }
+
+        // Remove after migration to antd v4
+        .ant-card-cover {
+            margin-right: -1px;
+            margin-left: -1px;
+            margin-top: -1px;
+        }
     }
 }
