@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive'
 import { Card, Col, Row } from 'antd';
 
 import history from '../../history';
@@ -9,40 +10,54 @@ import { DATE_FORMAT, OBJECT_TYPES } from '../../constants';
 import ColorDot from '../../components/ColorDot';
 import './LastEvents.scss';
 
-class LastEvents extends Component {
+const LastEvents = ({ objects, fetchLastEvents }) => {
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
+    const isPortrait = useMediaQuery({ orientation: 'portrait' });
+    const isLandscape = useMediaQuery({ orientation: 'landscape' });
 
-    componentDidMount() {
-        this.props.fetchLastEvents();
-    }
+    useEffect(() => {
+        fetchLastEvents();
+    }, [fetchLastEvents]);
 
-    goToObjectShow = id => {
+    const goToObjectShow = id => {
         history.push(`/objects/${id}`);
     };
 
-    render() {
-        const { objects } = this.props;
-        const columns = [
-            objects.slice(0, 3),
-            objects.slice(3, 6),
-            objects.slice(6, 9),
-            objects.slice(9, 12)
-        ];
+    const getLayout = (objects = []) => {
+        let columns = [];
+        let colSpan = null;
 
-        return (
-            <div className="okn-last-events">
-                <h2 className="okn-last-events__title">Последние события</h2>
-                <Row gutter={20}>
-                    {columns.map((column, i) => (
-                        <Col span={6} gutter={16} key={i}>
-                            {column.map((object, j) => this.renderCard(object, j))}
-                        </Col>
-                    ))}
-                </Row>
-            </div>
-        );
+        if (isMobile && isPortrait) {
+            columns = [objects];
+            colSpan = 24;
+        } else if (isMobile && isLandscape) {
+            columns = [
+                objects.slice(0, 6),
+                objects.slice(6, 12)
+            ];
+            colSpan = 12;
+        } else if (isTablet) {
+            columns = [
+                objects.slice(0, 4),
+                objects.slice(4, 8),
+                objects.slice(8, 12)
+            ];
+            colSpan = 8;
+        } else {
+            columns = [
+                objects.slice(0, 3),
+                objects.slice(3, 6),
+                objects.slice(6, 9),
+                objects.slice(9, 12)
+            ];
+            colSpan = 6;
+        }
+
+        return { columns, colSpan };
     }
 
-    renderCard(object, i) {
+    const renderCard = (object, i) => {
         const event = object.lastEvent;
         const objectType = object && object.type && OBJECT_TYPES[object.type];
 
@@ -52,8 +67,8 @@ class LastEvents extends Component {
                 size="small"
                 hoverable
                 className="okn-event"
-                cover={this.renderCoverPhoto(object.mainPhoto)}
-                onClick={() => this.goToObjectShow(object.id)}
+                cover={renderCoverPhoto(object.mainPhoto)}
+                onClick={() => goToObjectShow(object.id)}
             >
                 <div className="okn-event__title">
                     <ColorDot color={objectType.colorCode} tooltip={objectType.label}/>
@@ -67,7 +82,7 @@ class LastEvents extends Component {
         );
     }
 
-    renderCoverPhoto(photo) {
+    const renderCoverPhoto = (photo) => {
         return photo && photo.url && (
             <img
                 title={photo.description}
@@ -76,6 +91,21 @@ class LastEvents extends Component {
             />
         );
     }
+
+    const { columns, colSpan } = getLayout(objects);
+
+    return (
+        <div className="okn-last-events">
+            <h2 className="okn-last-events__title">Последние события</h2>
+            <Row gutter={20}>
+                {columns.map((column, i) => (
+                    <Col span={colSpan} gutter={16} key={i}>
+                        {column.map((object, j) => renderCard(object, j))}
+                    </Col>
+                ))}
+            </Row>
+        </div>
+    );
 }
 
 const mapStateToProps = (state) => {

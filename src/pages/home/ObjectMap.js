@@ -112,6 +112,7 @@ class ObjectMap extends Component {
                     {...viewport}
                     width="100%"
                     height="500px"
+                    scrollZoom={false}
                     mapboxApiAccessToken={mapboxApiAccessToken}
                     interactiveLayerIds={[clusterLayer.id, unclusteredPointLayer.id]}
                     onClick={this.onMapClick}
