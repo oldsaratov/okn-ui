@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import { Button, Icon, Spin, Timeline, Typography } from 'antd';
 import groupBy from 'lodash/groupBy';
 
@@ -9,89 +10,88 @@ import EventCard from './EventCard';
 import EventFormModal from './EventFormModal';
 
 import './Events.scss';
-
 const { Text } = Typography;
 
-class Events extends React.Component {
-    state = { visible: false, formEvent: {} };
+const Events = props => {
+    const { createStatus, createObjectEvent, fetchObjectEvents, hasEvents, objectId } = props;
+    const [formEvent, setFormEvent] = useState({});
+    const [modalVisible, setModalVisible] = useState(false);
+    const isMobileOrTablet = useMediaQuery({ maxWidth: 768 });
+    let formRef = {};
 
-    componentDidMount() {
-        if (this.props.hasEvents) {
-            this.props.fetchObjectEvents(this.props.objectId);
+    /**
+     * Fetch object events on init
+     */
+    useEffect(() => {
+        if (hasEvents) {
+            fetchObjectEvents(objectId);
         }
-    }
+    }, [fetchObjectEvents, hasEvents, objectId]);
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.createStatus.loading && !this.props.createStatus.loading) {
-            this.toggleModal(false);
+    /**
+     * Close EventFormModal after saving event
+     */
+    useEffect(() => {
+        if (!createStatus.loading) {
+            setModalVisible(false);
         }
-    }
+    }, [createStatus]);
 
-    onAddEvent = () => {
-        this.setState({ formEvent: {} });
-        this.toggleModal(true);
+    const onAddEvent = () => {
+        setFormEvent({});
+        setModalVisible(true);
     };
 
-    onFormChange = changedFields => {
-        this.setState(({ formEvent }) => ({ formEvent: { ...formEvent, ...changedFields } }));
+    const onFormChange = changedFields => {
+        setFormEvent({ ...formEvent, ...changedFields });
     };
 
-    onFormSave = () => {
-        const { form } = this.formRef.props;
+    const onFormSave = () => {
+        const { form } = formRef.props;
 
         form.validateFields((err, event) => {
             if (err) {
                 return;
             }
 
-            this.props.createObjectEvent(this.props.objectId, event);
+            createObjectEvent(props.objectId, event);
         });
     };
 
-    newFormRef = formRef => {
-        this.formRef = formRef;
+    const newFormRef = value => {
+        formRef = value;
     };
 
-    toggleModal = visible => {
-        this.setState({ visible });
-    };
-
-    render() {
-        return (
-            <div className="okn-object-events">
-                {this.renderTitle()}
-                {this.renderContent()}
-                {this.renderModal()}
-            </div>
-        );
-    }
-
-    renderContent() {
-        if (this.props.loading) {
+    const renderContent = () => {
+        if (props.loading) {
             return <Spin size="large" className="okn-object-events__loading"/>;
-        } else if (this.props.error) {
+        } else if (props.error) {
             return <Text className="okn-object-events__message">Что-то пошло не так <Icon type="frown"/></Text>;
-        } else if (!this.props.loading && this.props.events.length === 0) {
+        } else if (!props.loading && props.events.length === 0) {
             return <Text className="okn-object-events__message">С этим объектом пока ещё ничего не случилось.</Text>;
         }
 
-        return this.renderTimeline();
+        return renderTimeline();
     }
 
-    renderTitle() {
+    const renderTitle = () => {
         const button = (
             <div className="okn-object-events__title__edit-button">
-                <Button title="Добавить" type="link" icon="plus" onClick={this.onAddEvent}/>
+                <Button title="Добавить" type="link" icon="plus" onClick={onAddEvent}/>
             </div>
         );
 
-        return <h2 className="okn-object-events__title">События {this.props.isLoggedIn && button}</h2>;
+        return <h2 className="okn-object-events__title">События {props.isLoggedIn && button}</h2>;
     }
 
-    renderTimeline() {
+    const renderTimeline = () => {
         const timeline = [];
+        const timelineMode = isMobileOrTablet ? 'left' : 'alternate';
         const years = groupBy(
-            this.props.events.map((event, i) => ({ ...event, position: i % 2 === 0 ? 'left' : 'right' })),
+            props.events.map((event, i) => ({
+                ...event,
+                position: isMobileOrTablet ? 'left' : i % 2 === 0 ? 'left' : 'right' })
+            ),
             event => event.occuredAt.format('YYYY')
         );
 
@@ -107,16 +107,16 @@ class Events extends React.Component {
 
         const timelineItems = timeline.map(({ type, item }, index) => {
             if (type === 'dot') {
-                return this.renderTimelineYear(item, index);
+                return renderTimelineYear(item, index);
             }
 
-            return this.renderTimelineEvent(item, index);
+            return renderTimelineEvent(item, index);
         });
 
-        return <Timeline className="okn-object-events__timeline" mode="alternate">{timelineItems}</Timeline>;
+        return <Timeline className="okn-object-events__timeline" mode={timelineMode}>{timelineItems}</Timeline>;
     }
 
-    renderTimelineYear(year, index) {
+    const renderTimelineYear = (year, index) => {
         const dot = (
             <div className="okn-dot-year">
                 <Icon type="calendar" className="okn-dot-year__icon"/>
@@ -131,7 +131,7 @@ class Events extends React.Component {
         );
     }
 
-    renderTimelineEvent(event, index) {
+    const renderTimelineEvent = (event, index) => {
         const dot = (
             <div className="okn-dot-event">
                 <Icon type="clock-circle" className="okn-dot-event__icon"/>
@@ -145,28 +145,36 @@ class Events extends React.Component {
                 dot={dot}
                 position={event.position}
             >
-                <EventCard objectId={this.props.objectId} event={event} editable={this.props.isLoggedIn}/>
+                <EventCard objectId={props.objectId} event={event} editable={props.isLoggedIn}/>
             </Timeline.Item>
         );
     }
 
-    renderModal() {
+    const renderModal = () => {
         const modal = (
             <EventFormModal
-                wrappedComponentRef={this.newFormRef}
-                visible={this.state.visible}
+                wrappedComponentRef={newFormRef}
+                visible={modalVisible}
                 title="Новое событие"
                 okText="Создать"
-                confirmLoading={this.props.createStatus.loading}
-                event={this.state.formEvent}
-                onChange={this.onFormChange}
-                onCancel={() => this.toggleModal(false)}
-                onSave={this.onFormSave}
+                confirmLoading={props.createStatus.loading}
+                event={formEvent}
+                onChange={onFormChange}
+                onCancel={() => setModalVisible(false)}
+                onSave={onFormSave}
             />
         );
 
-        return this.props.isLoggedIn && modal;
+        return props.isLoggedIn && modal;
     }
+
+    return (
+        <div className="okn-object-events">
+            {renderTitle()}
+            {renderContent()}
+            {renderModal()}
+        </div>
+    );
 }
 
 const mapStateToProps = state => {
