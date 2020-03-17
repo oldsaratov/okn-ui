@@ -35,8 +35,8 @@ class ObjectMap extends Component {
 
     onMarkedAdd = () => {
         this.onChange({
-            longitude: SARATOV_CENTER_COORDS.longitude,
-            latitude: SARATOV_CENTER_COORDS.latitude
+            longitude: this.state.viewport.longitude || SARATOV_CENTER_COORDS.longitude,
+            latitude: this.state.viewport.latitude || SARATOV_CENTER_COORDS.latitude
         });
     }
 
