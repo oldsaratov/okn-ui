@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@uploadcare/react-widget": "^1.2.1",
     "antd": "^3.26.4",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "react": "^16.12.0",
